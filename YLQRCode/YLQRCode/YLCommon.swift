@@ -11,6 +11,7 @@ import UIKit
 extension DispatchQueue {
     static func safeMainQueue(block: @escaping () -> Void) {
         if !Thread.isMainThread {
+            print(Thread.current)
             DispatchQueue.main.async(execute: block)
         } else {
             block()
