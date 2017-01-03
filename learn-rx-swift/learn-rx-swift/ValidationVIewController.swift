@@ -51,7 +51,7 @@ class ValidationVIewController: UIViewController {
         everyThingdValid.bindTo(loginButton.rx.isEnabled)
         .addDisposableTo(disposeBag)
 
-        let titleObservable = Observable<String>.just("😀")
+        let titleObservable = Observable<String>.just("🤠")
             .asObservable()
             .shareReplay(1)
 
