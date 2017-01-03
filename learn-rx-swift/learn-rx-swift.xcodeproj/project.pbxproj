@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0504ED3BC55E39E15F19F935 /* Pods_learn_rx_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201022D588D875864A897D61 /* Pods_learn_rx_swift.framework */; };
+		8674498F1E1BE5CB009E7AC8 /* ValidationVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8674498E1E1BE5CB009E7AC8 /* ValidationVIewController.swift */; };
 		86B8DB891E0EE150007BB84B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8DB881E0EE150007BB84B /* AppDelegate.swift */; };
 		86B8DB8B1E0EE150007BB84B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B8DB8A1E0EE150007BB84B /* ViewController.swift */; };
 		86B8DB8E1E0EE150007BB84B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86B8DB8C1E0EE150007BB84B /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		201022D588D875864A897D61 /* Pods_learn_rx_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_learn_rx_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		21DBB5AA22CDA3A711349F57 /* Pods-learn-rx-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-learn-rx-swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-learn-rx-swift/Pods-learn-rx-swift.debug.xcconfig"; sourceTree = "<group>"; };
 		850CF8A79414566C8C1C8815 /* Pods-learn-rx-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-learn-rx-swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-learn-rx-swift/Pods-learn-rx-swift.release.xcconfig"; sourceTree = "<group>"; };
+		8674498E1E1BE5CB009E7AC8 /* ValidationVIewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationVIewController.swift; sourceTree = "<group>"; };
 		86B8DB851E0EE150007BB84B /* learn-rx-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "learn-rx-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86B8DB881E0EE150007BB84B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86B8DB8A1E0EE150007BB84B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				86B8DB881E0EE150007BB84B /* AppDelegate.swift */,
 				86B8DB8A1E0EE150007BB84B /* ViewController.swift */,
+				8674498E1E1BE5CB009E7AC8 /* ValidationVIewController.swift */,
 				86B8DB8C1E0EE150007BB84B /* Main.storyboard */,
 				86B8DB8F1E0EE150007BB84B /* Assets.xcassets */,
 				86B8DB911E0EE150007BB84B /* LaunchScreen.storyboard */,
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86B8DB8B1E0EE150007BB84B /* ViewController.swift in Sources */,
+				8674498F1E1BE5CB009E7AC8 /* ValidationVIewController.swift in Sources */,
 				86B8DB891E0EE150007BB84B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,6 +508,7 @@
 				86B8DBAE1E0EE6EA007BB84B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
