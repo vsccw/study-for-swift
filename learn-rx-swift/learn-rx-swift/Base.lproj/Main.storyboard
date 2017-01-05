@@ -61,6 +61,26 @@
                                             <segue destination="0ps-V0-5NR" kind="show" id="4UN-d9-amF"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ddm-w4-ybz" style="IBUITableViewCellStyleDefault" id="iDc-M5-m2L">
+                                        <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iDc-M5-m2L" id="T8m-8D-6gm">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Sample TableView" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ddm-w4-ybz">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="KJk-R8-444" kind="show" id="QBi-kD-L3S"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -107,7 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="438" y="430"/>
+            <point key="canvasLocation" x="-858" y="459"/>
         </scene>
         <!--ValidationV Iew Controller-->
         <scene sceneID="wz5-Pm-urt">
@@ -184,7 +204,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a20-r9-Nxa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="5Eg-gp-J30"/>
             </objects>
-            <point key="canvasLocation" x="1100" y="427.73613193403304"/>
+            <point key="canvasLocation" x="-252" y="489"/>
+        </scene>
+        <!--Sample Table View Controller-->
+        <scene sceneID="ar0-Ob-eWN">
+            <objects>
+                <viewController id="KJk-R8-444" customClass="SampleTableViewController" customModule="learn_rx_swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Vix-LQ-pcU"/>
+                        <viewControllerLayoutGuide type="bottom" id="H4h-jb-cFz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xuW-hF-qV4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pfO-wu-BMS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="EfG-Su-Lxj">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EfG-Su-Lxj" id="Ix0-j5-Ouz">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="H4h-jb-cFz" firstAttribute="top" secondItem="pfO-wu-BMS" secondAttribute="bottom" id="CMe-QU-KvX"/>
+                            <constraint firstItem="pfO-wu-BMS" firstAttribute="leading" secondItem="xuW-hF-qV4" secondAttribute="leading" id="RD0-Ft-BeQ"/>
+                            <constraint firstItem="pfO-wu-BMS" firstAttribute="top" secondItem="xuW-hF-qV4" secondAttribute="top" id="nRv-cQ-YNd"/>
+                            <constraint firstAttribute="trailing" secondItem="pfO-wu-BMS" secondAttribute="trailing" id="xV3-UG-a0w"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="x2h-il-aY6"/>
+                    <connections>
+                        <outlet property="simpleTableView" destination="pfO-wu-BMS" id="fFT-5F-9jR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fpR-WR-RKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="417" y="489"/>
         </scene>
     </scenes>
 </document>

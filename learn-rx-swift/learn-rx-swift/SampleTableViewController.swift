@@ -7,13 +7,50 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+
+
+struct Data {
+    let name: String = ""
+    let subname: String = ""
+}
 
 class SampleTableViewController: UIViewController {
 
+    @IBOutlet weak var simpleTableView: UITableView!
+    let disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         // Do any additional setup after loading the view.
+
+        let sss = Observable.just(
+            (0..<20).map {
+                "第\($0)行"
+        })
+        sss.bindTo(simpleTableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { (row, element, cell) in
+            cell.textLabel?.text = element
+        }
+        .addDisposableTo(disposeBag)
+
+        simpleTableView.rx.modelSelected(String.self)
+            .subscribe(onNext: { [weak self] value in
+                self?.showAlertView(value: value)
+
+            })
+        .addDisposableTo(disposeBag)
+    }
+    func showAlertView(value: String) {
+        let alertView = UIAlertView(
+            title: "😃",
+            message: "你点击了\(value)",
+            delegate: nil,
+            cancelButtonTitle: "OK"
+        )
+
+        alertView.show()
     }
 
     override func didReceiveMemoryWarning() {
