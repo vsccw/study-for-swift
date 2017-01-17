@@ -9,38 +9,136 @@
 import UIKit
 import AVFoundation
 
+enum ScanSetupResult {
+    case successed
+    case failed
+    case unknown
+}
+
 class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     let captureSession = AVCaptureSession()
-    let metadataOutput = AVCaptureMetadataOutput()
     var capturePreviewLayer: AVCaptureVideoPreviewLayer?
-    let rect = CGRect(x: 50, y: 100, width: 200, height: 200)
+    var metadataOutput: AVCaptureMetadataOutput?
+
+    let rect = CGRect(x: 0, y: 0, width: 0.5, height: 0.5)
     var rectOfInteres = CGRect.zero
     
+    var sessionQueue = DispatchQueue(label: "tv.yoloyolo.metadataQueue", attributes: [], target: nil)
+    
+    fileprivate var moveView: UIImageView!
+    
+    fileprivate var setupResult = ScanSetupResult.successed
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let width = view.frame.width
-        let height = view.frame.height
-        rectOfInteres = CGRect(x: rect.origin.x / width, y: rect.origin.y / height, width: rect.width / width, height: rect.height / height)
-        configSession()
-//        let v = UIView(frame: rect)
-//        v.layer.borderWidth = 1
-//        v.layer.borderColor = UIColor.red.cgColor
-//        
-//        view.addSubview(v)
-    
+        
+        let authorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        switch authorizationStatus {
+        case .authorized:
+            break
+        case .notDetermined:
+            sessionQueue.suspend()
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { [weak self] (granted) in
+                if !granted {
+                    self?.setupResult = .failed
+                }
+                self?.sessionQueue.resume()
+            })
+            break
+        case .denied:
+            setupResult = .failed
+            break
+        default:
+            setupResult = .unknown
+            break
+        }
+        
+        rectOfInteres = CGRect(x: (view.frame.height - 220) / (2 * view.frame.height), y: (view.frame.width - 220) / (2 * view.frame.width), width: 220/view.frame.height, height: 220/view.frame.width)
+        self.sessionQueue.sync { [weak self] in
+            self?.configSession()
+        }
+        
+        let dimmingView = UIView(frame: view.bounds)
+        dimmingView.backgroundColor = UIColor(white: 0.0, alpha: 0.80)
+        view.addSubview(dimmingView)
+        view.backgroundColor = UIColor.black
+        let targetRectView = UIImageView(frame: CGRect(x: 0, y: 0, width: 220, height: 220))
+        targetRectView.image = UIImage(named: "target_rect")
+        targetRectView.center = view.center
+        targetRectView.backgroundColor = UIColor.clear
+        view.addSubview(targetRectView)
+        
+        let moveView = UIImageView(frame: CGRect(x: 0, y: 0, width: 220, height: 3))
+        moveView.image = UIImage(named: "Line")
+        
+        targetRectView.addSubview(moveView)
+        self.moveView = moveView
+        
+        let animation = CABasicAnimation(keyPath: "transform.translation.y")
+        animation.fromValue = 0
+        animation.toValue = 220
+        animation.repeatCount = MAXFLOAT
+        animation.duration = 3.0
+        moveView.layer.add(animation, forKey: "moveView.transform.translation.y")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        sessionQueue.sync { [unowned self] in
+            switch self.setupResult {
+            case .successed:
+                self.captureSession.startRunning()
+              
+            case .failed:
+                DispatchQueue.main.async { [unowned self] in
+                    let message = NSLocalizedString("没有权限获取相机", comment: "请给我相机权限")
+                    let	alertController = UIAlertController(title: "YLQRCode", message: message, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("好", comment: "Alert OK button"), style: .cancel, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "设置", style: .`default`, handler: { action in
+                        UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            case .unknown:
+                DispatchQueue.main.async { [unowned self] in
+                    let message = NSLocalizedString("没有权限获取相机", comment: "请给我相机权限")
+                    let	alertController = UIAlertController(title: "YLQRCode", message: message, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"), style: .cancel, handler: nil))
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Alert button to open Settings"), style: .`default`, handler: { action in
+                        UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        captureSession.startRunning()
+        
+        
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if setupResult == .successed {
+            self.captureSession.stopRunning()
+        }
     }
     
     private func configSession() {
+        
+        if setupResult != .successed {
+            return
+        }
+        
         /// setup session
         captureSession.beginConfiguration()
+        
         do {
             var defaultVedioDevice: AVCaptureDevice?
             
@@ -50,8 +148,8 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 } else if let frontCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: AVCaptureDeviceType.builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .front) {
                     defaultVedioDevice = frontCameraDevice
                 }
-            } else {
-                // Fallback on earlier versions
+            }
+            else {
                 if let cameraDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) {
                     defaultVedioDevice = cameraDevice
                 }
@@ -66,18 +164,19 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             print("could not add device input to the session.")
             
         }
-        
+        metadataOutput = AVCaptureMetadataOutput()
         if captureSession.canAddOutput(metadataOutput) {
             captureSession.addOutput(metadataOutput)
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue(label: "com.yoloyolo.metadataQueue", qos: DispatchQoS.default, attributes: [], target: nil))
-            metadataOutput.metadataObjectTypes = metadataOutput.availableMetadataObjectTypes
-            metadataOutput.rectOfInterest = rectOfInteres
         }
+        metadataOutput?.setMetadataObjectsDelegate(self, queue: self.sessionQueue)
+        metadataOutput?.metadataObjectTypes = metadataOutput?.availableMetadataObjectTypes
+        metadataOutput?.rectOfInterest = self.rectOfInteres
+        print(rectOfInteres)
         
         captureSession.commitConfiguration()
         capturePreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         capturePreviewLayer?.frame = view.bounds
-        view.layer.addSublayer(capturePreviewLayer!)
+        view.layer.insertSublayer(capturePreviewLayer!, at: 0)
         
         
 //        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
@@ -96,14 +195,13 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
 //        captureMetaDataOutput.metadataObjectTypes = captureMetaDataOutput.availableMetadataObjectTypes
 //        
 //        capturePreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-//        
+//
 //        capturePreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspect
 //        capturePreviewLayer?.frame = view.bounds
 //        view.layer.addSublayer(capturePreviewLayer!)
     }
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
-        
         
 //        let supportedQRCoeTypes = [AVMetadataObjectTypeQRCode]
         for _supportedBarcode in metadataObjects {
@@ -116,6 +214,8 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                     print(Thread.current)
                     print(barcodeObject.stringValue)
                     self?.captureSession.stopRunning()
+                    self?.moveView.layer.removeAnimation(forKey: "moveView.transform.translation.y")
+                    self?.moveView.removeFromSuperview()
                 }
             }
         }
