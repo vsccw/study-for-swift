@@ -177,28 +177,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         capturePreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         capturePreviewLayer?.frame = view.bounds
         view.layer.insertSublayer(capturePreviewLayer!, at: 0)
-        
-        
-//        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-//        guard let deviceInput = try? AVCaptureDeviceInput(device: captureDevice) else {
-//            return
-//        }
-//        captureSession?.addInput(deviceInput)
-//        
-//        let captureMetaDataOutput = AVCaptureMetadataOutput()
-//        
-//        captureSession?.addOutput(captureMetaDataOutput)
-//        
-//        let queue = DispatchQueue(label: "com.yoloyolo.qrcode")
-//        captureMetaDataOutput.setMetadataObjectsDelegate(self, queue: queue)
-//        
-//        captureMetaDataOutput.metadataObjectTypes = captureMetaDataOutput.availableMetadataObjectTypes
-//        
-//        capturePreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-//
-//        capturePreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspect
-//        capturePreviewLayer?.frame = view.bounds
-//        view.layer.addSublayer(capturePreviewLayer!)
     }
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
