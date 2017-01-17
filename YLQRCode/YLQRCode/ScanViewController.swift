@@ -181,7 +181,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
-//        let supportedQRCoeTypes = [AVMetadataObjectTypeQRCode]
         for _supportedBarcode in metadataObjects {
            
             guard let supportedBarcode = _supportedBarcode as? AVMetadataObject else { return }
