@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import CoreImage
 
 enum ScanSetupResult {
     case successed
@@ -17,9 +18,10 @@ enum ScanSetupResult {
 
 class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
-    let captureSession = AVCaptureSession()
+    var captureSession: AVCaptureSession? = nil
     var capturePreviewLayer: AVCaptureVideoPreviewLayer?
     var metadataOutput: AVCaptureMetadataOutput?
+    var dimmingVIew: DimmingView?
 
     let rect = CGRect(x: 0, y: 0, width: 0.5, height: 0.5)
     var rectOfInteres = CGRect.zero
@@ -29,11 +31,14 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     fileprivate var moveView: UIImageView!
     
     fileprivate var setupResult = ScanSetupResult.successed
+    
+    fileprivate var isFirstPush = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        isFirstPush = true
         
         let authorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         switch authorizationStatus {
@@ -56,33 +61,14 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             break
         }
         
-        rectOfInteres = CGRect(x: (view.frame.height - 220) / (2 * view.frame.height), y: (view.frame.width - 220) / (2 * view.frame.width), width: 220/view.frame.height, height: 220/view.frame.width)
+         dimmingVIew = DimmingView(frame: view.bounds)
+        dimmingVIew?.rectOfInteract = CGRect(x: (view.frame.width - 250) * 0.5, y: (view.frame.height - 250) * 0.5 - 80, width: 250, height: 250)
+        view.addSubview(dimmingVIew!)
+        
+        rectOfInteres = CGRect(x: ((view.frame.height - 250) * 0.5 - 80) / view.frame.height, y: (view.frame.width - 250) * 0.5 / view.frame.width, width: 250/view.frame.height, height: 250/view.frame.width)
         self.sessionQueue.sync { [weak self] in
             self?.configSession()
         }
-        
-        let dimmingView = UIView(frame: view.bounds)
-        dimmingView.backgroundColor = UIColor(white: 0.0, alpha: 0.80)
-        view.addSubview(dimmingView)
-        view.backgroundColor = UIColor.black
-        let targetRectView = UIImageView(frame: CGRect(x: 0, y: 0, width: 220, height: 220))
-        targetRectView.image = UIImage(named: "target_rect")
-        targetRectView.center = view.center
-        targetRectView.backgroundColor = UIColor.clear
-        view.addSubview(targetRectView)
-        
-        let moveView = UIImageView(frame: CGRect(x: 0, y: 0, width: 220, height: 3))
-        moveView.image = UIImage(named: "Line")
-        
-        targetRectView.addSubview(moveView)
-        self.moveView = moveView
-        
-        let animation = CABasicAnimation(keyPath: "transform.translation.y")
-        animation.fromValue = 0
-        animation.toValue = 220
-        animation.repeatCount = MAXFLOAT
-        animation.duration = 3.0
-        moveView.layer.add(animation, forKey: "moveView.transform.translation.y")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,8 +76,9 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         sessionQueue.sync { [unowned self] in
             switch self.setupResult {
             case .successed:
-                self.captureSession.startRunning()
-              
+                if self.isFirstPush {
+                    self.captureSession?.startRunning()
+                }
             case .failed:
                 DispatchQueue.main.async { [unowned self] in
                     let message = NSLocalizedString("没有权限获取相机", comment: "请给我相机权限")
@@ -118,15 +105,13 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if setupResult == .successed {
-            self.captureSession.stopRunning()
+            self.captureSession?.stopRunning()
+//            self.captureSession = nil
         }
     }
     
@@ -135,9 +120,10 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         if setupResult != .successed {
             return
         }
+        captureSession = AVCaptureSession()
         
         /// setup session
-        captureSession.beginConfiguration()
+        captureSession?.beginConfiguration()
         
         do {
             var defaultVedioDevice: AVCaptureDevice?
@@ -156,8 +142,8 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             }
             let videoDeviceInput = try AVCaptureDeviceInput(device: defaultVedioDevice)
             
-            if captureSession.canAddInput(videoDeviceInput) {
-                captureSession.addInput(videoDeviceInput)
+            if captureSession!.canAddInput(videoDeviceInput) {
+                captureSession?.addInput(videoDeviceInput)
             }
         }
         catch {
@@ -165,15 +151,14 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             
         }
         metadataOutput = AVCaptureMetadataOutput()
-        if captureSession.canAddOutput(metadataOutput) {
-            captureSession.addOutput(metadataOutput)
+        if captureSession!.canAddOutput(metadataOutput) {
+            captureSession?.addOutput(metadataOutput)
         }
         metadataOutput?.setMetadataObjectsDelegate(self, queue: self.sessionQueue)
         metadataOutput?.metadataObjectTypes = metadataOutput?.availableMetadataObjectTypes
         metadataOutput?.rectOfInterest = self.rectOfInteres
-        print(rectOfInteres)
         
-        captureSession.commitConfiguration()
+        captureSession?.commitConfiguration()
         capturePreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         capturePreviewLayer?.frame = view.bounds
         view.layer.insertSublayer(capturePreviewLayer!, at: 0)
@@ -188,19 +173,60 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             if supportedBarcode.type == AVMetadataObjectTypeQRCode {
                 guard let barcodeObject = self.capturePreviewLayer?.transformedMetadataObject(for: supportedBarcode) as? AVMetadataMachineReadableCodeObject else { return }
                 DispatchQueue.safeMainQueue { [weak self] in
-                    print(Thread.current)
                     print(barcodeObject.stringValue)
-                    self?.captureSession.stopRunning()
-                    self?.moveView.layer.removeAnimation(forKey: "moveView.transform.translation.y")
-                    self?.moveView.removeFromSuperview()
+                    self?.captureSession?.stopRunning()
+                    self?.dimmingVIew?.removeAnimations()
                 }
             }
+        }
+    }
+    @IBAction func openAlbumAction(_ sender: Any) {
+        self.captureSession?.stopRunning()
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePickerView = UIImagePickerController()
+            imagePickerView.allowsEditing = true
+            imagePickerView.sourceType = .photoLibrary
+            imagePickerView.delegate = self
+            present(imagePickerView, animated: true, completion: nil)
         }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+    
+    func scanQRCodeFromPhotoLibrary(image: UIImage, block:((String?) -> Void)) -> Bool {
+        guard let cgImage = image.cgImage else { return false }
+        var hasQRCode = false
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
+        let features = detector!.features(in: CIImage(cgImage: cgImage))
+        for feature in features {
+            if let qrFeature = feature as? CIQRCodeFeature {
+                hasQRCode = true
+                isFirstPush = false
+                self.captureSession?.stopRunning()
+                block(qrFeature.messageString!)
+            }
+        }
+        return hasQRCode
+    }
+}
 
+extension ScanViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let hasQRCode = self.scanQRCodeFromPhotoLibrary(image: image) { str in
+                print(str!)
+            }
+            if !hasQRCode {
+                let alertView = UIAlertView(title: "提醒", message: "没有二维码", delegate: nil, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+                alertView.show()
+            }
+        }
+    }
 }
