@@ -38,6 +38,12 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     fileprivate var setupResult = ScanSetupResult.successed
     
     fileprivate var isFirstPush = false
+    
+    var resultString: String? {
+        didSet {
+            print("- The result string is : -", resultString ?? "Invalid value.")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -163,29 +169,9 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     @objc private func configPanchGesture(gesture: UIPinchGestureRecognizer) {
         guard let session = captureSession else { return }
         if session.isRunning {
-//            let pinchVelocityDividerFactor: CGFloat = 2.0
             if gesture.state == .changed {
-//                do {
-//                    try deviceInput?.device.lockForConfiguration()
-//                    let desiredFacetor = deviceInput!.device.videoZoomFactor + CGFloat(atan2f(Float(pinchVelocityDividerFactor), Float(gesture.velocity)))
-//                    deviceInput?.device.videoZoomFactor = max(1.0, min(desiredFacetor, deviceInput!.device.activeFormat.videoMaxZoomFactor))
-//                    deviceInput?.device.unlockForConfiguration()
-//                }
-//                catch {
-//                    print("")
-//                }
                 
             }
-//            print(gesture.scale + 1.0)
-//            do {
-//                try deviceInput?.device.lockForConfiguration()
-//                deviceInput?.device.videoZoomFactor = gesture.scale + 1.0
-//                deviceInput?.device.unlockForConfiguration()
-//            }
-//            catch {
-//                print("Error when set videoZoomFactor.")
-//            }
-//            lastScaleFactor = gesture.scale
         }
     }
     
@@ -250,7 +236,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             if supportedBarcode.type == AVMetadataObjectTypeQRCode {
                 guard let barcodeObject = self.capturePreviewLayer?.transformedMetadataObject(for: supportedBarcode) as? AVMetadataMachineReadableCodeObject else { return }
                 DispatchQueue.safeMainQueue { [weak self] in
-                    print(barcodeObject.stringValue)
+                    self?.resultString = barcodeObject.stringValue
                     self?.captureSession?.stopRunning()
                     self?.timer?.invalidate()
                     self?.dimmingVIew?.removeAnimations()
@@ -281,7 +267,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             if let qrFeature = feature as? CIQRCodeFeature {
                 isFirstPush = false
                 self.captureSession?.stopRunning()
-                block(qrFeature.messageString!)
+                block(qrFeature.messageString)
                 return true
             }
         }
@@ -298,7 +284,7 @@ extension ScanViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let hasQRCode = self.scanQRCodeFromPhotoLibrary(image: image) { str in
-                print(str!)
+                resultString = str
             }
             if !hasQRCode {
                 let alertView = UIAlertView(title: "提醒", message: "没有二维码", delegate: nil, cancelButtonTitle: "取消", otherButtonTitles: "确定")
