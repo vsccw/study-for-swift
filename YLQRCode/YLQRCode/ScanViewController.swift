@@ -20,8 +20,13 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     var captureSession: AVCaptureSession? = nil
     var capturePreviewLayer: AVCaptureVideoPreviewLayer?
+    var deviceInput: AVCaptureDeviceInput?
     var metadataOutput: AVCaptureMetadataOutput?
     var dimmingVIew: DimmingView?
+    
+    var timer: Timer?
+    
+    var lastScaleFactor: CGFloat = 1.0
 
     let rect = CGRect(x: 0, y: 0, width: 0.5, height: 0.5)
     var rectOfInteres = CGRect.zero
@@ -37,42 +42,57 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         isFirstPush = true
         
-        let authorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
-        switch authorizationStatus {
-        case .authorized:
-            break
-        case .notDetermined:
-            sessionQueue.suspend()
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { [weak self] (granted) in
-                if !granted {
-                    self?.setupResult = .failed
-                }
-                self?.sessionQueue.resume()
-            })
-            break
-        case .denied:
-            setupResult = .failed
-            break
-        default:
-            setupResult = .unknown
-            break
+        func authorizationStatus() -> ScanSetupResult {
+            var setupResult = ScanSetupResult.successed
+            let authorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+            switch authorizationStatus {
+            case .authorized:
+                setupResult = ScanSetupResult.successed
+            case .notDetermined:
+                AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
+                    if !granted {
+                        setupResult = ScanSetupResult.failed
+                    }
+                })
+                break
+            case .denied:
+                setupResult = ScanSetupResult.failed
+                break
+            default:
+                setupResult = ScanSetupResult.unknown
+                break
+            }
+            return setupResult
         }
         
-         dimmingVIew = DimmingView(frame: view.bounds)
+        self.setupResult = authorizationStatus()
+        dimmingVIew = DimmingView(frame: view.bounds)
         dimmingVIew?.rectOfInteract = CGRect(x: (view.frame.width - 250) * 0.5, y: (view.frame.height - 250) * 0.5 - 80, width: 250, height: 250)
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(configPanchGesture(gesture:)))
+        dimmingVIew?.addGestureRecognizer(pinchGesture)
         view.addSubview(dimmingVIew!)
         
         rectOfInteres = CGRect(x: ((view.frame.height - 250) * 0.5 - 80) / view.frame.height, y: (view.frame.width - 250) * 0.5 / view.frame.width, width: 250/view.frame.height, height: 250/view.frame.width)
         self.sessionQueue.sync { [weak self] in
             self?.configSession()
         }
+        
+        let slider = UISlider()
+        slider.minimumValue = 1.0
+        slider.maximumValue = 5.0
+        slider.frame = CGRect(x: 56, y: UIScreen.main.bounds.height - 56, width: UIScreen.main.bounds.width - 56 * 2, height: 56)
+        view.addSubview(slider)
+        slider.addTarget(self, action: #selector(sliderValueChanged(slider:)), for: .valueChanged)
+        
+        timer = Timer(timeInterval: 20.0, target: self, selector: #selector(showNotice(timer:)), userInfo: nil, repeats: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        RunLoop.current.add(timer!, forMode: RunLoopMode.defaultRunLoopMode)
+
         sessionQueue.sync { [unowned self] in
             switch self.setupResult {
             case .successed:
@@ -81,9 +101,9 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 }
             case .failed:
                 DispatchQueue.main.async { [unowned self] in
-                    let message = NSLocalizedString("没有权限获取相机", comment: "请给我相机权限")
+                    let message = "没有权限获取相机"
                     let	alertController = UIAlertController(title: "YLQRCode", message: message, preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("好", comment: "Alert OK button"), style: .cancel, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "好", style: .cancel, handler: nil))
                     alertController.addAction(UIAlertAction(title: "设置", style: .`default`, handler: { action in
                         UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
                     }))
@@ -91,10 +111,10 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 }
             case .unknown:
                 DispatchQueue.main.async { [unowned self] in
-                    let message = NSLocalizedString("没有权限获取相机", comment: "请给我相机权限")
+                    let message = "没有权限获取相机"
                     let	alertController = UIAlertController(title: "YLQRCode", message: message, preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"), style: .cancel, handler: nil))
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Alert button to open Settings"), style: .`default`, handler: { action in
+                    alertController.addAction(UIAlertAction(title: "好", style: .cancel, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "设置", style: .`default`, handler: { action in
                         UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
                     }))
                     self.present(alertController, animated: true, completion: nil)
@@ -111,7 +131,61 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         super.viewDidDisappear(animated)
         if setupResult == .successed {
             self.captureSession?.stopRunning()
-//            self.captureSession = nil
+            self.timer?.invalidate()
+        }
+    }
+    
+    
+    deinit {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc private func sliderValueChanged(slider: UISlider) {
+        guard let session = captureSession else { return }
+        if session.isRunning {
+            do {
+                try deviceInput?.device.lockForConfiguration()
+                deviceInput?.device.videoZoomFactor = CGFloat(slider.value)
+                deviceInput?.device.unlockForConfiguration()
+            }
+            catch {
+                print("Error when set videoZoomFactor.")
+            }
+        }
+    }
+    
+    @objc private func showNotice(timer: Timer) {
+        let alertView = UIAlertView(title: "提醒", message: "未发现二维码", delegate: nil, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+        alertView.show()
+    }
+    
+    @objc private func configPanchGesture(gesture: UIPinchGestureRecognizer) {
+        guard let session = captureSession else { return }
+        if session.isRunning {
+//            let pinchVelocityDividerFactor: CGFloat = 2.0
+            if gesture.state == .changed {
+//                do {
+//                    try deviceInput?.device.lockForConfiguration()
+//                    let desiredFacetor = deviceInput!.device.videoZoomFactor + CGFloat(atan2f(Float(pinchVelocityDividerFactor), Float(gesture.velocity)))
+//                    deviceInput?.device.videoZoomFactor = max(1.0, min(desiredFacetor, deviceInput!.device.activeFormat.videoMaxZoomFactor))
+//                    deviceInput?.device.unlockForConfiguration()
+//                }
+//                catch {
+//                    print("")
+//                }
+                
+            }
+//            print(gesture.scale + 1.0)
+//            do {
+//                try deviceInput?.device.lockForConfiguration()
+//                deviceInput?.device.videoZoomFactor = gesture.scale + 1.0
+//                deviceInput?.device.unlockForConfiguration()
+//            }
+//            catch {
+//                print("Error when set videoZoomFactor.")
+//            }
+//            lastScaleFactor = gesture.scale
         }
     }
     
@@ -131,7 +205,8 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             if #available(iOS 10.0, *) {
                 if let backCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: AVCaptureDeviceType.builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .back) {
                     defaultVedioDevice = backCameraDevice
-                } else if let frontCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: AVCaptureDeviceType.builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .front) {
+                }
+                else if let frontCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: AVCaptureDeviceType.builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .front) {
                     defaultVedioDevice = frontCameraDevice
                 }
             }
@@ -145,9 +220,10 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             if captureSession!.canAddInput(videoDeviceInput) {
                 captureSession?.addInput(videoDeviceInput)
             }
+            self.deviceInput = videoDeviceInput
         }
         catch {
-            print("could not add device input to the session.")
+            print("无法添加input.")
             
         }
         metadataOutput = AVCaptureMetadataOutput()
@@ -157,6 +233,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         metadataOutput?.setMetadataObjectsDelegate(self, queue: self.sessionQueue)
         metadataOutput?.metadataObjectTypes = metadataOutput?.availableMetadataObjectTypes
         metadataOutput?.rectOfInterest = self.rectOfInteres
+        
         
         captureSession?.commitConfiguration()
         capturePreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -175,6 +252,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 DispatchQueue.safeMainQueue { [weak self] in
                     print(barcodeObject.stringValue)
                     self?.captureSession?.stopRunning()
+                    self?.timer?.invalidate()
                     self?.dimmingVIew?.removeAnimations()
                 }
             }
@@ -184,7 +262,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         self.captureSession?.stopRunning()
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePickerView = UIImagePickerController()
-            imagePickerView.allowsEditing = true
+            imagePickerView.allowsEditing = false
             imagePickerView.sourceType = .photoLibrary
             imagePickerView.delegate = self
             present(imagePickerView, animated: true, completion: nil)
@@ -197,18 +275,17 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     func scanQRCodeFromPhotoLibrary(image: UIImage, block:((String?) -> Void)) -> Bool {
         guard let cgImage = image.cgImage else { return false }
-        var hasQRCode = false
         let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
         let features = detector!.features(in: CIImage(cgImage: cgImage))
-        for feature in features {
+        for feature in features { // 这里实际上可以识别两张二维码，在这里只取第一张（左边或者上边）
             if let qrFeature = feature as? CIQRCodeFeature {
-                hasQRCode = true
                 isFirstPush = false
                 self.captureSession?.stopRunning()
                 block(qrFeature.messageString!)
+                return true
             }
         }
-        return hasQRCode
+        return false
     }
 }
 
