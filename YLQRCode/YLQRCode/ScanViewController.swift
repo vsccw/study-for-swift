@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import CoreImage
+import SafariServices
 
 enum ScanSetupResult {
     case successed
@@ -41,7 +42,22 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     var resultString: String? {
         didSet {
-            print("- The result string is : -", resultString ?? "Invalid value.")
+            if let result = resultString {
+                let alertController = UIAlertController(title: "打开🔗", message: result, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "确定", style: .default, handler: { [weak self](action) in
+                    if let url = URL(string: result) {
+                        if #available(iOS 9.0, *) {
+                            let sfViewController = SFSafariViewController(url: url)
+//                            self?.navigationController?.pushViewController(sfViewController, animated: true)
+                            self?.present(sfViewController, animated: true, completion: nil)
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    }
+                }))
+                alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+                present(alertController, animated: true, completion: nil)
+            }
         }
     }
 
