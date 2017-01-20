@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         
         imageView.addGestureRecognizer(long)
         
+        generateQRCodeButtonClicked(nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,7 +52,7 @@ class ViewController: UIViewController {
        
     }
     
-    @IBAction func generateQRCodeButtonClicked(_ sender: Any) {
+    @IBAction func generateQRCodeButtonClicked(_ sender: Any?) {
         view.endEditing(true)
         guard let text = textField.text else {
             return
