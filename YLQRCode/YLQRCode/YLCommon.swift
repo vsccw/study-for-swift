@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 extension DispatchQueue {
     static func safeMainQueue(block: @escaping () -> Void) {
@@ -15,5 +16,22 @@ extension DispatchQueue {
         } else {
             block()
         }
+    }
+}
+
+struct Common {
+    static func playSound() {
+        guard let filePath = Bundle.main.path(forResource: "sound", ofType: "caf") else {
+            let alertView = UIAlertView(title: "提醒", message: "找不到音频文件", delegate: nil, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+            alertView.show()
+            return
+        }
+        let soundURL = URL(fileURLWithPath: filePath)
+        var soundID: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(soundURL as CFURL, &soundID)
+        
+//        AudioServicesPlayAlertSound(soundID)
+        AudioServicesPlaySystemSound(soundID)
+        AudioServicesRemoveSystemSoundCompletion(soundID)
     }
 }

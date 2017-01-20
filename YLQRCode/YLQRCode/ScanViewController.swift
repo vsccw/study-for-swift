@@ -238,6 +238,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 DispatchQueue.safeMainQueue { [weak self] in
                     self?.resultString = barcodeObject.stringValue
                     self?.captureSession?.stopRunning()
+                    Common.playSound()
                     self?.timer?.invalidate()
                     self?.dimmingVIew?.removeAnimations()
                 }
@@ -246,6 +247,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
     @IBAction func openAlbumAction(_ sender: Any) {
         self.captureSession?.stopRunning()
+        isFirstPush = false
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePickerView = UIImagePickerController()
             imagePickerView.allowsEditing = false
@@ -259,20 +261,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         super.didReceiveMemoryWarning()
     }
     
-    func scanQRCodeFromPhotoLibrary(image: UIImage, block:((String?) -> Void)) -> Bool {
-        guard let cgImage = image.cgImage else { return false }
-        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
-        let features = detector!.features(in: CIImage(cgImage: cgImage))
-        for feature in features { // 这里实际上可以识别两张二维码，在这里只取第一张（左边或者上边）
-            if let qrFeature = feature as? CIQRCodeFeature {
-                isFirstPush = false
-                self.captureSession?.stopRunning()
-                block(qrFeature.messageString)
-                return true
-            }
-        }
-        return false
-    }
 }
 
 extension ScanViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -283,12 +271,15 @@ extension ScanViewController: UIImagePickerControllerDelegate, UINavigationContr
         picker.dismiss(animated: true, completion: nil)
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let hasQRCode = self.scanQRCodeFromPhotoLibrary(image: image) { str in
-                resultString = str
-            }
-            if !hasQRCode {
-                let alertView = UIAlertView(title: "提醒", message: "没有二维码", delegate: nil, cancelButtonTitle: "取消", otherButtonTitles: "确定")
-                alertView.show()
+            DetectQRCode.scanQRCodeFromPhotoLibrary(image: image) { [weak self] str in
+                if let result = str {
+                    Common.playSound()
+                    self?.resultString = result
+                }
+                else {
+                    let alertView = UIAlertView(title: "提醒", message: "没有二维码", delegate: nil, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+                    alertView.show()
+                }
             }
         }
     }

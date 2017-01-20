@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F24B7B781E2F0A1000AD9CBB /* DimmingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24B7B771E2F0A1000AD9CBB /* DimmingView.swift */; };
 		F24B7B971E2F689E00AD9CBB /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = F24B7B961E2F689E00AD9CBB /* sound.caf */; };
+		F28CEA701E31B4A000D9954D /* DetectQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28CEA6F1E31B4A000D9954D /* DetectQRCode.swift */; };
+		F28CEA721E31B4D900D9954D /* GenerateQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28CEA711E31B4D900D9954D /* GenerateQRCode.swift */; };
 		F2F893911E18CB6D00B55774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F893901E18CB6D00B55774 /* AppDelegate.swift */; };
 		F2F893931E18CB6D00B55774 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F893921E18CB6D00B55774 /* ViewController.swift */; };
 		F2F893961E18CB6D00B55774 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2F893941E18CB6D00B55774 /* Main.storyboard */; };
@@ -22,6 +24,8 @@
 		F24B7B771E2F0A1000AD9CBB /* DimmingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingView.swift; sourceTree = "<group>"; };
 		F24B7B7E1E2F0C1B00AD9CBB /* QRCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QRCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F24B7B961E2F689E00AD9CBB /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
+		F28CEA6F1E31B4A000D9954D /* DetectQRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetectQRCode.swift; sourceTree = "<group>"; };
+		F28CEA711E31B4D900D9954D /* GenerateQRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerateQRCode.swift; sourceTree = "<group>"; };
 		F2F8938D1E18CB6D00B55774 /* YLQRCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLQRCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2F893901E18CB6D00B55774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2F893921E18CB6D00B55774 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 				F2F893901E18CB6D00B55774 /* AppDelegate.swift */,
 				F2F893921E18CB6D00B55774 /* ViewController.swift */,
 				F2F893A21E18D1C000B55774 /* ScanViewController.swift */,
+				F28CEA6F1E31B4A000D9954D /* DetectQRCode.swift */,
+				F28CEA711E31B4D900D9954D /* GenerateQRCode.swift */,
 				F24B7B771E2F0A1000AD9CBB /* DimmingView.swift */,
 				F2F893A41E18F31F00B55774 /* YLCommon.swift */,
 				F2F893941E18CB6D00B55774 /* Main.storyboard */,
@@ -207,7 +213,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F28CEA701E31B4A000D9954D /* DetectQRCode.swift in Sources */,
 				F2F893931E18CB6D00B55774 /* ViewController.swift in Sources */,
+				F28CEA721E31B4D900D9954D /* GenerateQRCode.swift in Sources */,
 				F24B7B781E2F0A1000AD9CBB /* DimmingView.swift in Sources */,
 				F2F893911E18CB6D00B55774 /* AppDelegate.swift in Sources */,
 				F2F893A31E18D1C000B55774 /* ScanViewController.swift in Sources */,
@@ -412,6 +420,7 @@
 				F24B7B891E2F0C1B00AD9CBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F2F893881E18CB6D00B55774 /* Build configuration list for PBXProject "YLQRCode" */ = {
 			isa = XCConfigurationList;
