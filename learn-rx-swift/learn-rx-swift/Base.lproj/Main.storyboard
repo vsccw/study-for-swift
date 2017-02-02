@@ -81,6 +81,26 @@
                                             <segue destination="KJk-R8-444" kind="show" id="QBi-kD-L3S"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="aGP-WB-h5i" style="IBUITableViewCellStyleDefault" id="4s9-5n-rM5">
+                                        <rect key="frame" x="0.0" y="132" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4s9-5n-rM5" id="nZY-qS-ZqF">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Image Picker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aGP-WB-h5i">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="0Jb-kV-9Pr" kind="show" id="96u-wG-Vy1"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -250,6 +270,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpR-WR-RKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="417" y="489"/>
+        </scene>
+        <!--Image Picker-->
+        <scene sceneID="V84-6c-Zl5">
+            <objects>
+                <viewController title="Image Picker" id="0Jb-kV-9Pr" customClass="ImageViewPickerController" customModule="learn_rx_swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RUP-JZ-q7b"/>
+                        <viewControllerLayoutGuide type="bottom" id="smv-uO-aGB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8KP-Mk-1Pt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uSw-vU-I4K">
+                                <rect key="frame" x="68" y="101" width="238" height="286"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="238" id="cXJ-uq-8Si"/>
+                                    <constraint firstAttribute="height" constant="286" id="fsC-3o-1EU"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IM4-Sc-AzW">
+                                <rect key="frame" x="145" y="404" width="84" height="30"/>
+                                <state key="normal" title="Open Picker"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IM4-Sc-AzW" firstAttribute="top" secondItem="uSw-vU-I4K" secondAttribute="bottom" constant="17" id="Ogk-50-2CM"/>
+                            <constraint firstItem="uSw-vU-I4K" firstAttribute="top" secondItem="RUP-JZ-q7b" secondAttribute="bottom" constant="37" id="a1i-Ax-lma"/>
+                            <constraint firstItem="uSw-vU-I4K" firstAttribute="centerX" secondItem="8KP-Mk-1Pt" secondAttribute="centerX" id="ie7-NK-Iqq"/>
+                            <constraint firstItem="IM4-Sc-AzW" firstAttribute="centerX" secondItem="uSw-vU-I4K" secondAttribute="centerX" id="ruq-sg-cTY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="uSw-vU-I4K" id="Vp3-fA-cwz"/>
+                        <outlet property="openPickerButton" destination="IM4-Sc-AzW" id="Gw5-2b-Zwx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t6Q-Ok-7Nz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1032.8" y="487.10644677661173"/>
         </scene>
     </scenes>
 </document>

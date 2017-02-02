@@ -20,6 +20,7 @@
 		86B8DBA61E0EE6EA007BB84B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86B8DBA41E0EE6EA007BB84B /* Main.storyboard */; };
 		86B8DBA81E0EE6EA007BB84B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86B8DBA71E0EE6EA007BB84B /* Assets.xcassets */; };
 		86B8DBAB1E0EE6EA007BB84B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86B8DBA91E0EE6EA007BB84B /* LaunchScreen.storyboard */; };
+		F223267D1E3F867E007446CC /* ImageViewPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223267C1E3F867E007446CC /* ImageViewPickerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		86B8DBAA1E0EE6EA007BB84B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86B8DBAC1E0EE6EA007BB84B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F22326791E36F315007446CC /* Rx.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Rx.playground; sourceTree = "<group>"; };
+		F223267C1E3F867E007446CC /* ImageViewPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewPickerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				86B8DB8A1E0EE150007BB84B /* ViewController.swift */,
 				8674498E1E1BE5CB009E7AC8 /* ValidationVIewController.swift */,
 				867449901E1D5194009E7AC8 /* SampleTableViewController.swift */,
+				F223267C1E3F867E007446CC /* ImageViewPickerController.swift */,
 				86B8DB8C1E0EE150007BB84B /* Main.storyboard */,
 				86B8DB8F1E0EE150007BB84B /* Assets.xcassets */,
 				86B8DB911E0EE150007BB84B /* LaunchScreen.storyboard */,
@@ -289,6 +292,7 @@
 			files = (
 				86B8DB8B1E0EE150007BB84B /* ViewController.swift in Sources */,
 				8674498F1E1BE5CB009E7AC8 /* ValidationVIewController.swift in Sources */,
+				F223267D1E3F867E007446CC /* ImageViewPickerController.swift in Sources */,
 				86B8DB891E0EE150007BB84B /* AppDelegate.swift in Sources */,
 				867449911E1D5194009E7AC8 /* SampleTableViewController.swift in Sources */,
 			);
