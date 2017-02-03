@@ -16,6 +16,9 @@ class ImageViewPickerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         openPickerButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
-        
+    
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 }
