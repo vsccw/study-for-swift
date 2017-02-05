@@ -36,9 +36,9 @@ class ViewController: UIViewController {
         
         func detect() {
             guard let image = imageView.image else { return }
-            DetectQRCode.scanQRCodeFromPhotoLibrary(image: image) { (result) in
+            YLDetectQRCode.scanQRCodeFromPhotoLibrary(image: image) { (result) in
                 guard let _result = result else { return }
-                Common.playSound()
+                YLQRScanCommon.playSound()
                 print(_result)
             }
         }
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
             return
         }
         
-        GenerateQRCode.beginGenerate(text: text) {
+        YLGenerateQRCode.beginGenerate(text: text) {
             guard let image  = $0 else { return }
             DispatchQueue.main.async { [weak self] in
                 self?.imageView.image = image

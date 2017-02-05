@@ -86,7 +86,7 @@
         <!--二维码-->
         <scene sceneID="ipM-1N-r2p">
             <objects>
-                <viewController id="P4Z-Iw-nHX" customClass="ScanViewController" customModule="YLQRCode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="P4Z-Iw-nHX" customClass="YLQRCodeScanViewController" customModule="YLQRCode" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UWZ-th-kP8"/>
                         <viewControllerLayoutGuide type="bottom" id="wuy-KJ-BTY"/>
@@ -97,11 +97,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="二维码" id="Mhj-0p-710">
-                        <barButtonItem key="rightBarButtonItem" title="打开相册" id="m1A-6c-YJE">
+                        <barButtonItem key="rightBarButtonItem" title="我的二维码" id="m1A-6c-YJE">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="openAlbumAction:" destination="P4Z-Iw-nHX" id="kHd-3A-wm7"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
