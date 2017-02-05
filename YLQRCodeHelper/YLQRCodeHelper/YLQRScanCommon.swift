@@ -21,7 +21,7 @@ extension DispatchQueue {
 
 struct YLQRScanCommon {
     static func playSound() {
-        guard let filePath = Bundle.main.path(forResource: "sound", ofType: "caf") else {
+        guard let filePath = Bundle.currentBundle.path(forResource: "sound", ofType: "caf") else {
             let alertView = UIAlertView(title: "提醒", message: "找不到音频文件", delegate: nil, cancelButtonTitle: "取消", otherButtonTitles: "确定")
             alertView.show()
             return

@@ -52,12 +52,14 @@ internal class YLDimmingView: UIView {
     private func setup() {
         let imageView = UIImageView()
         imageView.frame = rectOfInteract
-        imageView.image = #imageLiteral(resourceName: "Border")
+//        imageView.image = #imageLiteral(resourceName: "Border")
+        imageView.image = UIImage(named: "Border", in: Bundle.currentBundle, compatibleWith: nil)
         addSubview(imageView)
         self.imageView = imageView
         
         let animatableView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageView.frame.width, height: 1))
-        animatableView.image = #imageLiteral(resourceName: "ScanLineImage")
+//        animatableView.image = #imageLiteral(resourceName: "ScanLineImage")
+        animatableView.image = UIImage(named: "ScanLineImage", in: Bundle.currentBundle, compatibleWith: nil)
         animatableView.isHidden = true
         imageView.addSubview(animatableView)
         self.animatableView = animatableView

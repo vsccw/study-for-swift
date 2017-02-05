@@ -9,12 +9,12 @@
 import UIKit
 import CoreImage
 
-typealias CompletionHandler<T> = (T) -> Void
+public typealias CompletionHandler<T> = (T) -> Void
 
 struct YLDetectQRCode {
-    static func scanQRCodeFromPhotoLibrary(image: UIImage, completion: CompletionHandler<String?>) {
+    static func scanQRCodeFromPhotoLibrary(image: UIImage, completion: CompletionHandler<String?>?) {
         guard let cgImage = image.cgImage else {
-            completion(nil)
+            completion?(nil)
             return
         }
         if let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]) {
@@ -23,11 +23,11 @@ struct YLDetectQRCode {
                 if let qrFeature = feature as? CIQRCodeFeature {
                     //                isFirstPush = false
                     //                self.captureSession?.stopRunning()
-                    completion(qrFeature.messageString)
+                    completion?(qrFeature.messageString)
                     return
                 }
             }
         }
-        completion(nil)
+        completion?(nil)
     }
 }

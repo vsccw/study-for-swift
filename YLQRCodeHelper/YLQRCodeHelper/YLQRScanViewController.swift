@@ -19,7 +19,7 @@ enum YLScanSetupResult {
     case unknown
 }
 
-class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+open class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     fileprivate var captureSession = AVCaptureSession()
 
@@ -43,7 +43,7 @@ class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
     
     var resultString: String? /// 去override
 
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
         isFirstPush = true
@@ -113,11 +113,11 @@ class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         sessionQueue.sync { [weak self] in
@@ -145,12 +145,12 @@ class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopSessionRunning()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if setupResult == .successed {
             captureSession.stopRunning()
@@ -226,7 +226,7 @@ class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         view.layer.insertSublayer(capturePreviewLayer!, at: 0)
     }
     
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    open func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
         for _supportedBarcode in metadataObjects {
            

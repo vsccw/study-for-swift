@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F238D13D1E478FB000B71B63 /* Bundle+YL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F238D13C1E478FB000B71B63 /* Bundle+YL.swift */; };
 		F250B5C41E47681500B80CE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F250B5C31E47681500B80CE6 /* Assets.xcassets */; };
 		F250B5C71E47685600B80CE6 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = F250B5C61E47685600B80CE6 /* sound.caf */; };
 		F250B5E91E4768AC00B80CE6 /* YLQRCodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250B5E81E4768AC00B80CE6 /* YLQRCodeHelper.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F238D13C1E478FB000B71B63 /* Bundle+YL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+YL.swift"; sourceTree = "<group>"; };
 		F250B5C31E47681500B80CE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F250B5C61E47685600B80CE6 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
 		F250B5E81E4768AC00B80CE6 /* YLQRCodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLQRCodeHelper.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				F250B5C61E47685600B80CE6 /* sound.caf */,
 				F2FD0C321E47614100F9595D /* Info.plist */,
 				F250B5E81E4768AC00B80CE6 /* YLQRCodeHelper.swift */,
+				F238D13C1E478FB000B71B63 /* Bundle+YL.swift */,
 			);
 			path = YLQRCodeHelper;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				F2FD0C411E4761FE00F9595D /* YLQRScanCommon.swift in Sources */,
 				F2FD0C401E4761FE00F9595D /* YLGenerateQRCode.swift in Sources */,
 				F250B5E91E4768AC00B80CE6 /* YLQRCodeHelper.swift in Sources */,
+				F238D13D1E478FB000B71B63 /* Bundle+YL.swift in Sources */,
 				F2FD0C3F1E4761FE00F9595D /* YLDimmingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
