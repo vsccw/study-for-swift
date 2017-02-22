@@ -10,15 +10,12 @@ import UIKit
 import CoreImage
 
 struct YLGenerateQRCode {
-    static func beginGenerate(text: String, completion: CompletionHandler<UIImage?>) {
+    static func beginGenerate(text: String, withLogo: Bool = false, completion: CompletionHandler<UIImage?>) {
         let strData = text.data(using: .utf8)
         
         let qrFilter = CIFilter(name: "CIQRCodeGenerator")
         qrFilter?.setValue(strData, forKey: "inputMessage")
         qrFilter?.setValue("H", forKey: "inputCorrectionLevel")
-//        let color0 = UIColor.black.cgColor
-//        let color1 = UIColor(white: 0.5, alpha: 1.0).cgColor
-//        let colorFilter = CIFilter(name: "CIFalseColor", withInputParameters: ["inputImage": qrFilter!.outputImage!,"inputColor0": CIColor(cgColor: color0) ,"inputColor1": CIColor(cgColor: color1)])
         
         if let ciImage = qrFilter?.outputImage {
         
@@ -32,12 +29,13 @@ struct YLGenerateQRCode {
             cgContext?.scaleBy(x: 1.0, y: -1.0)
             cgContext?.draw(cgImage!, in: cgContext!.boundingBoxOfClipPath)
             
-            let image = YLGenerateQRCode.getBorderImage(image: #imageLiteral(resourceName: "29"))
-            
-            if let podfileCGImage = image?.cgImage {
-                cgContext?.draw(podfileCGImage, in: cgContext!.boundingBoxOfClipPath.insetBy(dx: (size.width - 34.0) * 0.5, dy: (size.height - 34.0) * 0.5))
+            if withLogo {
+                let image = YLGenerateQRCode.getBorderImage(image: #imageLiteral(resourceName: "29"))
+                
+                if let podfileCGImage = image?.cgImage {
+                    cgContext?.draw(podfileCGImage, in: cgContext!.boundingBoxOfClipPath.insetBy(dx: (size.width - 34.0) * 0.5, dy: (size.height - 34.0) * 0.5))
+                }
             }
-            
             let codeImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             completion(codeImage)
@@ -63,19 +61,5 @@ struct YLGenerateQRCode {
         }
         UIGraphicsEndImageContext()
         return currentImage
-        
-        
-//        var currentImage: UIImage?
-//        UIGraphicsBeginImageContext(CGSize(width: 40, height: 40))
-//        let context = UIGraphicsGetCurrentContext()
-//        context?.scaleBy(x: 1.0, y: -1.0)
-//        let image = UIImage(named: "podfile")
-//        context?.setFillColor(UIColor.white.cgColor)
-//        if let cgImage = image?.cgImage {
-//            context?.draw(cgImage, in: context!.boundingBoxOfClipPath.insetBy(dx: 5, dy: 5))
-//            currentImage = UIGraphicsGetImageFromCurrentImageContext()
-//        }
-//        UIGraphicsEndImageContext()
-//        return currentImage
     }
 }

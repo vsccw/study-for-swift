@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YLQRCodeScanViewController: YLQRScanViewController {
+class YLQRCodeScanViewController: YLQRScanBaseViewController {
     
     override var resultString: String? {
         didSet {
@@ -16,12 +16,20 @@ class YLQRCodeScanViewController: YLQRScanViewController {
         }
     }
     fileprivate var selectPhotosButton: UIButton!
+    fileprivate var tipLabel: UILabel!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let viewHeight = view.bounds.height
-//        let viewWidth = view.bounds.width
+        
+        tipLabel = UILabel()
+        tipLabel.text = "将二维码放入框中，即可自动扫描"
+        tipLabel.font = UIFont.systemFont(ofSize: 12)
+        tipLabel.textColor = UIColor.white
+        tipLabel.frame = CGRect(x: 0, y: scanConfig.scanRectWidthHeight + scanConfig.contentOffsetUp + 20, width: UIScreen.main.bounds.width, height: 13.0)
+        tipLabel.textAlignment = .center
+        
         selectPhotosButton = UIButton(frame: CGRect(x: 35.0, y: viewHeight - 136.0, width: UIScreen.main.bounds.width - 70.0, height: 44.0))
         selectPhotosButton.layer.masksToBounds = true
         selectPhotosButton.layer.cornerRadius = 4.0
@@ -32,7 +40,11 @@ class YLQRCodeScanViewController: YLQRScanViewController {
         selectPhotosButton.setTitleColor(UIColor.black, for: .normal)
         selectPhotosButton.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
         selectPhotosButton.addTarget(self, action: #selector(openAlbumAction(_:)), for: .touchUpInside)
-        view.addSubview(selectPhotosButton)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        dimmingView!.addSubview(tipLabel)
+        dimmingView!.addSubview(selectPhotosButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {

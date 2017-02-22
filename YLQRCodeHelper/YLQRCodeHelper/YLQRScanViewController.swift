@@ -95,18 +95,6 @@ open class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObje
         view.addSubview(activityView!)
         activityView?.startAnimating()
         
-//        selectPhotosButton = UIButton(frame: CGRect(x: 35.0, y: viewHeight - 136.0, width: UIScreen.main.bounds.width - 70.0, height: 44.0))
-//        selectPhotosButton.layer.masksToBounds = true
-//        selectPhotosButton.layer.cornerRadius = 4.0
-////        selectPhotosButton.setBackgroundImage(UIImage.solidColorImage(fillColor: UIColor.YLYellowColor, size: selectPhotosButton.frame.size), for: .normal)
-//        selectPhotosButton.backgroundColor = UIColor.yellow
-//        selectPhotosButton.setTitle("扫描相册中的二维码", for: UIControlState())
-////        selectPhotosButton.setTitleColor(UIColor(ARGBHEX: 0xFF232329), for: .normal)
-//        selectPhotosButton.setTitleColor(UIColor.black, for: .normal)
-//        selectPhotosButton.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
-//        selectPhotosButton.addTarget(self, action: #selector(openAlbumAction(_:)), for: .touchUpInside)
-//        view.addSubview(selectPhotosButton)
-        
         /// 在一个新的队列里进行初始化工作，还是**主线程**
         sessionQueue.sync { [weak self] in
             self?.configSession()

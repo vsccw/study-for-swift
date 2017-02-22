@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YLQRCodeHelper
 
 class ViewController: UIViewController {
 
@@ -36,11 +37,11 @@ class ViewController: UIViewController {
         
         func detect() {
             guard let image = imageView.image else { return }
-            YLDetectQRCode.scanQRCodeFromPhotoLibrary(image: image) { (result) in
-                guard let _result = result else { return }
-                YLQRScanCommon.playSound()
-                print(_result)
-            }
+//            YLDetectQRCode.scanQRCodeFromPhotoLibrary(image: image) { (result) in
+//                guard let _result = result else { return }
+//                YLQRScanCommon.playSound()
+//                print(_result)
+//            }
         }
         
         let alertController = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
@@ -58,12 +59,12 @@ class ViewController: UIViewController {
             return
         }
         
-        YLGenerateQRCode.beginGenerate(text: text, withLogo: true) {
-            guard let image  = $0 else { return }
-            DispatchQueue.main.async { [weak self] in
-                self?.imageView.image = image
-            }
-        }
+//        YLGenerateQRCode.beginGenerate(text: text) {
+//            guard let image  = $0 else { return }
+//            DispatchQueue.main.async { [weak self] in
+//                self?.imageView.image = image
+//            }
+//        }
         
     }
 

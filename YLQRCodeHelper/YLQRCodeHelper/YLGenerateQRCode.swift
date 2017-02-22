@@ -10,7 +10,7 @@ import UIKit
 import CoreImage
 
 struct YLGenerateQRCode {
-    static func beginGenerate(text: String, completion: CompletionHandler<UIImage?>?) {
+    static func beginGenerate(text: String, withLogo: Bool, completion: CompletionHandler<UIImage?>?) {
         let strData = text.data(using: .utf8)
         
         let qrFilter = CIFilter(name: "CIQRCodeGenerator")
@@ -18,7 +18,6 @@ struct YLGenerateQRCode {
         qrFilter?.setValue("H", forKey: "inputCorrectionLevel")
         
         if let ciImage = qrFilter?.outputImage {
-        
             let size = CGSize(width: 260, height: 260)
             let context = CIContext(options: nil)
             var cgImage = context.createCGImage(ciImage, from: ciImage.extent)
@@ -28,11 +27,11 @@ struct YLGenerateQRCode {
             cgContext?.interpolationQuality = .none
             cgContext?.scaleBy(x: 1.0, y: -1.0)
             cgContext?.draw(cgImage!, in: cgContext!.boundingBoxOfClipPath)
-            
-            let image = YLGenerateQRCode.getBorderImage(image: UIImage(named: "29", in: Bundle.currentBundle, compatibleWith: nil)!)
-            
-            if let podfileCGImage = image?.cgImage {
-                cgContext?.draw(podfileCGImage, in: cgContext!.boundingBoxOfClipPath.insetBy(dx: (size.width - 34.0) * 0.5, dy: (size.height - 34.0) * 0.5))
+            if withLogo, let image = UIImage(named: "29", in: Bundle.currentBundle, compatibleWith: nil) {
+                let image = YLGenerateQRCode.getBorderImage(image: image)
+                if let podfileCGImage = image?.cgImage {
+                    cgContext?.draw(podfileCGImage, in: cgContext!.boundingBoxOfClipPath.insetBy(dx: (size.width - 34.0) * 0.5, dy: (size.height - 34.0) * 0.5))
+                }
             }
             
             let codeImage = UIGraphicsGetImageFromCurrentImageContext()

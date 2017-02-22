@@ -9,6 +9,9 @@
 import UIKit
 import AudioToolbox
 
+typealias CompletionHandler<T> = (T) -> Void
+typealias YLQRScanResult = String
+
 extension DispatchQueue {
     static func safeMainQueue(block: @escaping () -> Void) {
         if !Thread.isMainThread {

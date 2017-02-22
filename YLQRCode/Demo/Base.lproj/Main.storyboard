@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7fj-1T-gkc">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--主页-->
+        <scene sceneID="UDz-Ml-5xP">
+            <objects>
+                <viewController id="Y7O-C5-R1E" customClass="ViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="THu-0Y-vjP"/>
+                        <viewControllerLayoutGuide type="bottom" id="fJ4-XN-QwU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BJY-iQ-FXa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vd8-Ak-frb">
+                                <rect key="frame" x="36" y="90" width="303" height="437"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fYk-n6-Ooz">
+                                <rect key="frame" x="58" y="240" width="260" height="260"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="260" id="lce-3P-pHK"/>
+                                    <constraint firstAttribute="width" constant="260" id="r00-Tz-xts"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDh-dE-vI6">
+                                <rect key="frame" x="57" y="162" width="260" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="生成二维码">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="generateQRCodeButtonClicked:" destination="Y7O-C5-R1E" eventType="touchUpInside" id="G3i-cw-yjp"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9oe-Gi-DgF">
+                                <rect key="frame" x="57" y="114" width="260" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="0.15521918400000001" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vd8-Ak-frb" firstAttribute="leading" secondItem="BJY-iQ-FXa" secondAttribute="leadingMargin" constant="20" id="7yB-xQ-xef"/>
+                            <constraint firstItem="SDh-dE-vI6" firstAttribute="top" secondItem="9oe-Gi-DgF" secondAttribute="bottom" constant="18" id="9rz-Xf-qTk"/>
+                            <constraint firstItem="fYk-n6-Ooz" firstAttribute="top" secondItem="SDh-dE-vI6" secondAttribute="bottom" constant="48" id="C7o-mX-OD0"/>
+                            <constraint firstItem="SDh-dE-vI6" firstAttribute="width" secondItem="fYk-n6-Ooz" secondAttribute="width" id="CxY-0w-yBD"/>
+                            <constraint firstItem="SDh-dE-vI6" firstAttribute="centerX" secondItem="BJY-iQ-FXa" secondAttribute="centerX" id="Dj4-mC-ojx"/>
+                            <constraint firstItem="vd8-Ak-frb" firstAttribute="centerX" secondItem="9oe-Gi-DgF" secondAttribute="centerX" id="W9Z-hG-BaG"/>
+                            <constraint firstItem="fYk-n6-Ooz" firstAttribute="centerX" secondItem="BJY-iQ-FXa" secondAttribute="centerX" id="XYp-pz-P2H"/>
+                            <constraint firstItem="9oe-Gi-DgF" firstAttribute="centerX" secondItem="SDh-dE-vI6" secondAttribute="centerX" id="Ycv-O8-zDD"/>
+                            <constraint firstAttribute="bottom" secondItem="vd8-Ak-frb" secondAttribute="bottom" constant="140" id="fiB-EZ-BL6"/>
+                            <constraint firstItem="9oe-Gi-DgF" firstAttribute="top" secondItem="THu-0Y-vjP" secondAttribute="bottom" constant="50" id="kbP-43-k3L"/>
+                            <constraint firstItem="vd8-Ak-frb" firstAttribute="top" secondItem="THu-0Y-vjP" secondAttribute="bottom" constant="26" id="kov-27-DTS"/>
+                            <constraint firstItem="9oe-Gi-DgF" firstAttribute="width" secondItem="SDh-dE-vI6" secondAttribute="width" id="mFq-Ex-vkz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="主页" id="Yof-Zi-Ysb">
+                        <barButtonItem key="leftBarButtonItem" title="二维码" id="zFt-eJ-hmA">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="CW2-CA-KNv" kind="show" id="Yi5-CD-VIb">
+                                    <nil key="action"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="fYk-n6-Ooz" id="4mt-0Y-gI8"/>
+                        <outlet property="textField" destination="9oe-Gi-DgF" id="84A-4k-ZTI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ecF-Lk-MhM" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="756" y="792.95352323838085"/>
+        </scene>
+        <!--二维码-->
+        <scene sceneID="zpu-t3-zJH">
+            <objects>
+                <viewController id="CW2-CA-KNv" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Msb-hB-oZU"/>
+                        <viewControllerLayoutGuide type="bottom" id="bPZ-zx-PjR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WWb-hA-8xa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="二维码" id="H8R-D5-GuD">
+                        <barButtonItem key="rightBarButtonItem" title="我的二维码" id="Yk2-oM-cQJ">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X9G-Vd-a2f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1382" y="793"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BF4-8f-5EQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7fj-1T-gkc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rJX-tn-dDr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y7O-C5-R1E" kind="relationship" relationship="rootViewController" id="61K-Pf-CUX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cmh-Xv-XId" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="792.95352323838085"/>
+        </scene>
+    </scenes>
+</document>

@@ -7,28 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F250B5B21E4765DA00B80CE6 /* YLQRCodeHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F250B5B11E4765DA00B80CE6 /* YLQRCodeHelper.framework */; };
-		F250B5B71E47664E00B80CE6 /* YLQRCodeHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F250B5B51E47664700B80CE6 /* YLQRCodeHelper.framework */; };
-		F250B5BE1E4766A400B80CE6 /* YLDetectQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250B5B91E4766A400B80CE6 /* YLDetectQRCode.swift */; };
-		F250B5BF1E4766A400B80CE6 /* YLDimmingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250B5BA1E4766A400B80CE6 /* YLDimmingView.swift */; };
-		F250B5C01E4766A400B80CE6 /* YLGenerateQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250B5BB1E4766A400B80CE6 /* YLGenerateQRCode.swift */; };
-		F250B5C11E4766A400B80CE6 /* YLQRScanCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250B5BC1E4766A400B80CE6 /* YLQRScanCommon.swift */; };
-		F250B5C21E4766A400B80CE6 /* YLQRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250B5BD1E4766A400B80CE6 /* YLQRScanViewController.swift */; };
+		F217157A1E4817F5009B72FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21715791E4817F5009B72FA /* AppDelegate.swift */; };
+		F217157F1E4817F5009B72FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F217157D1E4817F5009B72FA /* Main.storyboard */; };
+		F21715811E4817F5009B72FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F21715801E4817F5009B72FA /* Assets.xcassets */; };
+		F21715841E4817F5009B72FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F21715821E4817F5009B72FA /* LaunchScreen.storyboard */; };
+		F217158A1E481878009B72FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21715891E481878009B72FA /* ViewController.swift */; };
 		F2B4DDB71E4749B800E113E3 /* YLQRCodeScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B4DDB61E4749B800E113E3 /* YLQRCodeScanViewController.swift */; };
+		F2C045831E481B23004CE499 /* YLQRCodeHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F21715971E481A6C009B72FA /* YLQRCodeHelper.framework */; };
+		F2C045841E481B23004CE499 /* YLQRCodeHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F21715971E481A6C009B72FA /* YLQRCodeHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F2C045981E4820BE004CE499 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = F2C045911E4820BE004CE499 /* sound.caf */; };
+		F2C045991E4820BE004CE499 /* YLDetectQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C045921E4820BE004CE499 /* YLDetectQRCode.swift */; };
+		F2C0459A1E4820BE004CE499 /* YLDimmingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C045931E4820BE004CE499 /* YLDimmingView.swift */; };
+		F2C0459B1E4820BE004CE499 /* YLGenerateQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C045941E4820BE004CE499 /* YLGenerateQRCode.swift */; };
+		F2C0459C1E4820BE004CE499 /* YLQRCode.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2C045951E4820BE004CE499 /* YLQRCode.xcassets */; };
+		F2C0459D1E4820BE004CE499 /* YLQRScanBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C045961E4820BE004CE499 /* YLQRScanBaseViewController.swift */; };
+		F2C0459E1E4820BE004CE499 /* YLQRScanCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C045971E4820BE004CE499 /* YLQRScanCommon.swift */; };
 		F2F893911E18CB6D00B55774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F893901E18CB6D00B55774 /* AppDelegate.swift */; };
 		F2F893931E18CB6D00B55774 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F893921E18CB6D00B55774 /* ViewController.swift */; };
 		F2F893961E18CB6D00B55774 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2F893941E18CB6D00B55774 /* Main.storyboard */; };
-		F2F893981E18CB6D00B55774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F893971E18CB6D00B55774 /* Assets.xcassets */; };
 		F2F8939B1E18CB6D00B55774 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2F893991E18CB6D00B55774 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		F250B5B01E47651400B80CE6 /* Embed Frameworks */ = {
+		F2C045851E481B23004CE499 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F2C045841E481B23004CE499 /* YLQRCodeHelper.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,41 +43,82 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F250B5B11E4765DA00B80CE6 /* YLQRCodeHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YLQRCodeHelper.framework; path = "/Users/yolo/Desktop/github/study-for-swift/YLQRCode/YLQRCode/YLQRCodeHelper.framework"; sourceTree = "<absolute>"; };
-		F250B5B51E47664700B80CE6 /* YLQRCodeHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YLQRCodeHelper.framework; path = "/Users/yolo/Desktop/github/study-for-swift/YLQRCode/YLQRCode/YLQRCodeHelper.framework"; sourceTree = "<absolute>"; };
-		F250B5B91E4766A400B80CE6 /* YLDetectQRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLDetectQRCode.swift; sourceTree = "<group>"; };
-		F250B5BA1E4766A400B80CE6 /* YLDimmingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLDimmingView.swift; sourceTree = "<group>"; };
-		F250B5BB1E4766A400B80CE6 /* YLGenerateQRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLGenerateQRCode.swift; sourceTree = "<group>"; };
-		F250B5BC1E4766A400B80CE6 /* YLQRScanCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLQRScanCommon.swift; sourceTree = "<group>"; };
-		F250B5BD1E4766A400B80CE6 /* YLQRScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLQRScanViewController.swift; sourceTree = "<group>"; };
-		F250B5C51E47684A00B80CE6 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
+		F21715771E4817F5009B72FA /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F21715791E4817F5009B72FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F217157E1E4817F5009B72FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F21715801E4817F5009B72FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F21715831E4817F5009B72FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F21715851E4817F5009B72FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F21715891E481878009B72FA /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F21715971E481A6C009B72FA /* YLQRCodeHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YLQRCodeHelper.framework; sourceTree = "<group>"; };
 		F2B4DDB61E4749B800E113E3 /* YLQRCodeScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLQRCodeScanViewController.swift; sourceTree = "<group>"; };
+		F2C045911E4820BE004CE499 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
+		F2C045921E4820BE004CE499 /* YLDetectQRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLDetectQRCode.swift; sourceTree = "<group>"; };
+		F2C045931E4820BE004CE499 /* YLDimmingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLDimmingView.swift; sourceTree = "<group>"; };
+		F2C045941E4820BE004CE499 /* YLGenerateQRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLGenerateQRCode.swift; sourceTree = "<group>"; };
+		F2C045951E4820BE004CE499 /* YLQRCode.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = YLQRCode.xcassets; sourceTree = "<group>"; };
+		F2C045961E4820BE004CE499 /* YLQRScanBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLQRScanBaseViewController.swift; sourceTree = "<group>"; };
+		F2C045971E4820BE004CE499 /* YLQRScanCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLQRScanCommon.swift; sourceTree = "<group>"; };
 		F2F8938D1E18CB6D00B55774 /* YLQRCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLQRCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2F893901E18CB6D00B55774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2F893921E18CB6D00B55774 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F2F893951E18CB6D00B55774 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F2F893971E18CB6D00B55774 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2F8939A1E18CB6D00B55774 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2F8939C1E18CB6D00B55774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F21715741E4817F5009B72FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2C045831E481B23004CE499 /* YLQRCodeHelper.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2F8938A1E18CB6D00B55774 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F250B5B71E47664E00B80CE6 /* YLQRCodeHelper.framework in Frameworks */,
-				F250B5B21E4765DA00B80CE6 /* YLQRCodeHelper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F21715781E4817F5009B72FA /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				F21715971E481A6C009B72FA /* YLQRCodeHelper.framework */,
+				F21715791E4817F5009B72FA /* AppDelegate.swift */,
+				F21715891E481878009B72FA /* ViewController.swift */,
+				F217157D1E4817F5009B72FA /* Main.storyboard */,
+				F21715801E4817F5009B72FA /* Assets.xcassets */,
+				F21715821E4817F5009B72FA /* LaunchScreen.storyboard */,
+				F21715851E4817F5009B72FA /* Info.plist */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		F2C045901E4820BE004CE499 /* YLQRCodeHelper */ = {
+			isa = PBXGroup;
+			children = (
+				F2C045911E4820BE004CE499 /* sound.caf */,
+				F2C045921E4820BE004CE499 /* YLDetectQRCode.swift */,
+				F2C045931E4820BE004CE499 /* YLDimmingView.swift */,
+				F2C045941E4820BE004CE499 /* YLGenerateQRCode.swift */,
+				F2C045951E4820BE004CE499 /* YLQRCode.xcassets */,
+				F2C045961E4820BE004CE499 /* YLQRScanBaseViewController.swift */,
+				F2C045971E4820BE004CE499 /* YLQRScanCommon.swift */,
+			);
+			path = YLQRCodeHelper;
+			sourceTree = "<group>";
+		};
 		F2F893841E18CB6D00B55774 = {
 			isa = PBXGroup;
 			children = (
 				F2F8938F1E18CB6D00B55774 /* YLQRCode */,
+				F21715781E4817F5009B72FA /* Demo */,
 				F2F8938E1E18CB6D00B55774 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				F2F8938D1E18CB6D00B55774 /* YLQRCode.app */,
+				F21715771E4817F5009B72FA /* Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,19 +135,13 @@
 		F2F8938F1E18CB6D00B55774 /* YLQRCode */ = {
 			isa = PBXGroup;
 			children = (
-				F250B5B91E4766A400B80CE6 /* YLDetectQRCode.swift */,
-				F250B5BA1E4766A400B80CE6 /* YLDimmingView.swift */,
-				F250B5BB1E4766A400B80CE6 /* YLGenerateQRCode.swift */,
-				F250B5BC1E4766A400B80CE6 /* YLQRScanCommon.swift */,
-				F250B5BD1E4766A400B80CE6 /* YLQRScanViewController.swift */,
+				F2C045901E4820BE004CE499 /* YLQRCodeHelper */,
 				F2F893901E18CB6D00B55774 /* AppDelegate.swift */,
 				F2B4DDB61E4749B800E113E3 /* YLQRCodeScanViewController.swift */,
 				F2F893921E18CB6D00B55774 /* ViewController.swift */,
 				F2F893941E18CB6D00B55774 /* Main.storyboard */,
-				F2F893971E18CB6D00B55774 /* Assets.xcassets */,
 				F2F893991E18CB6D00B55774 /* LaunchScreen.storyboard */,
 				F2F8939C1E18CB6D00B55774 /* Info.plist */,
-				F250B5C51E47684A00B80CE6 /* sound.caf */,
 			);
 			path = YLQRCode;
 			sourceTree = "<group>";
@@ -106,6 +149,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F21715761E4817F5009B72FA /* Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F21715861E4817F5009B72FA /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildPhases = (
+				F21715731E4817F5009B72FA /* Sources */,
+				F21715741E4817F5009B72FA /* Frameworks */,
+				F21715751E4817F5009B72FA /* Resources */,
+				F2C045851E481B23004CE499 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Demo;
+			productName = Demo;
+			productReference = F21715771E4817F5009B72FA /* Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F2F8938C1E18CB6D00B55774 /* YLQRCode */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2F8939F1E18CB6D00B55774 /* Build configuration list for PBXNativeTarget "YLQRCode" */;
@@ -113,7 +174,6 @@
 				F2F893891E18CB6D00B55774 /* Sources */,
 				F2F8938A1E18CB6D00B55774 /* Frameworks */,
 				F2F8938B1E18CB6D00B55774 /* Resources */,
-				F250B5B01E47651400B80CE6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -134,6 +194,11 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Qiuncheng;
 				TargetAttributes = {
+					F21715761E4817F5009B72FA = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = JDTEF93AA4;
+						ProvisioningStyle = Automatic;
+					};
 					F2F8938C1E18CB6D00B55774 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = AXEMXHF2MM;
@@ -155,17 +220,29 @@
 			projectRoot = "";
 			targets = (
 				F2F8938C1E18CB6D00B55774 /* YLQRCode */,
+				F21715761E4817F5009B72FA /* Demo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F21715751E4817F5009B72FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F21715841E4817F5009B72FA /* LaunchScreen.storyboard in Resources */,
+				F21715811E4817F5009B72FA /* Assets.xcassets in Resources */,
+				F217157F1E4817F5009B72FA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2F8938B1E18CB6D00B55774 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2C0459C1E4820BE004CE499 /* YLQRCode.xcassets in Resources */,
 				F2F8939B1E18CB6D00B55774 /* LaunchScreen.storyboard in Resources */,
-				F2F893981E18CB6D00B55774 /* Assets.xcassets in Resources */,
+				F2C045981E4820BE004CE499 /* sound.caf in Resources */,
 				F2F893961E18CB6D00B55774 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,24 +250,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F21715731E4817F5009B72FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F217158A1E481878009B72FA /* ViewController.swift in Sources */,
+				F217157A1E4817F5009B72FA /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2F893891E18CB6D00B55774 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F250B5C11E4766A400B80CE6 /* YLQRScanCommon.swift in Sources */,
+				F2C0459D1E4820BE004CE499 /* YLQRScanBaseViewController.swift in Sources */,
 				F2F893931E18CB6D00B55774 /* ViewController.swift in Sources */,
-				F250B5C01E4766A400B80CE6 /* YLGenerateQRCode.swift in Sources */,
-				F250B5C21E4766A400B80CE6 /* YLQRScanViewController.swift in Sources */,
+				F2C0459B1E4820BE004CE499 /* YLGenerateQRCode.swift in Sources */,
 				F2F893911E18CB6D00B55774 /* AppDelegate.swift in Sources */,
 				F2B4DDB71E4749B800E113E3 /* YLQRCodeScanViewController.swift in Sources */,
-				F250B5BE1E4766A400B80CE6 /* YLDetectQRCode.swift in Sources */,
-				F250B5BF1E4766A400B80CE6 /* YLDimmingView.swift in Sources */,
+				F2C0459E1E4820BE004CE499 /* YLQRScanCommon.swift in Sources */,
+				F2C045991E4820BE004CE499 /* YLDetectQRCode.swift in Sources */,
+				F2C0459A1E4820BE004CE499 /* YLDimmingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		F217157D1E4817F5009B72FA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F217157E1E4817F5009B72FA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F21715821E4817F5009B72FA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F21715831E4817F5009B72FA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		F2F893941E18CB6D00B55774 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -210,6 +312,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		F21715871E4817F5009B72FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = JDTEF93AA4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Demo",
+				);
+				INFOPLIST_FILE = Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsccw.Demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		F21715881E4817F5009B72FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = JDTEF93AA4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Demo",
+				);
+				INFOPLIST_FILE = Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsccw.Demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		F2F8939D1E18CB6D00B55774 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -340,6 +478,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F21715861E4817F5009B72FA /* Build configuration list for PBXNativeTarget "Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F21715871E4817F5009B72FA /* Debug */,
+				F21715881E4817F5009B72FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F2F893881E18CB6D00B55774 /* Build configuration list for PBXProject "YLQRCode" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

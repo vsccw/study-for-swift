@@ -10,8 +10,6 @@
 
 import UIKit
 import AVFoundation
-import CoreImage
-import SafariServices
 
 enum YLScanSetupResult {
     case successed
@@ -19,14 +17,14 @@ enum YLScanSetupResult {
     case unknown
 }
 
-class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class YLQRScanBaseViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     fileprivate var captureSession = AVCaptureSession()
 
     fileprivate var capturePreviewLayer: AVCaptureVideoPreviewLayer?
     fileprivate var deviceInput: AVCaptureDeviceInput?
     fileprivate var metadataOutput: AVCaptureMetadataOutput?
-    fileprivate var dimmingView: YLDimmingView?
+    var dimmingView: YLDimmingView!
     
     fileprivate var rectOfInteres = CGRect.zero
     
@@ -34,14 +32,15 @@ class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
     
     fileprivate var setupResult = YLScanSetupResult.successed
     
+    /// 用于区分用户 **第一次push进来和present进入相册后进来**
     var isFirstPush = false
     
     fileprivate var activityView: UIActivityIndicatorView?
     
-    var style: YLScanViewConfig?
-//    fileprivate var selectPhotosButton: UIButton!
+    var scanConfig: YLScanViewConfig!
     
-    var resultString: String? /// 去override
+    /// 扫码获取的结果，用String表示，需要重写，**监听didSet即可**
+    var resultString: YLQRScanResult?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,37 +74,25 @@ class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
         }
         
         setupResult = authorizationStatus()
-        dimmingView = YLDimmingView(frame: view.bounds)
-        view.addSubview(dimmingView!)
         
-        let viewStyle = dimmingView!.style
+        dimmingView = YLDimmingView(frame: view.bounds)
+        scanConfig = dimmingView.config
         
         let viewWidth = view.frame.width
         let viewHeight = view.frame.height
         
-        rectOfInteres = CGRect(x: ((viewHeight - viewStyle.scanRectWidthHeight) * 0.5 - viewStyle.contentOffSetUp + 64.0) / viewHeight,
-                               y: (viewWidth - viewStyle.scanRectWidthHeight) * 0.5 / viewWidth,
-                               width: viewStyle.scanRectWidthHeight / viewHeight,
-                               height: viewStyle.scanRectWidthHeight / viewWidth)
+        rectOfInteres = CGRect(x: ((viewHeight - scanConfig.scanRectWidthHeight) * 0.5 - scanConfig.contentOffsetUp + 64.0) / viewHeight,
+                               y: (viewWidth - scanConfig.scanRectWidthHeight) * 0.5 / viewWidth,
+                               width: scanConfig.scanRectWidthHeight / viewHeight,
+                               height: scanConfig.scanRectWidthHeight / viewWidth)
         
         activityView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         activityView?.tintColor = UIColor.black
-        activityView?.frame = CGRect(x: 50, y: 50, width: 200, height: 200)
+        activityView?.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        activityView?.center = CGPoint(x: UIScreen.main.bounds.width * 0.5, y: scanConfig.scanRectWidthHeight * 0.5 + scanConfig.contentOffsetUp)
         activityView?.hidesWhenStopped = true
         view.addSubview(activityView!)
         activityView?.startAnimating()
-        
-//        selectPhotosButton = UIButton(frame: CGRect(x: 35.0, y: viewHeight - 136.0, width: UIScreen.main.bounds.width - 70.0, height: 44.0))
-//        selectPhotosButton.layer.masksToBounds = true
-//        selectPhotosButton.layer.cornerRadius = 4.0
-////        selectPhotosButton.setBackgroundImage(UIImage.solidColorImage(fillColor: UIColor.YLYellowColor, size: selectPhotosButton.frame.size), for: .normal)
-//        selectPhotosButton.backgroundColor = UIColor.yellow
-//        selectPhotosButton.setTitle("扫描相册中的二维码", for: UIControlState())
-////        selectPhotosButton.setTitleColor(UIColor(ARGBHEX: 0xFF232329), for: .normal)
-//        selectPhotosButton.setTitleColor(UIColor.black, for: .normal)
-//        selectPhotosButton.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
-//        selectPhotosButton.addTarget(self, action: #selector(openAlbumAction(_:)), for: .touchUpInside)
-//        view.addSubview(selectPhotosButton)
         
         /// 在一个新的队列里进行初始化工作，还是**主线程**
         sessionQueue.sync { [weak self] in
@@ -119,7 +106,28 @@ class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        dimmingView.removeFromSuperview()
+        view.addSubview(dimmingView)
+        startSesssion()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopSessionRunning()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if setupResult == .successed {
+            captureSession.stopRunning()
+        }
+    }
+    
+    func startSesssion() {
         
+        guard !captureSession.isRunning else  {
+            return
+        }
         sessionQueue.sync { [weak self] in
             guard let strongSelf = self else { return }
             switch strongSelf.setupResult {
@@ -142,18 +150,6 @@ class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
                 }))
                 strongSelf.present(alertController, animated: true, completion: nil)
             }
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        stopSessionRunning()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if setupResult == .successed {
-            captureSession.stopRunning()
         }
     }
     
@@ -243,40 +239,4 @@ class YLQRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDe
             }
         }
     }
-    
-//    @objc fileprivate func openAlbumAction(_ sender: Any) {
-//        stopSessionRunning()
-//        isFirstPush = false
-//        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-//            let imagePickerView = UIImagePickerController()
-//            imagePickerView.allowsEditing = false
-//            imagePickerView.sourceType = .photoLibrary
-//            imagePickerView.delegate = self
-//            present(imagePickerView, animated: true, completion: nil)
-//        }
-//    }
 }
-
-//extension YLQRScanViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//        isFirstPush = true
-//        picker.dismiss(animated: true, completion: nil)
-//    }
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//        picker.dismiss(animated: true, completion: nil)
-//        
-//        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            YLDetectQRCode.scanQRCodeFromPhotoLibrary(image: image) { [weak self] str in
-//                if let result = str {
-//                    YLQRScanCommon.playSound()
-//                    self?.resultString = result
-//                }
-//                else {
-//                    self?.isFirstPush = false
-//                    let alertView = UIAlertView(title: "提醒", message: "没有二维码", delegate: nil, cancelButtonTitle: "取消", otherButtonTitles: "确定")
-//                    alertView.show()
-//                }
-//            }
-//        }
-//    }
-//}

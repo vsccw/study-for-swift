@@ -9,10 +9,11 @@
 import UIKit
 
 internal struct YLScanViewConfig {
-    var contentOffSetUp: CGFloat = 64.0 + 80.0
-    var scanRectWidthHeight: CGFloat = 475.0 * 0.5
+    var scanRectWidthHeight: CGFloat = 235.0
+    var centerUpOffset: CGFloat = 77.0
     var borderLineColor: UIColor = UIColor.yellow
-    
+//    var dimmingBackgroundColor: UIColor = UIColor()
+    var contentOffsetUp: CGFloat = 0.0
     var borderLineWidth: CGFloat = 4.0
     
 }
@@ -23,24 +24,25 @@ internal class YLDimmingView: UIView {
     
     private var imageView: UIImageView!
     private var animatableView: UIImageView!
-    private var _style: YLScanViewConfig!
+    private var _config: YLScanViewConfig!
     
     private let animatedViewKey = "moveView.transform.translation.y"
     
-    internal var style: YLScanViewConfig {
-        return _style
+    internal var config: YLScanViewConfig {
+        return _config
     }
     
-    convenience init(frame: CGRect, style: YLScanViewConfig = YLScanViewConfig()) {
+    convenience init(frame: CGRect, config: YLScanViewConfig = YLScanViewConfig()) {
         self.init(frame: frame)
         let viewWidth = frame.width
         
-        _style = style
+        _config = config
+        _config.contentOffsetUp = UIScreen.main.bounds.height * 0.5 - config.centerUpOffset - config.scanRectWidthHeight * 0.5
         
-        rectOfInteract = CGRect(x: (viewWidth - style.scanRectWidthHeight) * 0.5,
-                                y: style.contentOffSetUp,
-                                width: style.scanRectWidthHeight,
-                                height: style.scanRectWidthHeight)
+        rectOfInteract = CGRect(x: (viewWidth - _config.scanRectWidthHeight) * 0.5,
+                                y: _config.contentOffsetUp,
+                                width: _config.scanRectWidthHeight,
+                                height: _config.scanRectWidthHeight)
         setup()
     }
 
@@ -86,14 +88,6 @@ internal class YLDimmingView: UIView {
         bottomLayer.frame = CGRect(x: imageViewOriginX, y: imageViewOriginY + imageViewHeight, width: imageViewWidth, height: frame.height - imageViewOriginY - imageViewHeight)
         bottomLayer.backgroundColor = UIColor(white: 0.0, alpha: 0.92).cgColor
         layer.addSublayer(bottomLayer)
-        
-        let label = UILabel()
-        label.text = "将二维码放入框中，即可自动扫描"
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor.white
-        label.frame = CGRect(x: 0, y: imageView.frame.maxY + 5.0, width: bounds.width, height: 30)
-        label.textAlignment = .center
-        addSubview(label)
     }
     
     func beginAnimation() {

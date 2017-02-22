@@ -9,6 +9,8 @@
 import UIKit
 import AudioToolbox
 
+public typealias CompletionHandler<T> = (T) -> Void
+
 extension DispatchQueue {
     static func safeMainQueue(block: @escaping () -> Void) {
         if !Thread.isMainThread {
@@ -30,7 +32,6 @@ struct YLQRScanCommon {
         var soundID: SystemSoundID = 0
         AudioServicesCreateSystemSoundID(soundURL as CFURL, &soundID)
         
-//        AudioServicesPlayAlertSound(soundID)
         AudioServicesPlaySystemSound(soundID)
         AudioServicesRemoveSystemSoundCompletion(soundID)
     }

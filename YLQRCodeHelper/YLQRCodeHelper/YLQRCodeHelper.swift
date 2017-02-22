@@ -6,8 +6,8 @@
 //  Copyright © 2017年 YOLO. All rights reserved.
 //
 
-public func generateQRCode(text: String, completion: CompletionHandler<UIImage?>?) {
-    YLGenerateQRCode.beginGenerate(text: text, completion: completion)
+public func generateQRCode(text: String, withLogo: Bool, completion: CompletionHandler<UIImage?>?) {
+    YLGenerateQRCode.beginGenerate(text: text, withLogo: withLogo, completion: completion)
 }
 
 public func detectQRCode(image: UIImage, completion: CompletionHandler<String?>?) {

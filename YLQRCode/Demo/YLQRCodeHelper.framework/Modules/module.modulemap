@@ -1,0 +1,10 @@
+framework module YLQRCodeHelper {
+  umbrella header "YLQRCodeHelper.h"
+
+  export *
+  module * { export * }
+}
+
+module YLQRCodeHelper.Swift {
+    header "YLQRCodeHelper-Swift.h"
+}

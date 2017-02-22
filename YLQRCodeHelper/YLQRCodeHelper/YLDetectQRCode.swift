@@ -9,8 +9,6 @@
 import UIKit
 import CoreImage
 
-public typealias CompletionHandler<T> = (T) -> Void
-
 struct YLDetectQRCode {
     static func scanQRCodeFromPhotoLibrary(image: UIImage, completion: CompletionHandler<String?>?) {
         guard let cgImage = image.cgImage else {
@@ -21,8 +19,6 @@ struct YLDetectQRCode {
             let features = detector.features(in: CIImage(cgImage: cgImage))
             for feature in features { // 这里实际上可以识别两张二维码，在这里只取第一张（左边或者上边）
                 if let qrFeature = feature as? CIQRCodeFeature {
-                    //                isFirstPush = false
-                    //                self.captureSession?.stopRunning()
                     completion?(qrFeature.messageString)
                     return
                 }

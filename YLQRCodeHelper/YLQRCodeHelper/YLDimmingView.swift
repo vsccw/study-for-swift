@@ -9,8 +9,8 @@
 import UIKit
 
 internal struct YLScanViewConfig {
-    var contentOffSetUp: CGFloat = 64.0 + 80.0
-    var scanRectWidthHeight: CGFloat = 475.0 * 0.5
+    var contentOffSetUp: CGFloat = 64.0 + 77.0
+    var scanRectWidthHeight: CGFloat = 235.0
     var borderLineColor: UIColor = UIColor.yellow
     
     var borderLineWidth: CGFloat = 4.0

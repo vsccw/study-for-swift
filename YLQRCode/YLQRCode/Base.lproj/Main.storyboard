@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDU-7D-OLX">
-                                <rect key="frame" x="36" y="90" width="303" height="437"/>
+                                <rect key="frame" x="16" y="90" width="343" height="557"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gZh-z6-395">
@@ -57,8 +57,8 @@
                             <constraint firstItem="dFp-zT-TN3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="FYt-sm-3jD"/>
                             <constraint firstItem="dFp-zT-TN3" firstAttribute="width" secondItem="Ktp-EH-BGX" secondAttribute="width" id="GbV-FB-ehU"/>
                             <constraint firstItem="Ktp-EH-BGX" firstAttribute="top" secondItem="dFp-zT-TN3" secondAttribute="bottom" constant="18" id="HEX-Fs-1t8"/>
-                            <constraint firstAttribute="bottom" secondItem="GDU-7D-OLX" secondAttribute="bottom" constant="140" id="QSD-qq-SnK"/>
-                            <constraint firstItem="GDU-7D-OLX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="a6M-hj-4D9"/>
+                            <constraint firstAttribute="bottom" secondItem="GDU-7D-OLX" secondAttribute="bottom" constant="20" id="QSD-qq-SnK"/>
+                            <constraint firstItem="GDU-7D-OLX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="a6M-hj-4D9"/>
                             <constraint firstItem="GDU-7D-OLX" firstAttribute="centerX" secondItem="dFp-zT-TN3" secondAttribute="centerX" id="dNm-NF-8mC"/>
                             <constraint firstItem="Ktp-EH-BGX" firstAttribute="width" secondItem="gZh-z6-395" secondAttribute="width" id="e0A-Ws-Vck"/>
                             <constraint firstItem="gZh-z6-395" firstAttribute="top" secondItem="Ktp-EH-BGX" secondAttribute="bottom" constant="48" id="elB-6z-WqJ"/>
