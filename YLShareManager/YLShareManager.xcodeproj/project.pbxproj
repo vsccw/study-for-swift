@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3F7583DD1EAEFFFA00377AD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7583DC1EAEFFFA00377AD4 /* AppDelegate.swift */; };
+		3F7583DF1EAEFFFA00377AD4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7583DE1EAEFFFA00377AD4 /* ViewController.swift */; };
+		3F7583E21EAEFFFA00377AD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7583E01EAEFFFA00377AD4 /* Main.storyboard */; };
+		3F7583E41EAEFFFA00377AD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F7583E31EAEFFFA00377AD4 /* Assets.xcassets */; };
+		3F7583E71EAEFFFA00377AD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7583E51EAEFFFA00377AD4 /* LaunchScreen.storyboard */; };
+		3F7583F81EAF003400377AD4 /* YLShareContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7583F71EAF003400377AD4 /* YLShareContent.swift */; };
+		3F7583FA1EAF01D900377AD4 /* YLShareImageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7583F91EAF01D900377AD4 /* YLShareImageContent.swift */; };
+		3F7583FC1EAF1C6700377AD4 /* YLShareUrlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7583FB1EAF1C6700377AD4 /* YLShareUrlContent.swift */; };
+		3F7584011EAF2A9900377AD4 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F7583FD1EAF2A9900377AD4 /* Bolts.framework */; };
+		3F7584021EAF2A9900377AD4 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F7583FE1EAF2A9900377AD4 /* FBSDKCoreKit.framework */; };
+		3F7584031EAF2A9900377AD4 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F7583FF1EAF2A9900377AD4 /* FBSDKLoginKit.framework */; };
+		3F7584041EAF2A9900377AD4 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F7584001EAF2A9900377AD4 /* FBSDKShareKit.framework */; };
+		3F7584061EAF331500377AD4 /* YLSharePlatformType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7584051EAF331500377AD4 /* YLSharePlatformType.swift */; };
+		3F7584121EAF42BB00377AD4 /* YLLineKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F7584101EAF42BB00377AD4 /* YLLineKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F7584151EAF42BB00377AD4 /* YLLineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F75840E1EAF42BB00377AD4 /* YLLineKit.framework */; };
+		3F7584161EAF42BB00377AD4 /* YLLineKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F75840E1EAF42BB00377AD4 /* YLLineKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3F75841C1EAF42CC00377AD4 /* YLLineKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F75841B1EAF42CC00377AD4 /* YLLineKit.swift */; };
+		3F7584231EAF4B1700377AD4 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F75841E1EAF4B1700377AD4 /* libWeChatSDK.a */; };
+		3F7584241EAF4B1700377AD4 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3F75841F1EAF4B1700377AD4 /* README.txt */; };
+		3FB8A01E1EAF5AF400D02158 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB8A01D1EAF5AF400D02158 /* libsqlite3.tbd */; };
+		3FB8A0261EAF5B5700D02158 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB8A0251EAF5B5700D02158 /* SystemConfiguration.framework */; };
+		3FB8A0271EAF5B5E00D02158 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB8A01F1EAF5B0600D02158 /* CoreTelephony.framework */; };
+		3FB8A0291EAF5B6500D02158 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB8A0281EAF5B6500D02158 /* libc++.tbd */; };
+		3FB8A02B1EAF5B6E00D02158 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB8A02A1EAF5B6E00D02158 /* libz.tbd */; };
+		3FB8A02D1EAF6D7800D02158 /* YLShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB8A02C1EAF6D7800D02158 /* YLShareManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3F7584131EAF42BB00377AD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F7583D11EAEFFFA00377AD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F75840D1EAF42BB00377AD4;
+			remoteInfo = YLLineKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3F75841A1EAF42BB00377AD4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3F7584161EAF42BB00377AD4 /* YLLineKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3F7583D91EAEFFFA00377AD4 /* YLShareManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLShareManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F7583DC1EAEFFFA00377AD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3F7583DE1EAEFFFA00377AD4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3F7583E11EAEFFFA00377AD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3F7583E31EAEFFFA00377AD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3F7583E61EAEFFFA00377AD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3F7583E81EAEFFFA00377AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F7583F71EAF003400377AD4 /* YLShareContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLShareContent.swift; sourceTree = "<group>"; };
+		3F7583F91EAF01D900377AD4 /* YLShareImageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLShareImageContent.swift; sourceTree = "<group>"; };
+		3F7583FB1EAF1C6700377AD4 /* YLShareUrlContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLShareUrlContent.swift; sourceTree = "<group>"; };
+		3F7583FD1EAF2A9900377AD4 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		3F7583FE1EAF2A9900377AD4 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		3F7583FF1EAF2A9900377AD4 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		3F7584001EAF2A9900377AD4 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		3F7584051EAF331500377AD4 /* YLSharePlatformType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLSharePlatformType.swift; sourceTree = "<group>"; };
+		3F75840E1EAF42BB00377AD4 /* YLLineKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YLLineKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F7584101EAF42BB00377AD4 /* YLLineKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLLineKit.h; sourceTree = "<group>"; };
+		3F7584111EAF42BB00377AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F75841B1EAF42CC00377AD4 /* YLLineKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLLineKit.swift; sourceTree = "<group>"; };
+		3F75841E1EAF4B1700377AD4 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		3F75841F1EAF4B1700377AD4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		3F7584201EAF4B1700377AD4 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		3F7584211EAF4B1700377AD4 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		3F7584221EAF4B1700377AD4 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		3F7584251EAF523900377AD4 /* YLShareManager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YLShareManager-Bridging-Header.h"; sourceTree = "<group>"; };
+		3FB8A01D1EAF5AF400D02158 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		3FB8A01F1EAF5B0600D02158 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3FB8A0211EAF5B1300D02158 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3FB8A0231EAF5B2B00D02158 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		3FB8A0251EAF5B5700D02158 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3FB8A0281EAF5B6500D02158 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		3FB8A02A1EAF5B6E00D02158 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		3FB8A02C1EAF6D7800D02158 /* YLShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLShareManager.swift; sourceTree = "<group>"; };
+		3FB8A02E1EAF7D5B00D02158 /* YLShareManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YLShareManager.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3F7583D61EAEFFFA00377AD4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FB8A02B1EAF5B6E00D02158 /* libz.tbd in Frameworks */,
+				3FB8A0291EAF5B6500D02158 /* libc++.tbd in Frameworks */,
+				3FB8A0271EAF5B5E00D02158 /* CoreTelephony.framework in Frameworks */,
+				3FB8A0261EAF5B5700D02158 /* SystemConfiguration.framework in Frameworks */,
+				3FB8A01E1EAF5AF400D02158 /* libsqlite3.tbd in Frameworks */,
+				3F7584041EAF2A9900377AD4 /* FBSDKShareKit.framework in Frameworks */,
+				3F7584151EAF42BB00377AD4 /* YLLineKit.framework in Frameworks */,
+				3F7584231EAF4B1700377AD4 /* libWeChatSDK.a in Frameworks */,
+				3F7584011EAF2A9900377AD4 /* Bolts.framework in Frameworks */,
+				3F7584021EAF2A9900377AD4 /* FBSDKCoreKit.framework in Frameworks */,
+				3F7584031EAF2A9900377AD4 /* FBSDKLoginKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F75840A1EAF42BB00377AD4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3F7583D01EAEFFFA00377AD4 = {
+			isa = PBXGroup;
+			children = (
+				3F75840F1EAF42BB00377AD4 /* YLLineKit */,
+				3F7583EE1EAF001600377AD4 /* Frameworks */,
+				3F7583DB1EAEFFFA00377AD4 /* YLShareManager */,
+				3F7583DA1EAEFFFA00377AD4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3F7583DA1EAEFFFA00377AD4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F7583D91EAEFFFA00377AD4 /* YLShareManager.app */,
+				3F75840E1EAF42BB00377AD4 /* YLLineKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F7583DB1EAEFFFA00377AD4 /* YLShareManager */ = {
+			isa = PBXGroup;
+			children = (
+				3FB8A02E1EAF7D5B00D02158 /* YLShareManager.entitlements */,
+				3F7583DC1EAEFFFA00377AD4 /* AppDelegate.swift */,
+				3F7583DE1EAEFFFA00377AD4 /* ViewController.swift */,
+				3F7583F71EAF003400377AD4 /* YLShareContent.swift */,
+				3F7583F91EAF01D900377AD4 /* YLShareImageContent.swift */,
+				3F7584051EAF331500377AD4 /* YLSharePlatformType.swift */,
+				3F7583FB1EAF1C6700377AD4 /* YLShareUrlContent.swift */,
+				3FB8A02C1EAF6D7800D02158 /* YLShareManager.swift */,
+				3F7583E01EAEFFFA00377AD4 /* Main.storyboard */,
+				3F7583E31EAEFFFA00377AD4 /* Assets.xcassets */,
+				3F7583E51EAEFFFA00377AD4 /* LaunchScreen.storyboard */,
+				3F7583E81EAEFFFA00377AD4 /* Info.plist */,
+				3F7584251EAF523900377AD4 /* YLShareManager-Bridging-Header.h */,
+			);
+			path = YLShareManager;
+			sourceTree = "<group>";
+		};
+		3F7583EE1EAF001600377AD4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3FB8A02A1EAF5B6E00D02158 /* libz.tbd */,
+				3FB8A0281EAF5B6500D02158 /* libc++.tbd */,
+				3FB8A0251EAF5B5700D02158 /* SystemConfiguration.framework */,
+				3FB8A0231EAF5B2B00D02158 /* CoreFoundation.framework */,
+				3FB8A0211EAF5B1300D02158 /* CoreGraphics.framework */,
+				3FB8A01F1EAF5B0600D02158 /* CoreTelephony.framework */,
+				3FB8A01D1EAF5AF400D02158 /* libsqlite3.tbd */,
+				3F75841D1EAF4B1700377AD4 /* OpenSDK1.7.7 */,
+				3F7583FD1EAF2A9900377AD4 /* Bolts.framework */,
+				3F7583FE1EAF2A9900377AD4 /* FBSDKCoreKit.framework */,
+				3F7583FF1EAF2A9900377AD4 /* FBSDKLoginKit.framework */,
+				3F7584001EAF2A9900377AD4 /* FBSDKShareKit.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F75840F1EAF42BB00377AD4 /* YLLineKit */ = {
+			isa = PBXGroup;
+			children = (
+				3F7584101EAF42BB00377AD4 /* YLLineKit.h */,
+				3F7584111EAF42BB00377AD4 /* Info.plist */,
+				3F75841B1EAF42CC00377AD4 /* YLLineKit.swift */,
+			);
+			path = YLLineKit;
+			sourceTree = "<group>";
+		};
+		3F75841D1EAF4B1700377AD4 /* OpenSDK1.7.7 */ = {
+			isa = PBXGroup;
+			children = (
+				3F75841E1EAF4B1700377AD4 /* libWeChatSDK.a */,
+				3F75841F1EAF4B1700377AD4 /* README.txt */,
+				3F7584201EAF4B1700377AD4 /* WechatAuthSDK.h */,
+				3F7584211EAF4B1700377AD4 /* WXApi.h */,
+				3F7584221EAF4B1700377AD4 /* WXApiObject.h */,
+			);
+			path = OpenSDK1.7.7;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3F75840B1EAF42BB00377AD4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F7584121EAF42BB00377AD4 /* YLLineKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3F7583D81EAEFFFA00377AD4 /* YLShareManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F7583EB1EAEFFFA00377AD4 /* Build configuration list for PBXNativeTarget "YLShareManager" */;
+			buildPhases = (
+				3F7583D51EAEFFFA00377AD4 /* Sources */,
+				3F7583D61EAEFFFA00377AD4 /* Frameworks */,
+				3F7583D71EAEFFFA00377AD4 /* Resources */,
+				3F75841A1EAF42BB00377AD4 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F7584141EAF42BB00377AD4 /* PBXTargetDependency */,
+			);
+			name = YLShareManager;
+			productName = YLShareManager;
+			productReference = 3F7583D91EAEFFFA00377AD4 /* YLShareManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3F75840D1EAF42BB00377AD4 /* YLLineKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F7584171EAF42BB00377AD4 /* Build configuration list for PBXNativeTarget "YLLineKit" */;
+			buildPhases = (
+				3F7584091EAF42BB00377AD4 /* Sources */,
+				3F75840A1EAF42BB00377AD4 /* Frameworks */,
+				3F75840B1EAF42BB00377AD4 /* Headers */,
+				3F75840C1EAF42BB00377AD4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YLLineKit;
+			productName = YLLineKit;
+			productReference = 3F75840E1EAF42BB00377AD4 /* YLLineKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3F7583D11EAEFFFA00377AD4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Qiun Cheng";
+				TargetAttributes = {
+					3F7583D81EAEFFFA00377AD4 = {
+						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = AXEMXHF2MM;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+					3F75840D1EAF42BB00377AD4 = {
+						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = AXEMXHF2MM;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3F7583D41EAEFFFA00377AD4 /* Build configuration list for PBXProject "YLShareManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3F7583D01EAEFFFA00377AD4;
+			productRefGroup = 3F7583DA1EAEFFFA00377AD4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3F7583D81EAEFFFA00377AD4 /* YLShareManager */,
+				3F75840D1EAF42BB00377AD4 /* YLLineKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3F7583D71EAEFFFA00377AD4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F7583E71EAEFFFA00377AD4 /* LaunchScreen.storyboard in Resources */,
+				3F7583E41EAEFFFA00377AD4 /* Assets.xcassets in Resources */,
+				3F7584241EAF4B1700377AD4 /* README.txt in Resources */,
+				3F7583E21EAEFFFA00377AD4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F75840C1EAF42BB00377AD4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F7583D51EAEFFFA00377AD4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F7583DF1EAEFFFA00377AD4 /* ViewController.swift in Sources */,
+				3F7583F81EAF003400377AD4 /* YLShareContent.swift in Sources */,
+				3F7583FC1EAF1C6700377AD4 /* YLShareUrlContent.swift in Sources */,
+				3F7584061EAF331500377AD4 /* YLSharePlatformType.swift in Sources */,
+				3F7583FA1EAF01D900377AD4 /* YLShareImageContent.swift in Sources */,
+				3FB8A02D1EAF6D7800D02158 /* YLShareManager.swift in Sources */,
+				3F7583DD1EAEFFFA00377AD4 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F7584091EAF42BB00377AD4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F75841C1EAF42CC00377AD4 /* YLLineKit.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3F7584141EAF42BB00377AD4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F75840D1EAF42BB00377AD4 /* YLLineKit */;
+			targetProxy = 3F7584131EAF42BB00377AD4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3F7583E01EAEFFFA00377AD4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F7583E11EAEFFFA00377AD4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3F7583E51EAEFFFA00377AD4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F7583E61EAEFFFA00377AD4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3F7583E91EAEFFFA00377AD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3F7583EA1EAEFFFA00377AD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3F7583EC1EAEFFFA00377AD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = YLShareManager/YLShareManager.entitlements;
+				DEVELOPMENT_TEAM = AXEMXHF2MM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				INFOPLIST_FILE = YLShareManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks/OpenSDK1.7.7",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsccw.YLShareManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "YLShareManager/YLShareManager-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		3F7583ED1EAEFFFA00377AD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = YLShareManager/YLShareManager.entitlements;
+				DEVELOPMENT_TEAM = AXEMXHF2MM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				INFOPLIST_FILE = YLShareManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks/OpenSDK1.7.7",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsccw.YLShareManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "YLShareManager/YLShareManager-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		3F7584181EAF42BB00377AD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = AXEMXHF2MM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = YLLineKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsccw.YLLineKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3F7584191EAF42BB00377AD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = AXEMXHF2MM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = YLLineKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsccw.YLLineKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3F7583D41EAEFFFA00377AD4 /* Build configuration list for PBXProject "YLShareManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F7583E91EAEFFFA00377AD4 /* Debug */,
+				3F7583EA1EAEFFFA00377AD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F7583EB1EAEFFFA00377AD4 /* Build configuration list for PBXNativeTarget "YLShareManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F7583EC1EAEFFFA00377AD4 /* Debug */,
+				3F7583ED1EAEFFFA00377AD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F7584171EAF42BB00377AD4 /* Build configuration list for PBXNativeTarget "YLLineKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F7584181EAF42BB00377AD4 /* Debug */,
+				3F7584191EAF42BB00377AD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3F7583D11EAEFFFA00377AD4 /* Project object */;
+}
