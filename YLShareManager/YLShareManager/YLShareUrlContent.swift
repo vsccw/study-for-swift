@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKShareKit
 import YLLineKit
+import Social
 
 class YLShareUrlContent: YLShareContent {
     
@@ -46,19 +47,45 @@ class YLShareUrlContent: YLShareContent {
             dialog.fromViewController = vc
             dialog.delegate = YLShareManager.manager
             dialog.shareContent = urlContent
+            dialog.mode = .native
             if dialog.canShow() {
                 dialog.show()
             }
             else {
-                fail?(YLShareError(description: "Counld not show.", code: YLShareErrorType.unknown))
+                if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
+                    let composeVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                    composeVC?.view.tintColor = UIColor.black
+                    
+                    if let url = URL(string: urlStr) {
+                        composeVC?.add(url)
+                    }
+                    
+                    var initialText = ""
+                    if let _title = title {
+                        initialText += "[\(_title)]"
+                    }
+                    if let _desc = desc {
+                        initialText += " \(_desc)"
+                    }
+                    composeVC?.setInitialText(initialText)
+
+                    vc.present(composeVC!, animated: true, completion: nil)
+                }
+                else {
+                    fail?(YLShareError(description: "Counld not show.", codeType: .unknown))
+                }
             }
         }
-        else if platform == .weixinTimeline || platform == .weixinChat {
+        else if platform == .weixinTimeline || platform == .weixinSession {
+            if !YLShareManager.manager.isWeixinInstalled {
+                fail?(YLShareError(description: "app not installed", codeType: .uninstalled))
+                return
+            }
             let mediaMsg = WXMediaMessage()
             mediaMsg.title = title
             mediaMsg.description = desc
             if let imageStr = thumbImage as? String {
-                if let url = URL.init(string: imageStr) {
+                if let url = URL(string: imageStr) {
                     do {
                         let data = try Data(contentsOf: url)
                         mediaMsg.thumbData = data
@@ -82,7 +109,7 @@ class YLShareUrlContent: YLShareContent {
             let req = SendMessageToWXReq()
             req.bText = false
             req.message = mediaMsg
-            if platform == .weixinChat {
+            if platform == .weixinSession {
                 req.scene = Int32(WXSceneSession.rawValue)
             }
             else if platform == .weixinTimeline {
@@ -96,7 +123,12 @@ class YLShareUrlContent: YLShareContent {
                 YLLineKit.sendMessage(message: message)
             }
             else {
-                YLLineKit.sendMessage(message: urlStr)
+                if YLShareManager.manager.isLineInstalled {
+                    YLLineKit.sendMessage(message: urlStr)
+                }
+                else {
+                    fail?(YLShareError(description: "app not installed", codeType: .uninstalled))
+                }
             }
         }
     }

@@ -13,6 +13,7 @@ import FBSDKShareKit
 class YLShareContent: NSObject {
     
     let manager = YLShareManager.manager
+    
     override init() {
         super.init()
     }

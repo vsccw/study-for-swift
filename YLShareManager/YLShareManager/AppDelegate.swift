@@ -16,25 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        WXApi.registerApp("wx149df8a39458c4d4", enableMTA: false)
+        YLShareManager.manager.application(application, didFinishLaunchingWithOptions: launchOptions)
+        YLShareManager.manager.register(with: "wx149df8a39458c4d4")
         return true
     }
     
     @available (iOS 9.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        if let sourceApp = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-            sourceApp == "com.tencent.xin" {
-            return WXApi.handleOpen(url, delegate: YLShareManager.manager)
-        }
-        let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
-        return handled
+        return YLShareManager.manager.application(app, open: url, options: options)
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        let handledOpen = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-        return handledOpen
+        return YLShareManager.manager.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 }
 

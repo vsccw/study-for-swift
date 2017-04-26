@@ -8,12 +8,38 @@
 
 import UIKit
 import YLLineKit
+import FBSDKLoginKit
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let loginWithFacebookButton = FBSDKLoginButton()
+        loginWithFacebookButton.setTitle("使用facebook登录", for: .normal)
+        loginWithFacebookButton.sizeToFit()
+        loginWithFacebookButton.center = CGPoint(x: view.center.x, y: view.center.y - 200)
+        view.addSubview(loginWithFacebookButton)
+        loginWithFacebookButton.addTarget(self, action: #selector(loginWithFacebookButtonButtonClicked), for: .touchUpInside)
+        
+        loginWithFacebookButton.readPermissions = ["public_profile", "email", "user_friends"]
+        loginWithFacebookButton.delegate = self
+        
+        let shareImageLineButton = UIButton(type: .system)
+        shareImageLineButton.setTitle("分享图片到line", for: .normal)
+        shareImageLineButton.sizeToFit()
+        shareImageLineButton.center = CGPoint(x: view.center.x, y: view.center.y - 160)
+        view.addSubview(shareImageLineButton)
+        shareImageLineButton.addTarget(self, action: #selector(shareImageLineButtonClicked), for: .touchUpInside)
+        
+        let shareTextLineButton = UIButton(type: .system)
+        shareTextLineButton.setTitle("分享文字到line", for: .normal)
+        shareTextLineButton.sizeToFit()
+        shareTextLineButton.center = CGPoint.init(x: view.center.x, y: view.center.y - 120)
+        view.addSubview(shareTextLineButton)
+        shareTextLineButton.addTarget(self, action: #selector(shareTextLineButtonClicked), for: .touchUpInside)
+        
         let button = UIButton(type: .system)
         button.setTitle("分享链接到fb", for: .normal)
         button.sizeToFit()
@@ -67,39 +93,88 @@ class ViewController: UIViewController {
     }
     
     func isInstalledLine() {
-        print(YLLineKit.isLineInstalled)
+        
+        UIAlertController.alert(with: "\(YLLineKit.isLineInstalled)", withAction: "Sure", in: self)
     }
     
     func installedFBButtonClicked() {
-        print(YLShareManager.manager.isFacebookInstalled)
+        UIAlertController.alert(with: "\(YLShareManager.manager.isFacebookInstalled)", withAction: "Sure", in: self)
     }
     
     func shareImageFacebookButtonClicked() {
-        let imageContent = YLShareImageContent(images: [UIImage(named: "123")!])
+        let imageContent = YLShareImageContent(images: [UIImage(named: "123")!,UIImage(named: "123")!])
         imageContent.show(.facebook, in: self, success: { (results) in
             print(results)
         }) { (error) in
+            if let err = error as? YLShareError {
+                if err.codeType == YLShareErrorCodeType.versionUnsupport {
+                    print("版本不匹配")
+                    return
+                }
+            }
             print(error)
         }
     }
     
     func shareImageWeixinChatButtonClicked() {
         let imageContent = YLShareImageContent(images: [UIImage(named: "123")!])
-        imageContent.show(.weixinChat, in: self, success: { (result) in
+        imageContent.show(.weixinSession, in: self, success: { (result) in
+            
+        }) { (error) in
+            print(error)
+        }
+    }
+    
+    func shareUrlWeixinChatButtonClicked() {
+        let urlContent = YLShareUrlContent.init(urlStr: "https://vsccw.com", quote: "测试测试", title: "标题标题", desc: "描述描述", thumbImage: UIImage(named: "123"))
+        urlContent.show(.weixinSession, in: self, success: { (result) in
+            
+        }) { (error) in
+            print(error)
+        }
+    }
+    
+    func shareTextLineButtonClicked() {
+        let urlContent = YLShareUrlContent.init(urlStr: "https://vsccw.com", quote: "测试测试", title: "标题标题", desc: "描述描述", thumbImage: UIImage(named: "123"))
+        urlContent.show(YLSharePlatformType.line, in: self, success: { (result) in
+            
+        }) { (error) in
+            print(error)
+        }
+    }
+    
+    func shareImageLineButtonClicked() {
+        let imageContent = YLShareImageContent(images: [UIImage(named: "123")!])
+        imageContent.show(.line, in: self, success: { (result) in
             
         }) { (error) in
             
         }
     }
     
-    func shareUrlWeixinChatButtonClicked() {
-        let urlContent = YLShareUrlContent.init(urlStr: "https://vsccw.com", quote: "测试测试", title: "标题标题", desc: "描述描述", thumbImage: UIImage(named: "123"))
-        urlContent.show(YLSharePlatformType.weixinChat, in: self, success: { (result) in
-            
-        }) { (error) in
-            print(error)
-        }
+    func loginWithFacebookButtonButtonClicked() {
+        
     }
+    
     // "https://docs-assets.developer.apple.com/published/e0791617a4/14f9f16e-55c0-474a-ae62-f42ebf2cab33.png"
 }
 
+extension ViewController: FBSDKLoginButtonDelegate {
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if let token = result.token.tokenString {
+            print(token)
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        
+    }
+}
+
+extension UIAlertController {
+    static func alert(with title: String, withAction actionTitle: String, in vc: UIViewController) {
+        let alert = UIAlertController.init(title: title, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: actionTitle, style: .cancel, handler: nil))
+        vc.present(alert, animated: true, completion: nil)
+    }
+}
