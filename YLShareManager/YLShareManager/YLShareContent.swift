@@ -18,7 +18,7 @@ class YLShareContent: NSObject {
         super.init()
     }
     
-    func show(_ platform: YLSharePlatformType, in vc: UIViewController, success: Success? = nil, fail: Fail? = nil) {
+    internal func showShareView(_ platform: YLSharePlatformType, in vc: UIViewController, success: Success? = nil, fail: Fail? = nil) {
         manager.success = success
         manager.fail = fail
     }

@@ -9,22 +9,34 @@
 import UIKit
 import YLLineKit
 import FBSDKLoginKit
+import CoreTelephony
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let info = CTTelephonyNetworkInfo()
+        let carrier = info.subscriberCellularProvider
+        
+        if carrier?.isoCountryCode == nil {
+            print("没有SIM卡")
+        }
+        else {
+            print(carrier?.carrierName)
+        }
+        
         // Do any additional setup after loading the view, typically from a nib.
         
-        let loginWithFacebookButton = FBSDKLoginButton()
+        let loginWithFacebookButton = UIButton(type: .system)
         loginWithFacebookButton.setTitle("使用facebook登录", for: .normal)
         loginWithFacebookButton.sizeToFit()
-        loginWithFacebookButton.center = CGPoint(x: view.center.x, y: view.center.y - 200)
+        loginWithFacebookButton.center = CGPoint(x: view.center.x, y: view.center.y + 160)
         view.addSubview(loginWithFacebookButton)
         loginWithFacebookButton.addTarget(self, action: #selector(loginWithFacebookButtonButtonClicked), for: .touchUpInside)
         
-        loginWithFacebookButton.readPermissions = ["public_profile", "email", "user_friends"]
-        loginWithFacebookButton.delegate = self
+//        loginWithFacebookButton.readPermissions = ["public_profile", "email", "user_friends"]
+//        loginWithFacebookButton.delegate = self
         
         let shareImageLineButton = UIButton(type: .system)
         shareImageLineButton.setTitle("分享图片到line", for: .normal)
@@ -85,8 +97,13 @@ class ViewController: UIViewController {
     
     func showShareView() {
         let urlContent = YLShareUrlContent.init(urlStr: "https://vsccw.com", quote: "测试测试", title: "标题标题", desc: "描述描述", thumbImage: "https://docs-assets.developer.apple.com/published/e0791617a4/14f9f16e-55c0-474a-ae62-f42ebf2cab33.png")
-        urlContent.show(YLSharePlatformType.facebook, in: self, success: { (result) in
-            
+//        urlContent.show(YLSharePlatformType.facebook, in: self, success: { (result) in
+//            
+//        }) { (error) in
+//            print(error)
+//        }
+        YLShareManager.manager.share(with: urlContent, on: .facebook, in: self, success: { (result) in
+            print(result)
         }) { (error) in
             print(error)
         }
@@ -103,7 +120,7 @@ class ViewController: UIViewController {
     
     func shareImageFacebookButtonClicked() {
         let imageContent = YLShareImageContent(images: [UIImage(named: "123")!,UIImage(named: "123")!])
-        imageContent.show(.facebook, in: self, success: { (results) in
+        YLShareManager.manager.share(with: imageContent, on: .facebook, in: self, success: { (results) in
             print(results)
         }) { (error) in
             if let err = error as? YLShareError {
@@ -118,7 +135,7 @@ class ViewController: UIViewController {
     
     func shareImageWeixinChatButtonClicked() {
         let imageContent = YLShareImageContent(images: [UIImage(named: "123")!])
-        imageContent.show(.weixinSession, in: self, success: { (result) in
+        YLShareManager.manager.share(with: imageContent, on: .weixinSession, in: self, success: { (result) in
             
         }) { (error) in
             print(error)
@@ -127,7 +144,7 @@ class ViewController: UIViewController {
     
     func shareUrlWeixinChatButtonClicked() {
         let urlContent = YLShareUrlContent.init(urlStr: "https://vsccw.com", quote: "测试测试", title: "标题标题", desc: "描述描述", thumbImage: UIImage(named: "123"))
-        urlContent.show(.weixinSession, in: self, success: { (result) in
+        YLShareManager.manager.share(with: urlContent, on: .weixinSession, in: self, success: { (result) in
             
         }) { (error) in
             print(error)
@@ -136,7 +153,7 @@ class ViewController: UIViewController {
     
     func shareTextLineButtonClicked() {
         let urlContent = YLShareUrlContent.init(urlStr: "https://vsccw.com", quote: "测试测试", title: "标题标题", desc: "描述描述", thumbImage: UIImage(named: "123"))
-        urlContent.show(YLSharePlatformType.line, in: self, success: { (result) in
+        YLShareManager.manager.share(with: urlContent, on: .line, in: self, success: { (result) in
             
         }) { (error) in
             print(error)
@@ -145,7 +162,7 @@ class ViewController: UIViewController {
     
     func shareImageLineButtonClicked() {
         let imageContent = YLShareImageContent(images: [UIImage(named: "123")!])
-        imageContent.show(.line, in: self, success: { (result) in
+        YLShareManager.manager.share(with: imageContent, on: .line, in: self, success: { (result) in
             
         }) { (error) in
             
@@ -153,7 +170,15 @@ class ViewController: UIViewController {
     }
     
     func loginWithFacebookButtonButtonClicked() {
-        
+        if FBSDKAccessToken.current() != nil {
+//           return
+        }
+        FBSDKLoginManager().logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
+            print(error)
+            if error != nil {
+                print(result?.token)
+            }
+        }
     }
     
     // "https://docs-assets.developer.apple.com/published/e0791617a4/14f9f16e-55c0-474a-ae62-f42ebf2cab33.png"

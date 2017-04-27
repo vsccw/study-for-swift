@@ -21,8 +21,8 @@ class YLShareImageContent: YLShareContent {
     }
     
     /// **注意** 分享图片到Facebook时只支持在应用内分享和使用自带分享模式，其他会报错
-    override func show(_ platform: YLSharePlatformType, in vc: UIViewController, success: Success?, fail: Fail?) {
-        super.show(platform, in: vc, success: success, fail: fail)
+    internal override func showShareView(_ platform: YLSharePlatformType, in vc: UIViewController, success: Success?, fail: Fail?) {
+        super.showShareView(platform, in: vc, success: success, fail: fail)
         
         if platform == .facebook {
             var photos = [FBSDKSharePhoto]()

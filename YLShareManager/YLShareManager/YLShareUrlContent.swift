@@ -28,8 +28,8 @@ class YLShareUrlContent: YLShareContent {
         self.thumbImage = image
     }
     
-    override func show(_ platform: YLSharePlatformType, in vc: UIViewController, success: Success?, fail: Fail?) {
-        super.show(platform, in: vc, success: success, fail: fail)
+    internal override func showShareView(_ platform: YLSharePlatformType, in vc: UIViewController, success: Success?, fail: Fail?) {
+        super.showShareView(platform, in: vc, success: success, fail: fail)
 
         if platform == .facebook {
             let urlContent = FBSDKShareLinkContent()

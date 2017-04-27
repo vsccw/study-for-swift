@@ -125,3 +125,10 @@ class YLShareManager: NSObject, WXApiDelegate, FBSDKSharingDelegate {
         }
     }
 }
+
+
+extension YLShareManager {
+    func share(with content: YLShareContent, on platform: YLSharePlatformType, in vc: UIViewController, success: Success? = nil, fail: Fail? = nil) {
+        content.showShareView(platform, in: vc, success: success, fail: fail)
+    }
+}
