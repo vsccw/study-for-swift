@@ -6,5 +6,7 @@
         <page name='Combining_operators'/>
         <page name='Transform'/>
         <page name='Filter'/>
+        <page name='Demo'/>
+        <page name='Schedulers'/>
     </pages>
 </playground>

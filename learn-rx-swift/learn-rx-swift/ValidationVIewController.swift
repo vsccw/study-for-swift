@@ -40,15 +40,15 @@ class ValidationVIewController: UIViewController {
             })
             .shareReplay(1)
 
-        usernameValid.bindTo(usernameLabel.rx.isHidden)
+        usernameValid.bind(to: usernameLabel.rx.isHidden)
             .addDisposableTo(disposeBag)
-        usernameValid.bindTo(passwordTextField.rx.isEnabled)
+        usernameValid.bind(to: passwordTextField.rx.isEnabled)
         .addDisposableTo(disposeBag)
 
-        passwordValid.bindTo(passwordLabel.rx.isHidden)
+        passwordValid.bind(to: passwordLabel.rx.isHidden)
             .addDisposableTo(disposeBag)
 
-        everyThingdValid.bindTo(loginButton.rx.isEnabled)
+        everyThingdValid.bind(to: loginButton.rx.isEnabled)
         .addDisposableTo(disposeBag)
 
         let titleObservable = Observable<String>.just("🤠")
@@ -56,7 +56,7 @@ class ValidationVIewController: UIViewController {
             .shareReplay(1)
 
         titleObservable
-            .bindTo(loginButton.rx.title(for: .normal))
+            .bind(to: loginButton.rx.title(for: .normal))
             .addDisposableTo(disposeBag)
 
 //        loginButton.rx.title(for: .normal).onNext("😇") // OR
