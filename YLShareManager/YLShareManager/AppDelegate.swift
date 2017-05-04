@@ -17,7 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         YLShareManager.manager.application(application, didFinishLaunchingWithOptions: launchOptions)
-        YLShareManager.manager.register(with: "wx149df8a39458c4d4")
+//        YLShareManager.manager.register(weixinID: "wx149df8a39458c4d4")
+        YLShareManager.manager.register(weixinID: "wx149df8a39458c4d4", qqID: "1105821097", weiboID: "")
         return true
     }
     

@@ -14,6 +14,7 @@ import Social
 class YLShareUrlContent: YLShareContent {
     
     var urlStr: String = ""
+    /// for facebook
     var quote: String?
     var title: String?
     var desc: String?
@@ -32,23 +33,8 @@ class YLShareUrlContent: YLShareContent {
         super.showShareView(platform, in: vc, success: success, fail: fail)
 
         if platform == .facebook {
-            let urlContent = FBSDKShareLinkContent()
-            urlContent.contentURL = URL(string: urlStr)
-            urlContent.quote = quote
-            urlContent.contentTitle = title
-            urlContent.contentDescription = desc
-            
-            if let thumbImageUrlStr = self.thumbImage as? String,
-                let thumbImageUrl = URL(string: thumbImageUrlStr) {
-                urlContent.imageURL = thumbImageUrl
-            }
-            
-            let dialog = FBSDKShareDialog()
-            dialog.fromViewController = vc
-            dialog.delegate = YLShareManager.manager
-            dialog.shareContent = urlContent
-            dialog.mode = .native
-            if dialog.canShow() {
+            let dialog = FBSDKShareDialog.urlDialog(content: self, in: vc, delegate: YLShareManager.manager)
+            if dialog.canShow() && YLShareManager.manager.isFacebookInstalled {
                 dialog.show()
             }
             else {
@@ -81,41 +67,16 @@ class YLShareUrlContent: YLShareContent {
                 fail?(YLShareError(description: "app not installed", codeType: .uninstalled))
                 return
             }
-            let mediaMsg = WXMediaMessage()
-            mediaMsg.title = title
-            mediaMsg.description = desc
-            if let imageStr = thumbImage as? String {
-                if let url = URL(string: imageStr) {
-                    do {
-                        let data = try Data(contentsOf: url)
-                        mediaMsg.thumbData = data
-                    }
-                    catch let err {
-                        print(err)
-                    }
-                }
-            }
-            else if let imageData = thumbImage as? Data {
-                mediaMsg.thumbData = imageData
-            }
-            else if let image = thumbImage as? UIImage {
-                mediaMsg.setThumbImage(image)
-            }
-            
-            let webpageObj = WXWebpageObject()
-            webpageObj.webpageUrl = urlStr
-            mediaMsg.mediaObject = webpageObj
-            
-            let req = SendMessageToWXReq()
-            req.bText = false
-            req.message = mediaMsg
+            let req = SendMessageToWXReq.urlMessage(content: self)
             if platform == .weixinSession {
                 req.scene = Int32(WXSceneSession.rawValue)
             }
             else if platform == .weixinTimeline {
                 req.scene = Int32(WXSceneTimeline.rawValue)
             }
-            WXApi.send(req)
+            if !WXApi.send(req) {
+                fail?(YLShareError(description: "counld not share.", codeType: .unknown))
+            }
         }
         else if platform == .line {
             if let title = title {
@@ -130,6 +91,16 @@ class YLShareUrlContent: YLShareContent {
                     fail?(YLShareError(description: "app not installed", codeType: .uninstalled))
                 }
             }
+        }
+        else if platform == .qqZone {
+            let req = SendMessageToQQReq.urlMessageToQQZone(content: self)
+            let statusCode = QQApiInterface.send(req)
+            YLShareManager.manager.handleQQStatusCode(statusCode: statusCode)
+        }
+        else if platform == .qqSession {
+            let req = SendMessageToQQReq.urlMessageToQQZone(content: self)
+            let statusCode = QQApiInterface.send(req)
+            YLShareManager.manager.handleQQStatusCode(statusCode: statusCode)
         }
     }
 }

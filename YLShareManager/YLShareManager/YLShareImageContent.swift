@@ -25,22 +25,8 @@ class YLShareImageContent: YLShareContent {
         super.showShareView(platform, in: vc, success: success, fail: fail)
         
         if platform == .facebook {
-            var photos = [FBSDKSharePhoto]()
-            for image in images {
-                let photo = FBSDKSharePhoto()
-                photo.image = image
-                photos.append(photo)
-            }
-            
-            let photoContent = FBSDKSharePhotoContent()
-            photoContent.photos = photos
-            
-            let dialog = FBSDKShareDialog()
-            dialog.fromViewController = vc
-            dialog.delegate = YLShareManager.manager
-            dialog.shareContent = photoContent
-            dialog.mode = .native
-            if dialog.canShow() {
+            let dialog = FBSDKShareDialog.imageDialog(content: self, in: vc, delegate: YLShareManager.manager)
+            if dialog.canShow() && YLShareManager.manager.isFacebookInstalled {
                 dialog.show()
             }
             else {
@@ -72,17 +58,7 @@ class YLShareImageContent: YLShareContent {
                 fail?(YLShareError(description: "app not installed", codeType: .uninstalled))
                 return
             }
-            if let image = images.first {
-                let mediaMsg = WXMediaMessage()
-                mediaMsg.thumbData = UIImageJPEGRepresentation(image, 0.1)
-                
-                let imageObj = WXImageObject()
-                imageObj.imageData = UIImageJPEGRepresentation(image, 1.0)
-                mediaMsg.mediaObject = imageObj
-                
-                let req = SendMessageToWXReq()
-                req.bText = false
-                req.message = mediaMsg
+            if let req = SendMessageToWXReq.imageMessage(content: self) {
                 if platform == .weixinTimeline {
                     req.scene = Int32(WXSceneTimeline.rawValue)
                 }
@@ -93,6 +69,16 @@ class YLShareImageContent: YLShareContent {
                     fail?(YLShareError(description: "counld not send weixin", codeType: .unknown))
                 }
             }
+        }
+        else if platform == .qqSession {
+            let req = SendMessageToQQReq.imageMessageToQQ(content: self)
+            let statusCode = QQApiInterface.send(req)
+            YLShareManager.manager.handleQQStatusCode(statusCode: statusCode)
+        }
+        else if platform == .qqZone {
+            let req = SendMessageToQQReq.imageMessageToQQZone(content: self)
+            let statusCode = QQApiInterface.send(req)
+            YLShareManager.manager.handleQQStatusCode(statusCode: statusCode)
         }
     }
 }

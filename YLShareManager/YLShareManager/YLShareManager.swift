@@ -17,6 +17,8 @@ enum YLShareErrorCodeType: Int {
     case wxErrorCommon = -1
     case wxErrCodeSentFail = -3
     case wxErrCodeAuthDeny = -4
+    case invalidMsgType = -6
+    case sendFailed = -7
     case unknown = 4004
 }
 
@@ -34,6 +36,8 @@ enum YLSharePlatformType {
     case facebook
     case weixinTimeline
     case weixinSession
+    case qqSession
+    case qqZone
 }
 
 typealias Success = ([AnyHashable : Any]?) -> Void
@@ -68,8 +72,13 @@ class YLShareManager: NSObject, WXApiDelegate, FBSDKSharingDelegate {
     }
     
     // MARK: - Open
-    func register(with weixinID: String) {
+    func register(weixinID: String) {
         WXApi.registerApp(weixinID, enableMTA: false)
+    }
+    
+    func register(weixinID: String, qqID: String, weiboID: String) {
+        WXApi.registerApp(weixinID, enableMTA: false)
+       let _ = TencentOAuth(appId: qqID, andDelegate: nil)
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
@@ -78,10 +87,18 @@ class YLShareManager: NSObject, WXApiDelegate, FBSDKSharingDelegate {
     
     @available (iOS 9.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        if let sourceApp = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-            sourceApp == "com.tencent.xin" {
-            return WXApi.handleOpen(url, delegate: YLShareManager.manager)
+        if let sourceApp = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String {
+            if sourceApp == "com.tencent.xin" {
+                return WXApi.handleOpen(url, delegate: YLShareManager.manager)
+            }
+            else if sourceApp == "com.tencent.mqq"{
+                return TencentOAuth.handleOpen(url)
+            }
+            else if sourceApp == "com.sina.weibo" {
+                
+            }
         }
+        
         let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         return handled
     }
@@ -89,6 +106,12 @@ class YLShareManager: NSObject, WXApiDelegate, FBSDKSharingDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if sourceApplication == "com.tencent.xin" {
             return WXApi.handleOpen(url, delegate: YLShareManager.manager)
+        }
+        else if sourceApplication == "com.tencent.mqq" {
+            return TencentOAuth.handleOpen(url)
+        }
+        else if sourceApplication == "com.sina.weibo" {
+            return true
         }
         else {
             return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
@@ -126,6 +149,19 @@ class YLShareManager: NSObject, WXApiDelegate, FBSDKSharingDelegate {
     }
 }
 
+extension YLShareManager {
+    func handleQQStatusCode(statusCode: QQApiSendResultCode) {
+        if statusCode == EQQAPISENDSUCESS {
+            success?(nil)
+        }
+        else if statusCode == EQQAPIMESSAGETYPEINVALID {
+            fail?(YLShareError.init(description: "消息类型错误", codeType: .invalidMsgType))
+        }
+        else if statusCode == EQQAPISENDFAILD {
+            fail?(YLShareError(description: "发送失败", codeType: .sendFailed))
+        }
+    }
+}
 
 extension YLShareManager {
     func share(with content: YLShareContent, on platform: YLSharePlatformType, in vc: UIViewController, success: Success? = nil, fail: Fail? = nil) {

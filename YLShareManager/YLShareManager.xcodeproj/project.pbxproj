@@ -32,6 +32,14 @@
 		3FB8A02B1EAF5B6E00D02158 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB8A02A1EAF5B6E00D02158 /* libz.tbd */; };
 		3FB8A02D1EAF6D7800D02158 /* YLShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB8A02C1EAF6D7800D02158 /* YLShareManager.swift */; };
 		3FB8A0301EB0C46900D02158 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB8A02F1EB0C46900D02158 /* KeyboardViewController.swift */; };
+		3FBD94621EB9D89300F8B30D /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE1ED701EB9C9460062ACD7 /* TencentOpenAPI.framework */; };
+		3FBD94641EB9DA8100F8B30D /* QQSendMessageToReq+YL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD94631EB9DA8100F8B30D /* QQSendMessageToReq+YL.swift */; };
+		3FE1ED731EB9C9460062ACD7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3FE1ED711EB9C9460062ACD7 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		3FE1ED751EB9CAD50062ACD7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE1ED741EB9CAD50062ACD7 /* Security.framework */; };
+		3FE1ED771EB9CAE30062ACD7 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE1ED761EB9CAE30062ACD7 /* libiconv.tbd */; };
+		3FE1ED791EB9CAF70062ACD7 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE1ED781EB9CAF70062ACD7 /* libstdc++.tbd */; };
+		3FE1ED7C1EB9D0560062ACD7 /* FBSDKShareDialog+YL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1ED7B1EB9D0560062ACD7 /* FBSDKShareDialog+YL.swift */; };
+		3FE1ED7E1EB9D2C50062ACD7 /* WXSendMessageToReq+YL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1ED7D1EB9D2C50062ACD7 /* WXSendMessageToReq+YL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +55,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		3F75841A1EAF42BB00377AD4 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -93,6 +101,14 @@
 		3FB8A02C1EAF6D7800D02158 /* YLShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLShareManager.swift; sourceTree = "<group>"; };
 		3FB8A02E1EAF7D5B00D02158 /* YLShareManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YLShareManager.entitlements; sourceTree = "<group>"; };
 		3FB8A02F1EB0C46900D02158 /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		3FBD94631EB9DA8100F8B30D /* QQSendMessageToReq+YL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QQSendMessageToReq+YL.swift"; sourceTree = "<group>"; };
+		3FE1ED701EB9C9460062ACD7 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		3FE1ED711EB9C9460062ACD7 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		3FE1ED741EB9CAD50062ACD7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3FE1ED761EB9CAE30062ACD7 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		3FE1ED781EB9CAF70062ACD7 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		3FE1ED7B1EB9D0560062ACD7 /* FBSDKShareDialog+YL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FBSDKShareDialog+YL.swift"; sourceTree = "<group>"; };
+		3FE1ED7D1EB9D2C50062ACD7 /* WXSendMessageToReq+YL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WXSendMessageToReq+YL.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +116,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FBD94621EB9D89300F8B30D /* TencentOpenAPI.framework in Frameworks */,
 				3FB8A02B1EAF5B6E00D02158 /* libz.tbd in Frameworks */,
+				3FE1ED791EB9CAF70062ACD7 /* libstdc++.tbd in Frameworks */,
+				3FE1ED771EB9CAE30062ACD7 /* libiconv.tbd in Frameworks */,
+				3FE1ED751EB9CAD50062ACD7 /* Security.framework in Frameworks */,
 				3FB8A0291EAF5B6500D02158 /* libc++.tbd in Frameworks */,
 				3FB8A0271EAF5B5E00D02158 /* CoreTelephony.framework in Frameworks */,
 				3FB8A0261EAF5B5700D02158 /* SystemConfiguration.framework in Frameworks */,
@@ -154,6 +174,9 @@
 				3F7583F91EAF01D900377AD4 /* YLShareImageContent.swift */,
 				3F7583FB1EAF1C6700377AD4 /* YLShareUrlContent.swift */,
 				3FB8A02C1EAF6D7800D02158 /* YLShareManager.swift */,
+				3FE1ED7D1EB9D2C50062ACD7 /* WXSendMessageToReq+YL.swift */,
+				3FBD94631EB9DA8100F8B30D /* QQSendMessageToReq+YL.swift */,
+				3FE1ED7B1EB9D0560062ACD7 /* FBSDKShareDialog+YL.swift */,
 				3F7583E01EAEFFFA00377AD4 /* Main.storyboard */,
 				3F7583E31EAEFFFA00377AD4 /* Assets.xcassets */,
 				3F7583E51EAEFFFA00377AD4 /* LaunchScreen.storyboard */,
@@ -166,6 +189,10 @@
 		3F7583EE1EAF001600377AD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3FE1ED781EB9CAF70062ACD7 /* libstdc++.tbd */,
+				3FE1ED761EB9CAE30062ACD7 /* libiconv.tbd */,
+				3FE1ED741EB9CAD50062ACD7 /* Security.framework */,
+				3FE1ED6F1EB9C9460062ACD7 /* QQSDK */,
 				3FB8A02A1EAF5B6E00D02158 /* libz.tbd */,
 				3FB8A0281EAF5B6500D02158 /* libc++.tbd */,
 				3FB8A0251EAF5B5700D02158 /* SystemConfiguration.framework */,
@@ -202,6 +229,15 @@
 				3F7584221EAF4B1700377AD4 /* WXApiObject.h */,
 			);
 			path = OpenSDK1.7.7;
+			sourceTree = "<group>";
+		};
+		3FE1ED6F1EB9C9460062ACD7 /* QQSDK */ = {
+			isa = PBXGroup;
+			children = (
+				3FE1ED701EB9C9460062ACD7 /* TencentOpenAPI.framework */,
+				3FE1ED711EB9C9460062ACD7 /* TencentOpenApi_IOS_Bundle.bundle */,
+			);
+			path = QQSDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,7 +303,7 @@
 				TargetAttributes = {
 					3F7583D81EAEFFFA00377AD4 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = AXEMXHF2MM;
+						DevelopmentTeam = USD3379RE4;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -310,6 +346,7 @@
 				3F7583E71EAEFFFA00377AD4 /* LaunchScreen.storyboard in Resources */,
 				3F7583E41EAEFFFA00377AD4 /* Assets.xcassets in Resources */,
 				3F7584241EAF4B1700377AD4 /* README.txt in Resources */,
+				3FE1ED731EB9C9460062ACD7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				3F7583E21EAEFFFA00377AD4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,10 +366,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F7583DF1EAEFFFA00377AD4 /* ViewController.swift in Sources */,
+				3FE1ED7C1EB9D0560062ACD7 /* FBSDKShareDialog+YL.swift in Sources */,
+				3FBD94641EB9DA8100F8B30D /* QQSendMessageToReq+YL.swift in Sources */,
 				3F7583F81EAF003400377AD4 /* YLShareContent.swift in Sources */,
 				3F7583FC1EAF1C6700377AD4 /* YLShareUrlContent.swift in Sources */,
 				3F7583FA1EAF01D900377AD4 /* YLShareImageContent.swift in Sources */,
 				3FB8A0301EB0C46900D02158 /* KeyboardViewController.swift in Sources */,
+				3FE1ED7E1EB9D2C50062ACD7 /* WXSendMessageToReq+YL.swift in Sources */,
 				3FB8A02D1EAF6D7800D02158 /* YLShareManager.swift in Sources */,
 				3F7583DD1EAEFFFA00377AD4 /* AppDelegate.swift in Sources */,
 			);
@@ -476,10 +516,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = YLShareManager/YLShareManager.entitlements;
-				DEVELOPMENT_TEAM = AXEMXHF2MM;
+				DEVELOPMENT_TEAM = USD3379RE4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Frameworks/QQSDK",
 				);
 				INFOPLIST_FILE = YLShareManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -487,6 +528,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks/OpenSDK1.7.7",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vsccw.YLShareManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -503,10 +545,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = YLShareManager/YLShareManager.entitlements;
-				DEVELOPMENT_TEAM = AXEMXHF2MM;
+				DEVELOPMENT_TEAM = USD3379RE4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Frameworks/QQSDK",
 				);
 				INFOPLIST_FILE = YLShareManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -514,6 +557,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks/OpenSDK1.7.7",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vsccw.YLShareManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";

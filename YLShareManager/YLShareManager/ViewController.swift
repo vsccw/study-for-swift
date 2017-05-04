@@ -16,27 +16,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let info = CTTelephonyNetworkInfo()
-        let carrier = info.subscriberCellularProvider
-        
-        if carrier?.isoCountryCode == nil {
-            print("没有SIM卡")
-        }
-        else {
-            print(carrier?.carrierName)
-        }
-        
         // Do any additional setup after loading the view, typically from a nib.
-        
-        let loginWithFacebookButton = UIButton(type: .system)
-        loginWithFacebookButton.setTitle("使用facebook登录", for: .normal)
-        loginWithFacebookButton.sizeToFit()
-        loginWithFacebookButton.center = CGPoint(x: view.center.x, y: view.center.y + 160)
-        view.addSubview(loginWithFacebookButton)
-        loginWithFacebookButton.addTarget(self, action: #selector(loginWithFacebookButtonButtonClicked), for: .touchUpInside)
-        
-//        loginWithFacebookButton.readPermissions = ["public_profile", "email", "user_friends"]
-//        loginWithFacebookButton.delegate = self
+
         
         let shareImageLineButton = UIButton(type: .system)
         shareImageLineButton.setTitle("分享图片到line", for: .normal)
@@ -93,6 +74,13 @@ class ViewController: UIViewController {
         shareUrlWeixinChatButton.center = CGPoint.init(x: view.center.x, y: view.center.y + 120)
         view.addSubview(shareUrlWeixinChatButton)
         shareUrlWeixinChatButton.addTarget(self, action: #selector(shareUrlWeixinChatButtonClicked), for: .touchUpInside)
+        
+        let shareUrlQQChatButton = UIButton(type: .system)
+        shareUrlQQChatButton.setTitle("分享url到qq chat", for: .normal)
+        shareUrlQQChatButton.sizeToFit()
+        shareUrlQQChatButton.center = CGPoint.init(x: view.center.x, y: view.center.y + 160)
+        view.addSubview(shareUrlQQChatButton)
+        shareUrlQQChatButton.addTarget(self, action: #selector(shareUrlQQChatButtonClicked), for: .touchUpInside)
     }
     
     func showShareView() {
@@ -166,6 +154,15 @@ class ViewController: UIViewController {
             
         }) { (error) in
             
+        }
+    }
+    
+    func shareUrlQQChatButtonClicked() {
+        let urlContent = YLShareUrlContent.init(urlStr: "https://vsccw.com", quote: "测试测试", title: "标题标题", desc: "描述描述", thumbImage: UIImage(named: "123"))
+        YLShareManager.manager.share(with: urlContent, on: .qqSession, in: self, success: { (result) in
+            
+        }) { (error) in
+            print(error)
         }
     }
     
