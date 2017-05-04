@@ -70,7 +70,8 @@
 		86B8DBA71E0EE6EA007BB84B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86B8DBAA1E0EE6EA007BB84B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86B8DBAC1E0EE6EA007BB84B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F22326791E36F315007446CC /* Rx.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Rx.playground; sourceTree = "<group>"; };
+		86C58F7C1EB466C800804276 /* Rx-D.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Rx-D.playground"; sourceTree = "<group>"; };
+		86C58F7D1EB4670200804276 /* Rx-new.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Rx-new.playground"; sourceTree = "<group>"; };
 		F223267C1E3F867E007446CC /* ImageViewPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewPickerController.swift; sourceTree = "<group>"; };
 		F24E6C9A1E44C73B0052050C /* RxDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F24E6C9C1E44C73B0052050C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,7 +135,8 @@
 		86B8DB7C1E0EE150007BB84B = {
 			isa = PBXGroup;
 			children = (
-				F22326791E36F315007446CC /* Rx.playground */,
+				86C58F7D1EB4670200804276 /* Rx-new.playground */,
+				86C58F7C1EB466C800804276 /* Rx-D.playground */,
 				86B8DB871E0EE150007BB84B /* learn-rx-swift */,
 				86B8DB9F1E0EE6EA007BB84B /* Basic */,
 				F24E6C9B1E44C73B0052050C /* RxDemo */,
@@ -265,7 +267,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Qiun Cheng";
 				TargetAttributes = {
 					86B8DB841E0EE150007BB84B = {
@@ -565,6 +567,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 21DBB5AA22CDA3A711349F57 /* Pods-learn-rx-swift.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 57EP4P69NV;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -584,6 +587,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 850CF8A79414566C8C1C8815 /* Pods-learn-rx-swift.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 57EP4P69NV;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -694,6 +698,7 @@
 				F24E6CAB1E44C73B0052050C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
