@@ -18,4 +18,6 @@
 #include <TencentOpenAPI/QQApiInterface.h>
 #endif
 
+#import "WeiboSDK.h"
+
 #endif
