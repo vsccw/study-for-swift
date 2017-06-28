@@ -1,5 +1,11 @@
 import UIKit
 
+enum YLAuthPlatform {
+    case qq
+    case wechat
+    case weibo
+}
+
 enum YLAuthErrorCodeType: Int {
     case userCancelled = -1
     case versionUnsupport = -2
@@ -43,11 +49,11 @@ class YLAuthManager: NSObject {
     fileprivate override init() {
         super.init()
     }
-    // MARK: - Public property
     
+    // MARK: - Public property
     static let manager = YLAuthManager()
     
-    var isWeixinInstalled: Bool {
+    var isWechatInstalled: Bool {
         return WXApi.isWXAppInstalled()
     }
     
@@ -59,24 +65,15 @@ class YLAuthManager: NSObject {
         return QQApiInterface.isQQInstalled()
     }
     
-    // MARK: - Public function
-    func register(weixinID: String?, qqID: String?, weiboID: String?) {
-        WXApi.registerApp(weixinID, enableMTA: false)
-        tencentOAth = TencentOAuth(appId: qqID, andDelegate: self)
-        tencentOAth?.redirectURI = "www.qq.com"
-        tencentOAth?.authShareType = AuthShareType_QQ
-        WeiboSDK.enableDebugMode(false)
-        WeiboSDK.registerApp(weiboID)
-    }
-    
-    func loginWithQQ(success: SuccessHandler?, fail: FailHandler?) {
+    // MARK: - Private function
+    fileprivate func loginWithQQ(success: SuccessHandler?, fail: FailHandler?) {
         loginSuccess = success
         loginFail = fail
         tencentOAth?.authorize(self.permissions, inSafari: true)
     }
     
-    func loginWithWeChat(success: SuccessHandler?, fail: FailHandler?) {
-        if !isWeixinInstalled {
+    fileprivate func loginWithWeChat(success: SuccessHandler?, fail: FailHandler?) {
+        if !isWechatInstalled {
             let error = YLAuthError(description: "未安装此应用", codeType: .appNotInstalled)
             fail?(error)
             return
@@ -89,7 +86,7 @@ class YLAuthManager: NSObject {
         WXApi.send(req)
     }
     
-    func loginWithWeibo(success: SuccessHandler?, fail: FailHandler?) {
+    fileprivate func loginWithWeibo(success: SuccessHandler?, fail: FailHandler?) {
         loginSuccess = success
         loginFail = fail
         let request = WBAuthorizeRequest()
@@ -98,6 +95,27 @@ class YLAuthManager: NSObject {
         request.scope = "all"
         request.userInfo = ["name": "com.tongzhuogame.weibo.auth"]
         WeiboSDK.send(request)
+    }
+    
+    // MARK: - Public function
+    func register(wechatID: String?, qqID: String?, weiboID: String?) {
+        WXApi.registerApp(wechatID, enableMTA: false)
+        tencentOAth = TencentOAuth(appId: qqID, andDelegate: self)
+        tencentOAth?.redirectURI = "https://yoloyolo.tv"
+        tencentOAth?.authShareType = AuthShareType_QQ
+        WeiboSDK.enableDebugMode(false)
+        WeiboSDK.registerApp(weiboID)
+    }
+    
+    func authWithPlatform(platform: YLAuthPlatform, success: SuccessHandler?, fail: FailHandler?) {
+        switch platform {
+        case .qq:
+            loginWithQQ(success: success, fail: fail)
+        case .weibo:
+            loginWithWeibo(success: success, fail: fail)
+        case .wechat:
+            loginWithWeChat(success: success, fail: fail)
+        }
     }
     
     @available (iOS 9.0, *)
@@ -128,51 +146,53 @@ class YLAuthManager: NSObject {
         }
         return true
     }
-    
 }
 
 
 // MARK: - WXApiDelegate
 extension YLAuthManager: WXApiDelegate {
     func onResp(_ resp: BaseResp!) {
-        if resp.errCode == 0 {
-            if let authResp = resp as? SendAuthResp {
-                if resp.errCode == WXSuccess.rawValue,
-                    authResp.state == "com.tongzhuogame.wechat.state" {
-                    print(authResp)
-                    var result = YLAuthResult()
-                    result.wxCode = authResp.code
-                    self.loginSuccess?(result)
-                }
-                else if resp.errCode == WXErrCodeUserCancel.rawValue {
-                    let error = YLAuthError(description: "用户取消了登录", codeType: .userCancelled)
-                    loginFail?(error)
-                }
-                else if resp.errCode == WXErrCodeAuthDeny.rawValue {
-                    let error = YLAuthError(description: "授权失败", codeType: .authDenied)
-                    loginFail?(error)
-                }
-                else {
-                    let error = YLAuthError(description: "授权失败", codeType: .unknown)
-                    loginFail?(error)
-                }
+        if let authResp = resp as? SendAuthResp {
+            if resp.errCode == WXSuccess.rawValue,
+                authResp.state == "com.tongzhuogame.wechat.state" {
+                print(authResp)
+                var result = YLAuthResult()
+                result.wxCode = authResp.code
+                self.loginSuccess?(result)
+            }
+            else if resp.errCode == WXErrCodeUserCancel.rawValue {
+                let error = YLAuthError(description: "用户取消了登录", codeType: .userCancelled)
+                loginFail?(error)
+            }
+            else if resp.errCode == WXErrCodeAuthDeny.rawValue {
+                let error = YLAuthError(description: "授权失败", codeType: .authDenied)
+                loginFail?(error)
             }
             else {
-                loginSuccess?(nil)
+                let error = YLAuthError(description: "授权失败", codeType: .unknown)
+                loginFail?(error)
             }
         }
-        else {
-            loginFail?(YLAuthError(description: resp.errStr ?? "", codeType: YLAuthErrorCodeType(rawValue: Int(resp.errCode)) ?? YLAuthErrorCodeType.unknown))
+        else if let messageResp = resp as? SendMessageToWXResp {
+            if messageResp.errCode == WXSuccess.rawValue {
+                YLShareManager.manager.success?()
+            }
+            else if messageResp.errCode == WXErrCodeUserCancel.rawValue {
+                let error = YLAuthError(description: "用户取消分享", codeType: .userCancelled)
+                YLShareManager.manager.fail?(error)
+            }
+            else if messageResp.errCode == WXErrCodeAuthDeny.rawValue {
+                let error = YLAuthError(description: "授权失败", codeType: .authDenied)
+                YLShareManager.manager.fail?(error)
+            }
+            else {
+                let error = YLAuthError(description: "分享失败", codeType: .unknown)
+                YLShareManager.manager.fail?(error)
+            }
         }
     }
 }
 
-
-extension YLAuthManager {
-    func handleQQStatusCode(statusCode: QQApiSendResultCode) {
-        
-    }
-}
 
 // MARK: - WeiboSDKDelegate
 extension YLAuthManager: WeiboSDKDelegate {

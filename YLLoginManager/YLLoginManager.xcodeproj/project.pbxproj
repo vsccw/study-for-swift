@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F52D00B1F028006005EBF58 /* YLAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52CFCE1F027700005EBF58 /* YLAuthManager.swift */; };
+		3F7DC06A1F03A32500D169FF /* YLShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DC0691F03A32500D169FF /* YLShareManager.swift */; };
 		3FABBA0A1F0251EA0010D67A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FABBA091F0251EA0010D67A /* AppDelegate.swift */; };
 		3FABBA0C1F0251EA0010D67A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FABBA0B1F0251EA0010D67A /* ViewController.swift */; };
 		3FABBA0F1F0251EA0010D67A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FABBA0D1F0251EA0010D67A /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		3F52CFCE1F027700005EBF58 /* YLAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YLAuthManager.swift; path = ../YLAuthManager/YLAuthManager.swift; sourceTree = "<group>"; };
 		3F52CFF41F027E85005EBF58 /* YLAuthManager-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YLAuthManager-Bridging-Header.h"; sourceTree = "<group>"; };
+		3F7DC0691F03A32500D169FF /* YLShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLShareManager.swift; sourceTree = "<group>"; };
 		3FABBA061F0251EA0010D67A /* YLLoginManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLLoginManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FABBA091F0251EA0010D67A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FABBA0B1F0251EA0010D67A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F7DC0681F03A30F00D169FF /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				3F7DC0691F03A32500D169FF /* YLShareManager.swift */,
+			);
+			name = Share;
+			sourceTree = "<group>";
+		};
 		3FABB9FD1F0251EA0010D67A = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +145,7 @@
 		3FABBA081F0251EA0010D67A /* YLLoginManager */ = {
 			isa = PBXGroup;
 			children = (
+				3F7DC0681F03A30F00D169FF /* Share */,
 				3F52CFCE1F027700005EBF58 /* YLAuthManager.swift */,
 				3F52CFF41F027E85005EBF58 /* YLAuthManager-Bridging-Header.h */,
 				3FABBA091F0251EA0010D67A /* AppDelegate.swift */,
@@ -285,6 +296,7 @@
 			files = (
 				3F52D00B1F028006005EBF58 /* YLAuthManager.swift in Sources */,
 				3FABBA0C1F0251EA0010D67A /* ViewController.swift in Sources */,
+				3F7DC06A1F03A32500D169FF /* YLShareManager.swift in Sources */,
 				3FABBA0A1F0251EA0010D67A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

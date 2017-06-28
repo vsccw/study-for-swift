@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        YLAuthManager.manager.register(weixinID: "wxdc1e388c3822c80b", qqID: "1105821097", weiboID: "2045436852")
+        YLAuthManager.manager.register(wechatID: "wxdc1e388c3822c80b", qqID: "1105821097", weiboID: "2045436852")
         return true
     }
     
