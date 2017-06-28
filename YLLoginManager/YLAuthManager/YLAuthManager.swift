@@ -5,6 +5,7 @@ enum YLAuthErrorCodeType: Int {
     case versionUnsupport = -2
     case authDenied = -3
     case badNetwork = -4
+    case appNotInstalled = -5
     case unknown = -404
 }
 
@@ -64,7 +65,7 @@ class YLAuthManager: NSObject {
         tencentOAth = TencentOAuth(appId: qqID, andDelegate: self)
         tencentOAth?.redirectURI = "www.qq.com"
         tencentOAth?.authShareType = AuthShareType_QQ
-        WeiboSDK.enableDebugMode(true)
+        WeiboSDK.enableDebugMode(false)
         WeiboSDK.registerApp(weiboID)
     }
     
@@ -75,6 +76,11 @@ class YLAuthManager: NSObject {
     }
     
     func loginWithWeChat(success: SuccessHandler?, fail: FailHandler?) {
+        if !isWeixinInstalled {
+            let error = YLAuthError(description: "未安装此应用", codeType: .appNotInstalled)
+            fail?(error)
+            return
+        }
         loginSuccess = success
         loginFail = fail
         let req = SendAuthReq()
