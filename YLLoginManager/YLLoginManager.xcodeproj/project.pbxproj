@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F08F6031F05081A00244AAE /* YLAudioError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F08F6021F05081A00244AAE /* YLAudioError.swift */; };
 		3F52D00B1F028006005EBF58 /* YLAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52CFCE1F027700005EBF58 /* YLAuthManager.swift */; };
 		3F7DC06A1F03A32500D169FF /* YLShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DC0691F03A32500D169FF /* YLShareManager.swift */; };
 		3FABBA0A1F0251EA0010D67A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FABBA091F0251EA0010D67A /* AppDelegate.swift */; };
@@ -34,6 +35,9 @@
 		3FABBA491F02533B0010D67A /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FABBA481F02533B0010D67A /* libstdc++.tbd */; };
 		3FABBA4B1F0253430010D67A /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FABBA4A1F0253430010D67A /* libiconv.tbd */; };
 		3FABBA4D1F02534B0010D67A /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FABBA4C1F02534B0010D67A /* libc++.tbd */; };
+		3FCA41181F03F2A500647E7D /* YLAudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA41171F03F2A500647E7D /* YLAudioRecorderManager.swift */; };
+		3FCA411A1F049BCC00647E7D /* YLAudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA41191F049BCC00647E7D /* YLAudioPlayerManager.swift */; };
+		3FFBC92D1F04B9530028DFF0 /* YLAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFBC92C1F04B9530028DFF0 /* YLAudioManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +54,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3F08F6021F05081A00244AAE /* YLAudioError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioError.swift; sourceTree = "<group>"; };
 		3F52CFCE1F027700005EBF58 /* YLAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YLAuthManager.swift; path = ../YLAuthManager/YLAuthManager.swift; sourceTree = "<group>"; };
 		3F52CFF41F027E85005EBF58 /* YLAuthManager-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YLAuthManager-Bridging-Header.h"; sourceTree = "<group>"; };
 		3F7DC0691F03A32500D169FF /* YLShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLShareManager.swift; sourceTree = "<group>"; };
@@ -87,6 +92,9 @@
 		3FABBA481F02533B0010D67A /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		3FABBA4A1F0253430010D67A /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		3FABBA4C1F02534B0010D67A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		3FCA41171F03F2A500647E7D /* YLAudioRecorderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioRecorderManager.swift; sourceTree = "<group>"; };
+		3FCA41191F049BCC00647E7D /* YLAudioPlayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioPlayerManager.swift; sourceTree = "<group>"; };
+		3FFBC92C1F04B9530028DFF0 /* YLAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +153,7 @@
 		3FABBA081F0251EA0010D67A /* YLLoginManager */ = {
 			isa = PBXGroup;
 			children = (
+				3FCA41161F03F29100647E7D /* Audio */,
 				3F7DC0681F03A30F00D169FF /* Share */,
 				3F52CFCE1F027700005EBF58 /* YLAuthManager.swift */,
 				3F52CFF41F027E85005EBF58 /* YLAuthManager-Bridging-Header.h */,
@@ -214,6 +223,17 @@
 				3FABBA2D1F02521D0010D67A /* WXApiObject.h */,
 			);
 			path = OpenSDK1.7.7;
+			sourceTree = "<group>";
+		};
+		3FCA41161F03F29100647E7D /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				3FCA41171F03F2A500647E7D /* YLAudioRecorderManager.swift */,
+				3FCA41191F049BCC00647E7D /* YLAudioPlayerManager.swift */,
+				3FFBC92C1F04B9530028DFF0 /* YLAudioManager.swift */,
+				3F08F6021F05081A00244AAE /* YLAudioError.swift */,
+			);
+			name = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,9 +314,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FCA411A1F049BCC00647E7D /* YLAudioPlayerManager.swift in Sources */,
 				3F52D00B1F028006005EBF58 /* YLAuthManager.swift in Sources */,
+				3FCA41181F03F2A500647E7D /* YLAudioRecorderManager.swift in Sources */,
 				3FABBA0C1F0251EA0010D67A /* ViewController.swift in Sources */,
 				3F7DC06A1F03A32500D169FF /* YLShareManager.swift in Sources */,
+				3FFBC92D1F04B9530028DFF0 /* YLAudioManager.swift in Sources */,
+				3F08F6031F05081A00244AAE /* YLAudioError.swift in Sources */,
 				3FABBA0A1F0251EA0010D67A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

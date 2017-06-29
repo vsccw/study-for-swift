@@ -8,13 +8,46 @@
 
 import UIKit
 
+import AVFoundation
+
 class ViewController: UIViewController {
     
     var message: YLShareMessage!
     
+    @IBAction func startRecord(_ sender: UIButton) {
+        YLAudioManager.manager.startRecord(withFileName: "\(Date().timeIntervalSince1970).wav") { (error) in
+            if error != nil {
+                let alert = UIAlertView(title: "", message: "\(String(describing: error))", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "取消")
+                alert.show()
+            }
+        }
+    }
+    
+    @IBAction func stopRecordAndPlay(_ sender: UIButton) {
+        
+        YLAudioManager.manager.stopRecord { (recordPath, duration, error) in
+            if error != nil {
+                let alert = UIAlertView(title: "", message: "\(String(describing: error))", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "取消")
+                alert.show()
+            }
+            print(duration)
+            if let path = recordPath {
+                YLAudioManager.manager.startPlayAudio(withPath: path, completion: { (error) in
+                    if error != nil {
+                        let alert = UIAlertView(title: "", message: "\(String(describing: error))", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "取消")
+                        alert.show()
+                    }
+                })
+            }
+        }
+    }
+    
+    @IBAction func startPlay(_ sender: UIButton) {
+        
+    }
     @IBAction func shareToQQButtonClicked(_ sender: UIButton) {
         
-        YLShareManager.manager.share(withPlatform: .qq, message: message, success: { 
+        YLShareManager.manager.share(withPlatform: .qq, message: message, success: {
             
         }) { (error) in
             let alert = UIAlertView(title: "", message: "\(String(describing: error))", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "取消")
