@@ -14,6 +14,11 @@ class YLAudioManager: NSObject {
     
     fileprivate override init() {
         super.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(YLAudioManager.proximitySensorStateChange(notification:)), name: .UIDeviceProximityStateDidChange, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Audio player
@@ -36,8 +41,10 @@ class YLAudioManager: NSObject {
         }
         
         let wavFilePath = (path as NSString).deletingPathExtension.appending(".wav")
+        enableProximitySensor()
         YLAudioPlayerManager.default.play(withPath: wavFilePath) { [weak self] (error) in
             self?.setCategory(category: AVAudioSessionCategoryAmbient, active: false)
+            self?.disableProximitySensor()
             if completion != nil {
                 completion?(error)
             }
