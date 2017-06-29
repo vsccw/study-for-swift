@@ -26,7 +26,9 @@ extension YLAudioManager {
         if device.proximityState == true  {
             category = AVAudioSessionCategoryPlayAndRecord
         }
-        
+        else {
+            category = AVAudioSessionCategoryPlayback
+        }
         do {
             try audioSession.setCategory(category)
         }
