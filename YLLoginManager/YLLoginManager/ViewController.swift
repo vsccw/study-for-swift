@@ -118,7 +118,6 @@ class ViewController: UIViewController {
         message.content = "[xxx］约你来同桌连麦玩游戏"
         message.title = "来同桌和我一起连麦玩游戏"
         message.url = "https://vsccw.com"
-        message.thumbImage = #imageLiteral(resourceName: "WechatIMG48")
     }
 
     override func didReceiveMemoryWarning() {

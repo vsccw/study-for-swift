@@ -5,11 +5,20 @@ enum YLSharePlatform {
     case wechatSesssion
 }
 
-struct YLShareMessage {
+class YLShareMessage {
     var title: String?
-    var thumbImage: UIImage?
     var content: String?
     var url: String?
+}
+
+class YLWechatMessage: YLShareMessage {
+    var thumbImage: UIImage?
+    var thumbData: Data?
+}
+
+class YLQQMessage: YLShareMessage {
+    var previewImageData: Data?
+    var previewImageURL: String?
 }
 
 typealias ShareSuccess = () -> Void
@@ -54,7 +63,14 @@ class YLShareManager: NSObject {
         let mediaMsg = WXMediaMessage()
         mediaMsg.title = message.title
         mediaMsg.description = message.content
-        mediaMsg.setThumbImage(message.thumbImage)
+        if let wechatMessage = message as? YLWechatMessage,
+            let image = wechatMessage.thumbImage {
+            mediaMsg.setThumbImage(image)
+        }
+        if let wechatMessage = message as? YLWechatMessage,
+            let data = wechatMessage.thumbData {
+            mediaMsg.thumbData = data
+        }
         
         let webpageObj = WXWebpageObject()
         webpageObj.webpageUrl = message.url
@@ -70,9 +86,14 @@ class YLShareManager: NSObject {
         if let urlStr = message.url,
             let url = URL(string: urlStr) {
             let obj = QQApiURLObject(url: url, title: message.title, description: message.content, previewImageData: nil, targetContentType: QQApiURLTargetTypeVideo)
-            if let image = message.thumbImage {
-                let data = UIImageJPEGRepresentation(image, 0.5)
+            if let qqMessage = message as? YLQQMessage,
+                let data = qqMessage.previewImageData {
                 obj?.previewImageData = data
+            }
+            if let qqMessage = message as? YLQQMessage,
+                let imageUrlStr = qqMessage.previewImageURL,
+                let imageUrl = URL(string: imageUrlStr) {
+                obj?.previewImageURL = imageUrl
             }
             obj?.shareDestType = ShareDestTypeQQ
             return SendMessageToQQReq(content: obj)
@@ -83,13 +104,23 @@ class YLShareManager: NSObject {
     }
     
     fileprivate func qqZoneUrlMessage(message: YLShareMessage) -> SendMessageToQQReq? {
-        if let urlStr = message.url,
-            let url = URL(string: urlStr),
-            let image = message.thumbImage {
-            let data = UIImageJPEGRepresentation(image, 0.5)
-            let urlObj = QQApiNewsObject.object(with: url, title: message.title, description: message.content, previewImageData: data) as? QQApiObject
+        if let qqMessage = message as? YLQQMessage,
+            let urlStr = message.url,
+            let url = URL(string: urlStr) {
+            
+            var urlObj: QQApiNewsObject?
+            let title = message.title ?? ""
+            let desc = message.content ?? ""
+            if let data = qqMessage.previewImageData {
+                urlObj = QQApiNewsObject.object(with: url, title: title, description: desc, previewImageData: data) as? QQApiNewsObject
+            }
+            if let previewImageUrl = qqMessage.previewImageURL,
+                let imageUrl = URL(string: previewImageUrl) {
+                urlObj = QQApiNewsObject(url: url, title: title, description: desc, previewImageURL: imageUrl, targetContentType: QQApiURLTargetTypeNews)
+            }
             urlObj?.cflag = UInt64(kQQAPICtrlFlagQZoneShareOnStart)
             urlObj?.shareDestType = ShareDestTypeQQ
+            
             return SendMessageToQQReq(content: urlObj)
         }
         else {
