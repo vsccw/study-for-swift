@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     var message: YLShareMessage!
     
     @IBAction func startRecord(_ sender: UIButton) {
-        YLAudioManager.manager.startRecord(withFileName: "\(Date().timeIntervalSince1970).wav") { (error) in
+        YLAudioManager.manager.startRecord(withFileName: "\(Date().timeIntervalSince1970.hashValue).wav") { (error) in
             if error != nil {
                 let alert = UIAlertView(title: "", message: "\(String(describing: error))", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "取消")
                 alert.show()

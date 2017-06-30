@@ -8,9 +8,10 @@ class YLAudioRecorderManager: NSObject {
     static let `default` = YLAudioRecorderManager()
     
     var audioRecorder: AVAudioRecorder?
+    
     var audioRecorderSetting: [String: Any] {
         return [AVSampleRateKey: 8000.0,
-                AVFormatIDKey: kAudioFormatLinearPCM,
+                AVFormatIDKey: kAudioFormatMPEG4AAC,
                 AVLinearPCMBitDepthKey: 16,
                 AVNumberOfChannelsKey: 1]
     }
@@ -21,9 +22,8 @@ class YLAudioRecorderManager: NSObject {
         super.init()
     }
     
-    
     func startRecord(withPath path: String, completion: ((Error?) -> Void)?) {
-        let wavFilePath = (path as NSString).deletingPathExtension.appending(".wav")
+        let wavFilePath = path.deletingPathExtension.appendExtension("aac")
         guard let wavURL = URL(string: wavFilePath) else {
             fatalError("the wav file path does not exit.")
         }
@@ -31,8 +31,9 @@ class YLAudioRecorderManager: NSObject {
             try audioRecorder = AVAudioRecorder(url: wavURL, settings: audioRecorderSetting)
             audioRecorder?.isMeteringEnabled = true
             audioRecorder?.delegate = self
-            
+
             audioRecorder?.record()
+            
             if completion != nil {
                 completion?(nil)
             }

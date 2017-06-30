@@ -8,16 +8,8 @@ class YLAudioPlayerManager: NSObject {
     fileprivate var finishedHandler: ((Error?) -> Void)?
     
     func play(withPath filePath: String, completion: ((Error?) -> Void)?) {
-        let fm = FileManager.default
         self.finishedHandler = completion
-        if !fm.fileExists(atPath: filePath) {
-            let error = YLAudioError.filePathNotExist("file path does not exit")
-            if finishedHandler != nil {
-                finishedHandler?(error)
-            }
-            return
-        }
-        
+
         guard let wavUrl = URL(string: filePath) else {
             let error = YLAudioError.filePathNotExist("file path does not exit")
             if finishedHandler != nil {

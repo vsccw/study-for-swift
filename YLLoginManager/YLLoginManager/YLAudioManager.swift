@@ -40,7 +40,16 @@ class YLAudioManager: NSObject {
             setCategory(category: AVAudioSessionCategoryPlayback, active: true)
         }
         
-        let wavFilePath = (path as NSString).deletingPathExtension.appending(".wav")
+        let wavFilePath = path.deletingPathExtension.appendExtension("aac")
+        let fm = FileManager.default
+        if !fm.fileExists(atPath: wavFilePath) {
+            let error = YLAudioError.filePathNotExist("file path does not exit")
+            if completion != nil {
+                completion?(error)
+            }
+            setCategory(category: AVAudioSessionCategoryAmbient, active: false)
+            return
+        }
         enableProximitySensor()
         YLAudioPlayerManager.default.play(withPath: wavFilePath) { [weak self] (error) in
             self?.setCategory(category: AVAudioSessionCategoryAmbient, active: false)
@@ -94,7 +103,7 @@ class YLAudioManager: NSObject {
                 return
             }
         }
-        audioRecorderManager.startRecord(withPath: recordPath.appending("/").appending(fileName), completion: completion)
+        audioRecorderManager.startRecord(withPath: recordPath.appendPathComponent(fileName), completion: completion)
     }
     
     func stopRecord(withCompletion completion: ((_ recordPath: String?, _ duration: TimeInterval, _ error: Error?) -> Void)?) {

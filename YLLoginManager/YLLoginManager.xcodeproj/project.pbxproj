@@ -11,6 +11,7 @@
 		3F08F6051F05142100244AAE /* YLAudioManager+ProximitySensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F08F6041F05142100244AAE /* YLAudioManager+ProximitySensor.swift */; };
 		3F16A7571F05F737007FE88F /* count.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F16A7551F05F737007FE88F /* count.wav */; };
 		3F16A7581F05F737007FE88F /* hello.amr in Resources */ = {isa = PBXBuildFile; fileRef = 3F16A7561F05F737007FE88F /* hello.amr */; };
+		3F16A75A1F062B27007FE88F /* String+YLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F16A7591F062B27007FE88F /* String+YLExtension.swift */; };
 		3F52D00B1F028006005EBF58 /* YLAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52CFCE1F027700005EBF58 /* YLAuthManager.swift */; };
 		3F7DC06A1F03A32500D169FF /* YLShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DC0691F03A32500D169FF /* YLShareManager.swift */; };
 		3FABBA0A1F0251EA0010D67A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FABBA091F0251EA0010D67A /* AppDelegate.swift */; };
@@ -61,6 +62,7 @@
 		3F08F6041F05142100244AAE /* YLAudioManager+ProximitySensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YLAudioManager+ProximitySensor.swift"; sourceTree = "<group>"; };
 		3F16A7551F05F737007FE88F /* count.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = count.wav; sourceTree = "<group>"; };
 		3F16A7561F05F737007FE88F /* hello.amr */ = {isa = PBXFileReference; lastKnownFileType = file; path = hello.amr; sourceTree = "<group>"; };
+		3F16A7591F062B27007FE88F /* String+YLExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+YLExtension.swift"; sourceTree = "<group>"; };
 		3F52CFCE1F027700005EBF58 /* YLAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YLAuthManager.swift; path = ../YLAuthManager/YLAuthManager.swift; sourceTree = "<group>"; };
 		3F52CFF41F027E85005EBF58 /* YLAuthManager-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YLAuthManager-Bridging-Header.h"; sourceTree = "<group>"; };
 		3F7DC0691F03A32500D169FF /* YLShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLShareManager.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				3F7DC0681F03A30F00D169FF /* Share */,
 				3F52CFCE1F027700005EBF58 /* YLAuthManager.swift */,
 				3F52CFF41F027E85005EBF58 /* YLAuthManager-Bridging-Header.h */,
+				3F16A7591F062B27007FE88F /* String+YLExtension.swift */,
 				3FABBA091F0251EA0010D67A /* AppDelegate.swift */,
 				3FABBA0B1F0251EA0010D67A /* ViewController.swift */,
 				3FABBA0D1F0251EA0010D67A /* Main.storyboard */,
@@ -326,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FCA411A1F049BCC00647E7D /* YLAudioPlayerManager.swift in Sources */,
+				3F16A75A1F062B27007FE88F /* String+YLExtension.swift in Sources */,
 				3F52D00B1F028006005EBF58 /* YLAuthManager.swift in Sources */,
 				3FCA41181F03F2A500647E7D /* YLAudioRecorderManager.swift in Sources */,
 				3F08F6051F05142100244AAE /* YLAudioManager+ProximitySensor.swift in Sources */,
