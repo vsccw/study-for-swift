@@ -39,7 +39,20 @@ class ViewController: UIViewController {
                 let alert = UIAlertView(title: "", message: "\(String(describing: error))", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "取消")
                 alert.show()
             }
-            print(recordPath ?? "--")
+            if let path = recordPath {
+                let type = YLAudioType.manager.audioType(withPath: path)
+                switch type {
+                case kAudioFormatMPEG4AAC:
+                    print("kAudioFormatMPEG4AAC")
+                case kAudioFormatLinearPCM:
+                    print("kAudioFormatLinearPCM")
+                    
+                default:
+                    print(AudioFormatID(type))
+                }
+                
+            }
+            
             if let path = recordPath {
                 YLAudioManager.manager.startPlayAudio(withPath: path, completion: { (error) in
                     if error != nil {
@@ -58,6 +71,7 @@ class ViewController: UIViewController {
     @IBAction func startPlay(_ sender: UIButton) {
         
     }
+    
     @IBAction func shareToQQButtonClicked(_ sender: UIButton) {
         
         YLShareManager.manager.share(withPlatform: .qq, message: message, success: {
@@ -137,7 +151,6 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
+
 

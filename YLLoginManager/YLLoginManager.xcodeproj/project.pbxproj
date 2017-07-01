@@ -52,6 +52,8 @@
 		3FABBA4D1F02534B0010D67A /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FABBA4C1F02534B0010D67A /* libc++.tbd */; };
 		3FCA41181F03F2A500647E7D /* YLAudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA41171F03F2A500647E7D /* YLAudioRecorderManager.swift */; };
 		3FCA411A1F049BCC00647E7D /* YLAudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA41191F049BCC00647E7D /* YLAudioPlayerManager.swift */; };
+		3FF172591F07AD880093C07D /* YLAudioTypeJudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF172581F07AD880093C07D /* YLAudioTypeJudge.m */; };
+		3FF1725B1F07AE9F0093C07D /* YLAudioType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1725A1F07AE9F0093C07D /* YLAudioType.swift */; };
 		3FFBC92D1F04B9530028DFF0 /* YLAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFBC92C1F04B9530028DFF0 /* YLAudioManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +130,9 @@
 		3FABBA4C1F02534B0010D67A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		3FCA41171F03F2A500647E7D /* YLAudioRecorderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioRecorderManager.swift; sourceTree = "<group>"; };
 		3FCA41191F049BCC00647E7D /* YLAudioPlayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioPlayerManager.swift; sourceTree = "<group>"; };
+		3FF172571F07AD880093C07D /* YLAudioTypeJudge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLAudioTypeJudge.h; sourceTree = "<group>"; };
+		3FF172581F07AD880093C07D /* YLAudioTypeJudge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLAudioTypeJudge.m; sourceTree = "<group>"; };
+		3FF1725A1F07AE9F0093C07D /* YLAudioType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioType.swift; sourceTree = "<group>"; };
 		3FFBC92C1F04B9530028DFF0 /* YLAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -214,6 +219,9 @@
 				3F52CFF41F027E85005EBF58 /* YLAuthManager-Bridging-Header.h */,
 				3FABBA091F0251EA0010D67A /* AppDelegate.swift */,
 				3FABBA0B1F0251EA0010D67A /* ViewController.swift */,
+				3FF1725A1F07AE9F0093C07D /* YLAudioType.swift */,
+				3FF172571F07AD880093C07D /* YLAudioTypeJudge.h */,
+				3FF172581F07AD880093C07D /* YLAudioTypeJudge.m */,
 				3FABBA0D1F0251EA0010D67A /* Main.storyboard */,
 				3FABBA101F0251EA0010D67A /* Assets.xcassets */,
 				3FABBA121F0251EA0010D67A /* LaunchScreen.storyboard */,
@@ -433,7 +441,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F4E56441F075C7E0013D003 /* YLAudioFormat.swift in Sources */,
+				3FF172591F07AD880093C07D /* YLAudioTypeJudge.m in Sources */,
 				3FCA411A1F049BCC00647E7D /* YLAudioPlayerManager.swift in Sources */,
+				3FF1725B1F07AE9F0093C07D /* YLAudioType.swift in Sources */,
 				3F16A75A1F062B27007FE88F /* String+YLExtension.swift in Sources */,
 				3F52D00B1F028006005EBF58 /* YLAuthManager.swift in Sources */,
 				3FCA41181F03F2A500647E7D /* YLAudioRecorderManager.swift in Sources */,
@@ -696,6 +706,7 @@
 				3F4E561B1F065E810013D003 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FABBA011F0251EA0010D67A /* Build configuration list for PBXProject "YLLoginManager" */ = {
 			isa = XCConfigurationList;
