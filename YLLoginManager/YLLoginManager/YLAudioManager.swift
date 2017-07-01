@@ -1,9 +1,15 @@
 import AVFoundation
 
-class YLAudioManager: NSObject {
+@objc
+public class YLAudioManager: NSObject {
     
     // MARK: - Public property
-    static let manager = YLAudioManager()
+    public static let manager = YLAudioManager()
+    public var audioFormat = YLAudioFormat.aac {
+        didSet {
+            YLAudioRecorderManager.default.audioFormat = audioFormat
+        }
+    }
     
     // MARK: - Private property
     fileprivate var recordStartDate: Date!
@@ -22,14 +28,14 @@ class YLAudioManager: NSObject {
     }
     
     // MARK: - Audio player
-    var isAudioPlaying: Bool {
+    public var isAudioPlaying: Bool {
         guard let audioPlayer = YLAudioPlayerManager.default.audioPlayer else {
             return false
         }
         return audioPlayer.isPlaying
     }
     
-    func startPlayAudio(withPath path: String, completion: ((Error?) -> Void)?) {
+    public func startPlayAudio(withPath path: String, completion: ((Error?) -> Void)?) {
         var isNeedSetActive = true
         if isAudioPlaying {
             YLAudioPlayerManager.default.stopPlaying()
@@ -40,16 +46,23 @@ class YLAudioManager: NSObject {
             setCategory(category: AVAudioSessionCategoryPlayback, active: true)
         }
         
-        let wavFilePath = path.deletingPathExtension.appendExtension("aac")
+        var wavFilePath = path.yl_deletingPathExtension.yl_appendExtension("aac")
         let fm = FileManager.default
         if !fm.fileExists(atPath: wavFilePath) {
-            let error = YLAudioError.filePathNotExist("file path does not exit")
-            if completion != nil {
-                completion?(error)
+            wavFilePath = path.yl_deletingPathExtension.yl_appendExtension("wav")
+            if !fm.fileExists(atPath: wavFilePath) {
+                wavFilePath = path.yl_deletingPathExtension.yl_appendExtension("m4a")
+                if !fm.fileExists(atPath: wavFilePath) {
+                    let error = YLAudioError.filePathNotExist("file path does not exit")
+                    if completion != nil {
+                        completion?(error)
+                    }
+                    setCategory(category: AVAudioSessionCategoryAmbient, active: false)
+                    return
+                }
             }
-            setCategory(category: AVAudioSessionCategoryAmbient, active: false)
-            return
         }
+        
         enableProximitySensor()
         YLAudioPlayerManager.default.play(withPath: wavFilePath) { [weak self] (error) in
             self?.setCategory(category: AVAudioSessionCategoryAmbient, active: false)
@@ -60,7 +73,7 @@ class YLAudioManager: NSObject {
         }
     }
     
-    func stopPlayAudio() {
+    public func stopPlayAudio() {
         if isAudioPlaying {
             YLAudioPlayerManager.default.stopPlaying()
         }
@@ -68,7 +81,7 @@ class YLAudioManager: NSObject {
     }
     
     // MARK: - Audio recorder
-    func startRecord(withFileName fileName: String, completion: ((Error?) -> Void)?) {
+    public func startRecord(withFileName fileName: String, completion: ((Error?) -> Void)?) {
         if !isMicrophoneAvailable {
             let error = YLAudioError.microphoneUnavailable("麦克风不可用")
             completion?(error)
@@ -103,10 +116,10 @@ class YLAudioManager: NSObject {
                 return
             }
         }
-        audioRecorderManager.startRecord(withPath: recordPath.appendPathComponent(fileName), completion: completion)
+        audioRecorderManager.startRecord(withPath: recordPath.yl_appendPathComponent(fileName), completion: completion)
     }
     
-    func stopRecord(withCompletion completion: ((_ recordPath: String?, _ duration: TimeInterval, _ error: Error?) -> Void)?) {
+    public func stopRecord(withCompletion completion: ((_ recordPath: String?, _ duration: TimeInterval, _ error: Error?) -> Void)?) {
         if !isRecroding, completion != nil {
             let error = YLAudioError.recorderIsNotStarted("录音尚未开始")
             completion?(nil, 0, error)
@@ -137,7 +150,11 @@ class YLAudioManager: NSObject {
         }
     }
     
-    var isRecroding: Bool {
+    public func cancelRecord() {
+        YLAudioRecorderManager.default.cancelRecord()
+    }
+    
+    public var isRecroding: Bool {
         guard let audioRecorder = YLAudioRecorderManager.default.audioRecorder else {
             return false
         }
@@ -145,7 +162,7 @@ class YLAudioManager: NSObject {
     }
     
     // MARK: - Public property
-    var isMicrophoneAvailable: Bool {
+    public var isMicrophoneAvailable: Bool {
         var _granted = false
         let audioSession = AVAudioSession.sharedInstance()
         audioSession.requestRecordPermission { (granted) in
@@ -154,7 +171,7 @@ class YLAudioManager: NSObject {
         return _granted
     }
     
-    var peekRecorderVoiceMeter: Double {
+    public var peekRecorderVoiceMeter: Double {
         var ret = 0.0
         guard let recorder = YLAudioRecorderManager.default.audioRecorder else {
             return ret

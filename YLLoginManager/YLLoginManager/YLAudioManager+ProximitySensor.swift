@@ -1,25 +1,25 @@
 
 import AVFoundation
 
-extension YLAudioManager {
+public extension YLAudioManager {
     
     // MARK: - Public
-    func enableProximitySensor() {
+    public func enableProximitySensor() {
         let device = UIDevice.current
         device.isProximityMonitoringEnabled = true
     }
     
-    func disableProximitySensor() {
+    public func disableProximitySensor() {
         let device = UIDevice.current
         device.isProximityMonitoringEnabled = false
     }
     
-    var currentProximityEnabled: Bool {
+    public var currentProximityEnabled: Bool {
         let device = UIDevice.current
         return device.isProximityMonitoringEnabled
     }
     
-    func proximitySensorStateChange(notification: NotificationCenter) {
+    internal func proximitySensorStateChange(notification: NotificationCenter) {
         let device = UIDevice.current
         let audioSession = AVAudioSession.sharedInstance()
         var category = AVAudioSessionCategoryPlayback

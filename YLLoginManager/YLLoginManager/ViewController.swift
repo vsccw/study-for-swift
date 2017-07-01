@@ -14,8 +14,17 @@ class ViewController: UIViewController {
     
     var message: YLShareMessage!
     
+    @IBAction func aacButtonClicked(_ sender: UIButton) {
+        YLAudioManager.manager.audioFormat = YLAudioFormat.aac
+    }
+    @IBAction func wavButtonClicked(_ sender: UIButton) {
+        YLAudioManager.manager.audioFormat = YLAudioFormat.wav
+    }
+    @IBAction func m4aButtonClicked(_ sender: UIButton) {
+        YLAudioManager.manager.audioFormat = YLAudioFormat.m4a
+    }
     @IBAction func startRecord(_ sender: UIButton) {
-        YLAudioManager.manager.startRecord(withFileName: "\(Date().timeIntervalSince1970.hashValue).wav") { (error) in
+        YLAudioManager.manager.startRecord(withFileName: "\(Int(Date().timeIntervalSince1970)).wav") { (error) in
             if error != nil {
                 let alert = UIAlertView(title: "", message: "\(String(describing: error))", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "取消")
                 alert.show()
@@ -35,6 +44,10 @@ class ViewController: UIViewController {
                 YLAudioManager.manager.startPlayAudio(withPath: path, completion: { (error) in
                     if error != nil {
                         let alert = UIAlertView(title: "", message: "\(String(describing: error))", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "取消")
+                        alert.show()
+                    }
+                    else {
+                        let alert = UIAlertView(title: "", message: "\(String(describing: path))", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "取消")
                         alert.show()
                     }
                 })
