@@ -39,7 +39,7 @@ class ViewController: UIViewController {
                 let alert = UIAlertView(title: "", message: "\(String(describing: error))", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "取消")
                 alert.show()
             }
-            print(duration)
+            print(recordPath ?? "--")
             if let path = recordPath {
                 YLAudioManager.manager.startPlayAudio(withPath: path, completion: { (error) in
                     if error != nil {

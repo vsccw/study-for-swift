@@ -1,10 +1,11 @@
 
 import AVFoundation
 
-public struct YLAudioFormat: RawRepresentable {
+@objc
+public class YLAudioFormat: NSObject, RawRepresentable {
     public let rawValue: UInt8
 
-    public init(rawValue: UInt8) {
+    required public init(rawValue: UInt8) {
         self.rawValue = rawValue
     }
     
@@ -14,7 +15,7 @@ public struct YLAudioFormat: RawRepresentable {
 }
 
 public extension YLAudioFormat {
-    var format: UInt32 {
+    public var format: UInt32 {
         switch rawValue {
         case 1:
             return kAudioFormatMPEG4AAC
@@ -27,7 +28,7 @@ public extension YLAudioFormat {
         }
     }
     
-    var subExtension: String {
+    public var subExtension: String {
         switch rawValue {
         case 1:
             return "aac"

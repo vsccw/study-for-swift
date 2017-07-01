@@ -22,7 +22,7 @@
 		3F4E56211F065E970013D003 /* YLAudioManager+ProximitySensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F08F6041F05142100244AAE /* YLAudioManager+ProximitySensor.swift */; };
 		3F4E56221F065EB80013D003 /* String+YLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F16A7591F062B27007FE88F /* String+YLExtension.swift */; };
 		3F4E56441F075C7E0013D003 /* YLAudioFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E56431F075C7E0013D003 /* YLAudioFormat.swift */; };
-		3F4E56451F075C7E0013D003 /* YLAudioFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E56431F075C7E0013D003 /* YLAudioFormat.swift */; };
+		3F4E56461F0774800013D003 /* YLAudioFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E56431F075C7E0013D003 /* YLAudioFormat.swift */; };
 		3F52D00B1F028006005EBF58 /* YLAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52CFCE1F027700005EBF58 /* YLAuthManager.swift */; };
 		3F7DC06A1F03A32500D169FF /* YLShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DC0691F03A32500D169FF /* YLShareManager.swift */; };
 		3FABBA0A1F0251EA0010D67A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FABBA091F0251EA0010D67A /* AppDelegate.swift */; };
@@ -420,7 +420,7 @@
 			files = (
 				3F4E561E1F065E970013D003 /* YLAudioPlayerManager.swift in Sources */,
 				3F4E56221F065EB80013D003 /* String+YLExtension.swift in Sources */,
-				3F4E56451F075C7E0013D003 /* YLAudioFormat.swift in Sources */,
+				3F4E56461F0774800013D003 /* YLAudioFormat.swift in Sources */,
 				3F4E561F1F065E970013D003 /* YLAudioManager.swift in Sources */,
 				3F4E56201F065E970013D003 /* YLAudioError.swift in Sources */,
 				3F4E56211F065E970013D003 /* YLAudioManager+ProximitySensor.swift in Sources */,

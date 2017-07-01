@@ -5,9 +5,12 @@ public class YLAudioManager: NSObject {
     
     // MARK: - Public property
     public static let manager = YLAudioManager()
-    public var audioFormat = YLAudioFormat.aac {
-        didSet {
-            YLAudioRecorderManager.default.audioFormat = audioFormat
+    public var audioFormat: YLAudioFormat {
+        set {
+            YLAudioRecorderManager.default.audioFormat = newValue
+        }
+        get {
+            return self.audioFormat
         }
     }
     
@@ -21,6 +24,7 @@ public class YLAudioManager: NSObject {
     fileprivate override init() {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(YLAudioManager.proximitySensorStateChange(notification:)), name: .UIDeviceProximityStateDidChange, object: nil)
+        audioFormat = YLAudioFormat.aac
     }
     
     deinit {
@@ -53,12 +57,17 @@ public class YLAudioManager: NSObject {
             if !fm.fileExists(atPath: wavFilePath) {
                 wavFilePath = path.yl_deletingPathExtension.yl_appendExtension("m4a")
                 if !fm.fileExists(atPath: wavFilePath) {
-                    let error = YLAudioError.filePathNotExist("file path does not exit")
-                    if completion != nil {
-                        completion?(error)
+                    if !path.yl_hasPathExtension {
+                        wavFilePath = path
                     }
-                    setCategory(category: AVAudioSessionCategoryAmbient, active: false)
-                    return
+                    else {
+                        let error = YLAudioError.filePathNotExist("file path does not exit")
+                        if completion != nil {
+                            completion?(error)
+                        }
+                        setCategory(category: AVAudioSessionCategoryAmbient, active: false)
+                        return
+                    }
                 }
             }
         }
