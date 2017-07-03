@@ -36,6 +36,9 @@ class YLAudioRecorderManager: NSObject {
     var audioRecorderSetting = [String: Any]()
     
     var recordCompletion: RecorderCompletion?
+    var recordMaxDuration: Int = 60
+    fileprivate var recordStartDate: Date!
+    fileprivate var timer: Timer?
     
     fileprivate override init() {
         super.init()
@@ -43,6 +46,11 @@ class YLAudioRecorderManager: NSObject {
                                 AVFormatIDKey: audioFormat.format,
                                 AVLinearPCMBitDepthKey: 16,
                                 AVNumberOfChannelsKey: 1]
+    }
+    
+    deinit {
+        timer?.invalidate()
+        timer = nil
     }
     
     func startRecord(withPath path: String, completion: ((Error?) -> Void)?) {
@@ -55,6 +63,8 @@ class YLAudioRecorderManager: NSObject {
             audioRecorder?.isMeteringEnabled = true
             audioRecorder?.delegate = self
 
+            recordStartDate = Date()
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(remainSections), userInfo: nil, repeats: true)
             audioRecorder?.record()
             
             if completion != nil {
@@ -70,6 +80,8 @@ class YLAudioRecorderManager: NSObject {
     func stopRecord(completion: RecorderCompletion?) {
         audioRecorder?.stop()
         recordCompletion = completion
+        timer?.invalidate()
+        timer = nil
     }
     
     func cancelRecord(completion: RecorderCompletion? = nil) {
@@ -96,6 +108,13 @@ class YLAudioRecorderManager: NSObject {
             audioRecorder.record()
         }
     }
+    
+    @objc fileprivate func remainSections() {
+        if let startDate = recordStartDate {
+            let duration = Int(Date().timeIntervalSince1970 - startDate.timeIntervalSince1970)
+            YLAudioManager.manager.remainSecondsHandler?(recordMaxDuration - duration)
+        }
+    }
 }
 
 extension YLAudioRecorderManager: AVAudioRecorderDelegate {
@@ -112,9 +131,13 @@ extension YLAudioRecorderManager: AVAudioRecorderDelegate {
         }
         audioRecorder = nil
         recordCompletion = nil
+        timer?.invalidate()
+        timer = nil
     }
     
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
         audioRecorder = nil
+        timer?.invalidate()
+        timer = nil
     }
 }

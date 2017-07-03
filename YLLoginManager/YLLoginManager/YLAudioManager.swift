@@ -14,23 +14,33 @@ public class YLAudioManager: NSObject {
             return self.audioFormat
         }
     }
+
+    public var recordMinDuration: TimeInterval = 1.0
+    public var recordMaxDuration: Int = 60 {
+        didSet {
+            YLAudioRecorderManager.default.recordMaxDuration = recordMaxDuration
+        }
+    }
+    
     /// 来电话而且正在录音时的处理，默认取消录音
     public var callIncomingHandler: ((_ isCallingIn: Bool) -> Void)? = { _ in
         if YLAudioManager.manager.isRecroding {
             YLAudioRecorderManager.default.cancelRecord(completion: { _ in
             })
+            YLAudioPlayerManager.default.stopPlaying()
         }
     }
     public var callDialingHandler: (() -> Void)?
     public var callConnectedHandler: (() -> Void)?
     public var callDisconnectedHandler: (() -> Void)?
     public var convertToAmrHandler:((_ filePath: String) -> String)?
+    public var remainSecondsHandler: ((_ seconds: Int) -> Void)?
     
     // MARK: - Private property
     fileprivate var recordStartDate: Date!
     fileprivate var recordEndDate: Date!
-    fileprivate let recordMinDuration: TimeInterval = 1.0
     fileprivate var currentActiveState = false
+    fileprivate var timer: Timer?
     fileprivate var currentCategory = ""
     fileprivate let callCenter = CTCallCenter()
     
