@@ -14,6 +14,25 @@ class YLAudioRecorderManager: NSObject {
         }
     }
     
+    var isRecording: Bool {
+        if let audioRecorder = audioRecorder {
+            return audioRecorder.isRecording
+        }
+        return false
+    }
+    
+    var peekRecorderVoiceMeter: Double {
+        var ret = 0.0
+        guard let recorder = YLAudioRecorderManager.default.audioRecorder else {
+            return ret
+        }
+        recorder.updateMeters()
+        if recorder.isRecording {
+            ret = Double(pow(10, 0.05 * recorder.peakPower(forChannel: 0)))
+        }
+        return ret
+    }
+    
     var audioRecorderSetting = [String: Any]()
     
     var recordCompletion: RecorderCompletion?
@@ -27,7 +46,7 @@ class YLAudioRecorderManager: NSObject {
     }
     
     func startRecord(withPath path: String, completion: ((Error?) -> Void)?) {
-        let wavFilePath = path.yl_deletingPathExtension.yl_appendExtension(audioFormat.subExtension)
+        let wavFilePath = path.yl.deletingPathExtension.yl.appendExtension(audioFormat.subExtension)
         guard let wavURL = URL(string: wavFilePath) else {
             fatalError("the wav file path does not exit.")
         }
@@ -53,11 +72,12 @@ class YLAudioRecorderManager: NSObject {
         recordCompletion = completion
     }
     
-    func cancelRecord() {
+    func cancelRecord(completion: RecorderCompletion? = nil) {
         audioRecorder?.delegate = nil
         if let audioRecorder = audioRecorder,
             audioRecorder.isRecording {
-            audioRecorder.stop()
+            self.stopRecord(completion: completion)
+            audioRecorder.deleteRecording()
         }
         audioRecorder = nil
         recordCompletion = nil

@@ -53,7 +53,8 @@
 		3FCA41181F03F2A500647E7D /* YLAudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA41171F03F2A500647E7D /* YLAudioRecorderManager.swift */; };
 		3FCA411A1F049BCC00647E7D /* YLAudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA41191F049BCC00647E7D /* YLAudioPlayerManager.swift */; };
 		3FF172591F07AD880093C07D /* YLAudioTypeJudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF172581F07AD880093C07D /* YLAudioTypeJudge.m */; };
-		3FF1725B1F07AE9F0093C07D /* YLAudioType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1725A1F07AE9F0093C07D /* YLAudioType.swift */; };
+		3FF172601F09F1520093C07D /* YLAudioManager+AudioType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1725E1F09E9D90093C07D /* YLAudioManager+AudioType.swift */; };
+		3FF172611F09F2B00093C07D /* YLAudioManager+AudioType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF1725E1F09E9D90093C07D /* YLAudioManager+AudioType.swift */; };
 		3FFBC92D1F04B9530028DFF0 /* YLAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFBC92C1F04B9530028DFF0 /* YLAudioManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -132,7 +133,7 @@
 		3FCA41191F049BCC00647E7D /* YLAudioPlayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioPlayerManager.swift; sourceTree = "<group>"; };
 		3FF172571F07AD880093C07D /* YLAudioTypeJudge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLAudioTypeJudge.h; sourceTree = "<group>"; };
 		3FF172581F07AD880093C07D /* YLAudioTypeJudge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLAudioTypeJudge.m; sourceTree = "<group>"; };
-		3FF1725A1F07AE9F0093C07D /* YLAudioType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioType.swift; sourceTree = "<group>"; };
+		3FF1725E1F09E9D90093C07D /* YLAudioManager+AudioType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YLAudioManager+AudioType.swift"; sourceTree = "<group>"; };
 		3FFBC92C1F04B9530028DFF0 /* YLAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLAudioManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -219,7 +220,6 @@
 				3F52CFF41F027E85005EBF58 /* YLAuthManager-Bridging-Header.h */,
 				3FABBA091F0251EA0010D67A /* AppDelegate.swift */,
 				3FABBA0B1F0251EA0010D67A /* ViewController.swift */,
-				3FF1725A1F07AE9F0093C07D /* YLAudioType.swift */,
 				3FF172571F07AD880093C07D /* YLAudioTypeJudge.h */,
 				3FF172581F07AD880093C07D /* YLAudioTypeJudge.m */,
 				3FABBA0D1F0251EA0010D67A /* Main.storyboard */,
@@ -298,6 +298,7 @@
 				3F08F6021F05081A00244AAE /* YLAudioError.swift */,
 				3F4E56431F075C7E0013D003 /* YLAudioFormat.swift */,
 				3F08F6041F05142100244AAE /* YLAudioManager+ProximitySensor.swift */,
+				3FF1725E1F09E9D90093C07D /* YLAudioManager+AudioType.swift */,
 			);
 			name = Audio;
 			path = ../YLLoginManager;
@@ -428,6 +429,7 @@
 			files = (
 				3F4E561E1F065E970013D003 /* YLAudioPlayerManager.swift in Sources */,
 				3F4E56221F065EB80013D003 /* String+YLExtension.swift in Sources */,
+				3FF172601F09F1520093C07D /* YLAudioManager+AudioType.swift in Sources */,
 				3F4E56461F0774800013D003 /* YLAudioFormat.swift in Sources */,
 				3F4E561F1F065E970013D003 /* YLAudioManager.swift in Sources */,
 				3F4E56201F065E970013D003 /* YLAudioError.swift in Sources */,
@@ -443,12 +445,12 @@
 				3F4E56441F075C7E0013D003 /* YLAudioFormat.swift in Sources */,
 				3FF172591F07AD880093C07D /* YLAudioTypeJudge.m in Sources */,
 				3FCA411A1F049BCC00647E7D /* YLAudioPlayerManager.swift in Sources */,
-				3FF1725B1F07AE9F0093C07D /* YLAudioType.swift in Sources */,
 				3F16A75A1F062B27007FE88F /* String+YLExtension.swift in Sources */,
 				3F52D00B1F028006005EBF58 /* YLAuthManager.swift in Sources */,
 				3FCA41181F03F2A500647E7D /* YLAudioRecorderManager.swift in Sources */,
 				3F08F6051F05142100244AAE /* YLAudioManager+ProximitySensor.swift in Sources */,
 				3FABBA0C1F0251EA0010D67A /* ViewController.swift in Sources */,
+				3FF172611F09F2B00093C07D /* YLAudioManager+AudioType.swift in Sources */,
 				3F7DC06A1F03A32500D169FF /* YLShareManager.swift in Sources */,
 				3FFBC92D1F04B9530028DFF0 /* YLAudioManager.swift in Sources */,
 				3F08F6031F05081A00244AAE /* YLAudioError.swift in Sources */,

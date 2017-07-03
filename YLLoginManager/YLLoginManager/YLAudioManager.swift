@@ -1,4 +1,5 @@
 import AVFoundation
+import CoreTelephony
 
 @objc
 public class YLAudioManager: NSObject {
@@ -13,6 +14,17 @@ public class YLAudioManager: NSObject {
             return self.audioFormat
         }
     }
+    /// 来电话而且正在录音时的处理，默认取消录音
+    public var callIncomingHandler: ((_ isCallingIn: Bool) -> Void)? = { _ in
+        if YLAudioManager.manager.isRecroding {
+            YLAudioRecorderManager.default.cancelRecord(completion: { _ in
+            })
+        }
+    }
+    public var callDialingHandler: (() -> Void)?
+    public var callConnectedHandler: (() -> Void)?
+    public var callDisconnectedHandler: (() -> Void)?
+    public var convertToAmrHandler:((_ filePath: String) -> String)?
     
     // MARK: - Private property
     fileprivate var recordStartDate: Date!
@@ -20,11 +32,27 @@ public class YLAudioManager: NSObject {
     fileprivate let recordMinDuration: TimeInterval = 1.0
     fileprivate var currentActiveState = false
     fileprivate var currentCategory = ""
+    fileprivate let callCenter = CTCallCenter()
     
     fileprivate override init() {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(YLAudioManager.proximitySensorStateChange(notification:)), name: .UIDeviceProximityStateDidChange, object: nil)
         audioFormat = YLAudioFormat.aac
+        
+        callCenter.callEventHandler = { [weak self] call in
+            switch call.callState {
+            case CTCallStateDialing:
+                self?.callDialingHandler?()
+            case CTCallStateIncoming:
+                self?.callIncomingHandler?(true)
+            case CTCallStateConnected:
+                self?.callConnectedHandler?()
+            case CTCallStateDisconnected:
+                self?.callDisconnectedHandler?()
+            default:
+                break
+            }
+        }
     }
     
     deinit {
@@ -33,10 +61,11 @@ public class YLAudioManager: NSObject {
     
     // MARK: - Audio player
     public var isAudioPlaying: Bool {
-        guard let audioPlayer = YLAudioPlayerManager.default.audioPlayer else {
-            return false
-        }
-        return audioPlayer.isPlaying
+        return YLAudioPlayerManager.default.isPlaying
+    }
+    
+    public var audioPlayingDuration: TimeInterval {
+        return YLAudioPlayerManager.default.duration
     }
     
     public func startPlayAudio(withPath path: String, completion: ((Error?) -> Void)?) {
@@ -50,35 +79,39 @@ public class YLAudioManager: NSObject {
             setCategory(category: AVAudioSessionCategoryPlayback, active: true)
         }
         
-        var wavFilePath = path.yl_deletingPathExtension.yl_appendExtension("aac")
-        let fm = FileManager.default
-        if !fm.fileExists(atPath: wavFilePath) {
-            wavFilePath = path.yl_deletingPathExtension.yl_appendExtension("wav")
-            if !fm.fileExists(atPath: wavFilePath) {
-                wavFilePath = path.yl_deletingPathExtension.yl_appendExtension("m4a")
-                if !fm.fileExists(atPath: wavFilePath) {
-                    if !path.yl_hasPathExtension {
-                        wavFilePath = path
-                    }
-                    else {
-                        let error = YLAudioError.filePathNotExist("file path does not exit")
-                        if completion != nil {
-                            completion?(error)
-                        }
-                        setCategory(category: AVAudioSessionCategoryAmbient, active: false)
-                        return
+        var wavFilePath = ""
+        if isAAC(withPath: path) || isLinearPCM(withPath: path) {
+            wavFilePath = path
+            enableProximitySensor()
+            YLAudioPlayerManager.default.play(withPath: wavFilePath) { [weak self] (error) in
+                self?.setCategory(category: AVAudioSessionCategoryAmbient, active: false)
+                self?.disableProximitySensor()
+                if completion != nil {
+                    completion?(error)
+                }
+            }
+        }
+        else if isAMR(withPath: path) {
+            /// convert to amr
+            if let handler = convertToAmrHandler {
+                wavFilePath = handler(path)
+                enableProximitySensor()
+                YLAudioPlayerManager.default.play(withPath: wavFilePath) { [weak self] (error) in
+                    self?.setCategory(category: AVAudioSessionCategoryAmbient, active: false)
+                    self?.disableProximitySensor()
+                    if completion != nil {
+                        completion?(error)
                     }
                 }
             }
         }
-        
-        enableProximitySensor()
-        YLAudioPlayerManager.default.play(withPath: wavFilePath) { [weak self] (error) in
-            self?.setCategory(category: AVAudioSessionCategoryAmbient, active: false)
-            self?.disableProximitySensor()
+        else {
+            let error = YLAudioError.filePathNotExist("file path does not exit")
             if completion != nil {
                 completion?(error)
             }
+            setCategory(category: AVAudioSessionCategoryAmbient, active: false)
+            return
         }
     }
     
@@ -125,7 +158,7 @@ public class YLAudioManager: NSObject {
                 return
             }
         }
-        audioRecorderManager.startRecord(withPath: recordPath.yl_appendPathComponent(fileName), completion: completion)
+        audioRecorderManager.startRecord(withPath: recordPath.yl.appendPathComponent(fileName), completion: completion)
     }
     
     public func stopRecord(withCompletion completion: ((_ recordPath: String?, _ duration: TimeInterval, _ error: Error?) -> Void)?) {
@@ -163,11 +196,16 @@ public class YLAudioManager: NSObject {
         YLAudioRecorderManager.default.cancelRecord()
     }
     
+    public func pauseRecord() {
+        YLAudioRecorderManager.default.pauseRecord()
+    }
+    
+    public func resumeRecord() {
+        YLAudioRecorderManager.default.resumeRecord()
+    }
+    
     public var isRecroding: Bool {
-        guard let audioRecorder = YLAudioRecorderManager.default.audioRecorder else {
-            return false
-        }
-        return audioRecorder.isRecording
+        return YLAudioRecorderManager.default.isRecording
     }
     
     // MARK: - Public property
@@ -181,14 +219,7 @@ public class YLAudioManager: NSObject {
     }
     
     public var peekRecorderVoiceMeter: Double {
-        var ret = 0.0
-        guard let recorder = YLAudioRecorderManager.default.audioRecorder else {
-            return ret
-        }
-        if recorder.isRecording {
-            ret = Double(pow(10, 0.05 * recorder.peakPower(forChannel: 0)))
-        }
-        return ret
+        return YLAudioRecorderManager.default.peekRecorderVoiceMeter
     }
     
     // MARK: - Private function

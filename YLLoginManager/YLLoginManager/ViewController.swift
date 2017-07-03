@@ -40,7 +40,7 @@ class ViewController: UIViewController {
                 alert.show()
             }
             if let path = recordPath {
-                let type = YLAudioType.manager.audioType(withPath: path)
+                let type = YLAudioManager.manager.audioType(withPath: path)
                 switch type {
                 case kAudioFormatMPEG4AAC:
                     print("kAudioFormatMPEG4AAC")

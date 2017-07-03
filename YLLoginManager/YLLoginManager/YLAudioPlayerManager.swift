@@ -5,6 +5,20 @@ class YLAudioPlayerManager: NSObject {
     
     var audioPlayer: AVAudioPlayer?
     
+    var duration: TimeInterval {
+        if let audioPlayer = audioPlayer {
+            return audioPlayer.duration
+        }
+        return 0
+    }
+    
+    var isPlaying: Bool {
+        if let audioPlayer = audioPlayer {
+            return audioPlayer.isPlaying
+        }
+        return false
+    }
+    
     fileprivate var finishedHandler: ((Error?) -> Void)?
     
     func play(withPath filePath: String, completion: ((Error?) -> Void)?) {
@@ -42,6 +56,12 @@ class YLAudioPlayerManager: NSObject {
             finishedHandler = nil
         }
     }
+    
+    func pausePlaying() {
+        if let audioPlayer = audioPlayer {
+            audioPlayer.pause()
+        }
+    }
 }
 
 
@@ -56,7 +76,6 @@ extension YLAudioPlayerManager: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if finishedHandler != nil {
             finishedHandler?(nil)
-            finishedHandler = nil
         }
         if let audioPlayer = self.audioPlayer {
             audioPlayer.delegate = nil
